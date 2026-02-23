@@ -1,6 +1,6 @@
 # Time-Comrade 🎮
 
-> **Language / Idioma:** [Español](#español) | [English](#english)
+> **Language / Idioma / Język:** [Español](#español) | [English](#english) | [Polski](#polish)
 
 ---
 
@@ -68,7 +68,7 @@
 ---
 
 <a id="english"></a>
-# 🇺🇸 Project Organization
+# 🇬🇧 Project Organization
 
 ## 🛠️ GitHub
 * **Empty Folders:** To upload empty folders to a Git-based version control system, you can create an empty `.gitKeep` file in that folder.
@@ -127,3 +127,64 @@
 * **Frequency:** Upload code often with small, continuous commits.
 * **Testing:** Playtest after updating to verify everything works.
 * **Caution:** Be careful not to upload only partial changes or forget to include new files.
+
+---
+
+<a id="polish"></a>
+# 🇵🇱 Organizacja Projektu
+
+## 🛠️ GitHub
+* **Puste foldery:** Aby przesłać puste foldery do systemu kontroli wersji opartego na Git, można utworzyć w danym folderze pusty plik `.gitKeep`.
+* **Pliki .meta:** Upewnij się, że pliki `.meta` są przesyłane do repozytorium, ponieważ zawierają ważne informacje o plikach i katalogach gry, takie jak ustawienia importu tekstur.
+
+### 1. Konwencje i struktura
+* **Dokumentacja:** Wszyscy muszą przestrzegać ustalonych konwencji nazewnictwa oraz struktury katalogów.
+* **Nazewnictwo:** **Nie używaj spacji** w nazwach plików ani folderów. Zawsze stosuj **CamelCase** (np. `MyNewScript.cs` lub `MainCharacter`).
+* **Lokalizacja:** Nigdy nie przechowuj plików poza folderem `Assets`.
+
+### 2. Commity
+* **Wiadomość:** W wiadomości commita krótko wyjaśnij cel zmian. Używamy formatu „typ: czasownik w trybie rozkazującym + opis”.
+* **Najczęstsze typy:**
+    * `feat`: Dodaje nową funkcjonalność.
+    * `fix`: Naprawia błąd.
+    * `docs`: Zmiany w dokumentacji.
+    * `refactor`: Refaktoryzacja kodu (nie zmienia zachowania).
+* **Format:** Opis commita powinien zawsze zaczynać się od czasownika w trybie rozkazującym (np. *dodaj, utwórz, usuń, zmień, napraw*).
+
+### 3. Gałęzie (Branches)
+* **Koncepcja:** Gałąź jest tworzona jako dokładna kopia innej, ale od tego momentu każda może rozwijać się w innym kierunku.
+* **Main:** Początkowo istnieje tylko gałąź `main` (lub `master`).
+* **Workflow:** Zaleca się dodawanie nowej funkcjonalności poprzez utworzenie gałęzi, pracę na niej, a następnie połączenie jej z `main`, gdy będzie gotowa.
+* **Integracja:** Po zakończeniu i zweryfikowaniu zmian należy scalić je z `main`, aby stały się częścią gry.
+* **Synchronizacja:** Jeśli `main` ulegnie zmianie podczas pracy na gałęzi, należy zaktualizować swoją gałąź (scalić zmiany z `main`) przed ponownym scaleniem jej z `main`.
+* **Pull Request:** Proces scalania zmian do `main` odbywa się za pomocą pull request / merge request (PR lub MR).
+* **Współpraca:** PR umożliwia dokumentowanie i omawianie zmian, gdzie inni członkowie zespołu mogą przekazać opinię.
+
+## 🎬 Sceny
+* **Konflikty:** Gdy kilka osób pracuje jednocześnie nad tą samą sceną, system kontroli wersji może mieć problemy ze scalaniem zmian.
+* **Podział:** Lepiej dzielić poziomy na mniejsze sceny, aby zmniejszyć ryzyko konfliktów.
+* **Ładowanie addytywne:** W czasie działania projektu można ładować sceny addytywnie:
+    * `SceneManager.LoadScene(int sceneBuildIndex, LoadSceneMode.Additive)`
+* **Ładowanie asynchroniczne:** Możliwe jest także ładowanie w tle:
+    * `SceneManager.LoadSceneAsync(int sceneBuildIndex, LoadSceneMode.Additive)`
+
+## 📦 Obiekty
+* **Prefabrykaty (Prefabs):** Pamiętaj, aby używać prefabów zawsze, gdy to możliwe.
+* **Organizacja:** Używaj pustych obiektów GameObject do organizowania sceny i zapobiegania nadmiernemu rozrostowi hierarchii.
+
+* **Instancjonowanie:** Obiekty tworzone w czasie działania pojawiają się w głównym katalogu sceny (root). Jeśli powstaje ich wiele, scena staje się nieczytelna.
+* **Parenting:** Aby poprawnie tym zarządzać, przypisz obiekt nadrzędny (parent) podczas instancjonowania (upewnij się, że jego Transform ma ustawione wartości identity). Pozwala to zwijać obiekt nadrzędny i łatwiej zarządzać widokiem.
+
+## 📁 Foldery
+* **Pliki .meta:** Każdy plik i folder ma tekstowy plik `.meta`. Są one niezbędne — zachowuj je razem z odpowiadającymi im plikami.
+* **Wymagane foldery:** Wymagane są tylko `Assets`, `Packages` oraz `ProjectSettings`.
+* **Lokalizacja:** Nie zapisuj plików poza folderem `Assets`.
+* **Przenoszenie plików:** Zawsze przenoś pliki wewnątrz Unity, aby plik `.meta` został przeniesiony razem z nimi.
+* **Sceny testowe:** Oddziel sceny testowe do dedykowanego folderu, który można dodatkowo organizować według autora.
+* **Zasoby zewnętrzne:** Przechowuj własne pliki oddzielnie od zasobów firm trzecich (np. folder `ThirdParty`).
+
+## 💡 Inne wskazówki
+* **Zawsze grywalne:** Projekt powinien zawsze znajdować się w stanie umożliwiającym uruchomienie gry.
+* **Częstotliwość:** Wysyłaj kod często, wykonując małe i regularne commity.
+* **Testowanie:** Po aktualizacji przetestuj grę, aby upewnić się, że wszystko działa poprawnie.
+* **Ostrożność:** Uważaj, aby nie przesłać jedynie częściowych zmian ani nie zapomnieć dodać nowych plików.
