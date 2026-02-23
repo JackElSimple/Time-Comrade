@@ -171,9 +171,11 @@
 ## 📦 Obiekty
 * **Prefabrykaty (Prefabs):** Pamiętaj, aby używać prefabów zawsze, gdy to możliwe.
 * **Organizacja:** Używaj pustych obiektów GameObject do organizowania sceny i zapobiegania nadmiernemu rozrostowi hierarchii.
+<img width="181" height="203" alt="image" src="https://github.com/user-attachments/assets/ae97d2f9-ca74-4cd5-8595-c7e773301e51" />
 
 * **Instancjonowanie:** Obiekty tworzone w czasie działania pojawiają się w głównym katalogu sceny (root). Jeśli powstaje ich wiele, scena staje się nieczytelna.
 * **Parenting:** Aby poprawnie tym zarządzać, przypisz obiekt nadrzędny (parent) podczas instancjonowania (upewnij się, że jego Transform ma ustawione wartości identity). Pozwala to zwijać obiekt nadrzędny i łatwiej zarządzać widokiem.
+<img width="1058" height="294" alt="image" src="https://github.com/user-attachments/assets/332a2897-29fb-413d-90a2-12900c3691d0" />
 
 ## 📁 Foldery
 * **Pliki .meta:** Każdy plik i folder ma tekstowy plik `.meta`. Są one niezbędne — zachowuj je razem z odpowiadającymi im plikami.
