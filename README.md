@@ -1,6 +1,6 @@
 # Time-Comrade 🎮
 
-> **Language / Idioma / Język:** [Español](#español) | [English](#english) | [Polski](#polish)
+> **Language / Idioma / Język:**   [English](#english) | [Español](#español) | [Polski](#polish)
 
 ---
 
