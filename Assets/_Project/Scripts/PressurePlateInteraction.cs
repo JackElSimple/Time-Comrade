@@ -1,52 +1,52 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class pressurePlateInteraction : MonoBehaviour
+public class PressurePlateInteraction : MonoBehaviour
 {
-    Vector3 initialPos;
-    float pressDepth = 0.1f;
-    bool playerOnPlate = false;
+    private float pressDepth = 0.1f;
+    private float pressSpeed = 2f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public UnityEvent onPressed;
+    public UnityEvent onReleased;
+
+    private Vector3 initialPos;
+    private bool playerOnPlate = false;
+
     void Start()
     {
         initialPos = transform.position;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.name=="Opit")
-        {
-            collision.transform.parent = transform; // if you don't group this the players will lag behind when the plate goes down
-            playerOnPlate = true;
-        }
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.transform.name=="Opit")
-        {
-            if (transform.position.y > initialPos.y - pressDepth)
-            {
-                transform.Translate(0,-0.01f,0);
-            }
-        }
-    }
-
-     void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.transform.name=="Opit")
-        {
-            collision.transform.parent = null;
-            playerOnPlate = false;
-        }
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (!playerOnPlate && transform.position.y < initialPos.y)
+        Vector3 targetPos = playerOnPlate 
+            ? initialPos + Vector3.down * pressDepth 
+            : initialPos;
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPos,
+            pressSpeed * Time.deltaTime
+        );
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.name == "Opit")
         {
-            transform.Translate(0,0.01f,0);
+            collision.transform.SetParent(transform); 
+            playerOnPlate = true;
+            onPressed?.Invoke();
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.name == "Opit")
+        {
+            collision.transform.SetParent(null);
+            playerOnPlate = false;
+            onReleased?.Invoke();
         }
     }
 }
