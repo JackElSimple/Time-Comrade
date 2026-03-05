@@ -22,6 +22,9 @@ public class CloneController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Rewind y tal")]
+    [SerializeField] private float delayTime = 1.0f;
+
     private Rigidbody2D rb;
     private float horizontalInput;
     private bool isGrounded;
@@ -32,6 +35,8 @@ public class CloneController : MonoBehaviour
     private Vector3 initialPosition; //the position of the player when the rewind  is pushed
     private Vector3 initialVelocity; //the vector of movement of the player when the rewind is pushed
     private PlayerInputFrame frame;
+    private float timeAwake = 0.0f;
+    private bool dormido = true;
 
     void Awake()
     {
@@ -44,35 +49,46 @@ public class CloneController : MonoBehaviour
 
     void Update()
     {
-        if(frameNumber >= recordedInputs.Count)
+        timeAwake+= Time.deltaTime;
+        if(timeAwake >= delayTime)
         {
-            transform.position= initialPosition;
-            rb.linearVelocity = initialVelocity;
-            frameNumber= 0;
-        }
-        // Inputs
-        //horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
-        frame = recordedInputs[frameNumber];
+            if (dormido)
+            {
+                dormido= false;
+                rb.linearVelocity = initialVelocity;
+            }
+            if(frameNumber >= recordedInputs.Count)
+            {
+                transform.position= initialPosition;
+        
+                frameNumber= 0;
+                timeAwake = 0.0f;
+                dormido= true;
+            }
+            // Inputs
+            //horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
+            frame = recordedInputs[frameNumber];
 
 
-        // Lógica de Flip
-        if (frame.horizontal > 0)
-        {
-            characterSprite.flipX = true; // Mirando a la derecha (D)
-        }
-        else if (frame.horizontal < 0)
-        {
-            characterSprite.flipX = false;  // Mirando a la izquierda (A)
-        }
+            // Lógica de Flip
+            if (frame.horizontal > 0)
+            {
+                characterSprite.flipX = true; // Mirando a la derecha (D)
+            }
+            else if (frame.horizontal < 0)
+            {
+                characterSprite.flipX = false;  // Mirando a la izquierda (A)
+            }
 
-        if (frame.jump && isGrounded) // Espacio
-        {
-           wantsToJump = true;
-        }
+            if (frame.jump && isGrounded) // Espacio
+            {
+               wantsToJump = true;
+            }
 
-        // Check de suelo
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        frameNumber++;
+            // Check de suelo
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+            frameNumber++;
+        }
     }
 
     void FixedUpdate()
