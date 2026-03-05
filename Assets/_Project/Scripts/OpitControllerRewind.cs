@@ -138,15 +138,8 @@ public class OpitControllerRewind : MonoBehaviour
         isRecording = false;
         //transform.position = initialPosition; //terminar
         rb.linearVelocity = initialVelocity;
-        if (rb.linearVelocityX > 0)
-        {
-            transform.position = initialPosition - new Vector3(cloneDistance, 0, 0); 
-        }
-        else
-        {
-            transform.position = initialPosition + new Vector3(cloneDistance, 0, 0);
-        }
-
+        transform.position = initialPosition; 
+        
      }
 
     public Vector3 getInitialPosition() {  
