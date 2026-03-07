@@ -93,10 +93,17 @@ public class CloneController : MonoBehaviour
 
     void FixedUpdate()
     {
-        ApplyMovement();
-        ApplyJump();
-        ApplyBetterFall();
-    }
+        // El clon avanza 1 frame de la lista cada 1/60 de segundo
+        if (!dormido && frameNumber < recordedInputs.Count)
+        {
+            frame = recordedInputs[frameNumber];
+            rb.linearVelocity = new Vector2(frame.horizontal * moveSpeed, rb.linearVelocity.y);
+            ApplyMovement();
+            ApplyJump();
+            ApplyBetterFall();
+            frameNumber++;
+        }
+        }
 
     private void ApplyMovement()
     {

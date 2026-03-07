@@ -58,21 +58,14 @@ public class OpitControllerRewind : MonoBehaviour
         // Inputs
         horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
 
-        
-        // Lógica de Flip
-        if (horizontalInput > 0)
-        {
-            characterSprite.flipX = true; // Mirando a la derecha (D)
-        }
-        else if (horizontalInput < 0)
-        {
-            characterSprite.flipX = false;  // Mirando a la izquierda (A)
-        }
+       
 
         if (Input.GetButtonDown("Jump") && isGrounded) // Espacio
         {
             wantsToJump = true;
         }
+
+        ActualizarVisual();
 
         // Check de suelo
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -88,9 +81,26 @@ public class OpitControllerRewind : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isRecording)
+        {// Esto se ejecutará 60 veces por segundo 
+            recordedInputs.Add(new PlayerInputFrame(horizontalInput, wantsToJump));
+        }
         ApplyMovement();
         ApplyJump();
         ApplyBetterFall();
+        
+    }
+    private void ActualizarVisual()
+    {
+        // Lógica de Flip
+        if (horizontalInput > 0)
+        {
+            characterSprite.flipX = true; // Mirando a la derecha (D)
+        }
+        else if (horizontalInput < 0)
+        {
+            characterSprite.flipX = false;  // Mirando a la izquierda (A)
+        }
     }
 
     private void ApplyMovement()

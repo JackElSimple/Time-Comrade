@@ -15,5 +15,11 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
-	}
+
+        // Capamos los FPS de renderizado
+        Application.targetFrameRate = 60;
+
+        // Quitamos el VSync (si está activo, ignorará el targetFrameRate)
+        QualitySettings.vSyncCount = 0;
+    }
 }
