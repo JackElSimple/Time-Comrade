@@ -32,7 +32,7 @@ public class PressurePlateInteraction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.name == "Opit")
+        if (collision.transform.tag == "Player")
         {
             collision.transform.SetParent(transform); 
             playerOnPlate = true;
@@ -42,7 +42,7 @@ public class PressurePlateInteraction : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.transform.name == "Opit")
+        if (collision.transform.tag == "Player")
         {
             collision.transform.SetParent(null);
             playerOnPlate = false;

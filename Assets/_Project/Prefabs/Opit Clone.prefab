@@ -111,9 +111,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Size.x
+      value: 1.3777778
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3777778
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 929764195424117306, guid: 51454b3a6e643e24eb98ed1a47804ced, type: 3}
+      objectReference: {fileID: 21300000, guid: 51454b3a6e643e24eb98ed1a47804ced, type: 3}
+    - target: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4027544381892727008, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_Name
       value: Opit Clone

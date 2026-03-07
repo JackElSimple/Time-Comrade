@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using static OpitControllerRewind;
 
@@ -10,15 +11,19 @@ public class SceneController : MonoBehaviour
     [Header("Cosas Rewind")]
     [SerializeField] private float recordingDuration = 5.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure más o menos
 
-    [Header("Cosas Patata")]
+    [Header("Objetos en escena")]
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
+    [SerializeField] private GameObject[] inanimateObjects;
+    [SerializeField] private GameObject[] enemies;
 
     private bool isRecording;
     private float recordingTime = 0;
     private GameObject opit;
     private GameObject clone;
+    private Vector3[] positions = new Vector3[100];
+    private Vector3[] velocitys = new Vector3[100];
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,14 +39,12 @@ public class SceneController : MonoBehaviour
             {
                 recordingTime = Time.deltaTime;//cuenta un frame
                 isRecording = true;
-                opit.GetComponent<OpitControllerRewind>().StartRecording(); //change because the OpitControllerRewind can change
-                Destroy(clone);
+                SaveState();
             }
             else
             {
                 isRecording = false;
-                opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
-                CreateClone();
+                LoadState();
             }
         }
         if (isRecording)
@@ -50,8 +53,7 @@ public class SceneController : MonoBehaviour
             if (recordingTime >= recordingDuration)
             {
                 isRecording = false;
-                opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
-                CreateClone();
+                LoadState();
 
             }
         }
@@ -77,6 +79,41 @@ public class SceneController : MonoBehaviour
         List<PlayerInputFrame> listaInputs = opit.GetComponent<OpitControllerRewind>().getImputsList();
 
         clone.GetComponent<CloneController>().SetListaInputs(listaInputs);
+    }
+
+    private void SaveState()
+    {
+        opit.GetComponent<OpitControllerRewind>().StartRecording(); //opit
+        Destroy(clone); //clone
+        for (int i=0; i < inanimateObjects.Length; i++)
+        {
+            positions[i] = inanimateObjects[i].transform.position;
+            //add the status that u want
+        }
+        for (int i = 0; i < enemies.Length; i++)
+        {
+             positions[i + inanimateObjects.Length] = enemies[i].transform.position;
+             velocitys[i + inanimateObjects.Length] =enemies[i].GetComponent<Rigidbody2D>().linearVelocity;
+            //add the status that u want
+        }
+    }
+
+    private void LoadState()
+    {
+        opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
+        CreateClone();
+        for (int i = 0; i < inanimateObjects.Length; i++)
+        {
+             inanimateObjects[i].transform.position = positions[i];
+            //add the status that u want
+        }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].transform.position = positions[i + inanimateObjects.Length];
+            enemies[i].GetComponent<Rigidbody2D>().linearVelocity = velocitys[i + inanimateObjects.Length];
+            //add the status that u want
+        }
     }
 
 }
