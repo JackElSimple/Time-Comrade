@@ -116,4 +116,17 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    public void KillPlayer()//and respwan it
+    {
+
+        Destroy(opit);
+        Destroy(clone);
+        isRecording = false;
+        CreateOpit();
+    }
+    public void KillClone()
+    {
+        Destroy(clone);
+    }
+
 }

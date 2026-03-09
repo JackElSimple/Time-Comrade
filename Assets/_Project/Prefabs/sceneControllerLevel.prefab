@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 17279379533095951}
   m_Layer: 0
   m_Name: sceneControllerLevel
-  m_TagString: Untagged
+  m_TagString: ControladorEscena
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,4 +48,5 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   personaje: {fileID: 800635597894420647, guid: 8ead75b1cf005844881800cbacb0d0c6, type: 3}
   sombra: {fileID: 7215591257669660622, guid: ee1d39cd635339546a215f5df4d41776, type: 3}
-  otherThings: []
+  inanimateObjects: []
+  enemies: []

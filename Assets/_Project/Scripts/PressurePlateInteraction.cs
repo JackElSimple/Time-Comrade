@@ -6,6 +6,8 @@ public class PressurePlateInteraction : MonoBehaviour
     private float pressDepth = 0.1f;
     private float pressSpeed = 2f;
 
+    private bool pressed = false;
+    private bool doublePressed = false; //para que el clon no se quite
     public UnityEvent onPressed;
     public UnityEvent onReleased;
 
@@ -32,21 +34,37 @@ public class PressurePlateInteraction : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.transform.tag == "Player")
-        {
-            collision.transform.SetParent(transform); 
-            playerOnPlate = true;
-            onPressed?.Invoke();
+        {   
+            if (pressed){
+                doublePressed = true;
+            }
+            else { 
+                doublePressed= false; //por si acaso
+                pressed = true;
+                collision.transform.SetParent(transform); 
+                playerOnPlate = true;
+                onPressed?.Invoke();
+            }
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
+       
         if (collision.transform.tag == "Player")
         {
-            collision.transform.SetParent(null);
-            playerOnPlate = false;
-            onReleased?.Invoke();
+            if (doublePressed)
+            {
+                doublePressed = false;
+            }
+            else { 
+                pressed = false;
+                collision.transform.SetParent(null);
+                playerOnPlate = false;
+                onReleased?.Invoke();
+            }
         }
     }
 }

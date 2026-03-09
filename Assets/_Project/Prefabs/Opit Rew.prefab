@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Opit Rew
       objectReference: {fileID: 0}
+    - target: {fileID: 4027544381892727008, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6174384511088916617, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.7

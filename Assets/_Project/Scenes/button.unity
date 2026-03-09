@@ -347,6 +347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sceneControllerLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 5994460391794395070, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
