@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordingDuration: 5
-  spawnPoint: {fileID: 0}
+  currentSpawnPoint: {fileID: 0}
   personaje: {fileID: 800635597894420647, guid: 8ead75b1cf005844881800cbacb0d0c6, type: 3}
   sombra: {fileID: 7215591257669660622, guid: ee1d39cd635339546a215f5df4d41776, type: 3}
-  inanimateObjects: []
+  inanimateObjects:
+  - {fileID: 0}
   enemies: []

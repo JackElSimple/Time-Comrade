@@ -31,7 +31,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
 	public void StartGame()
 	{
-		SceneManager.LoadScene("TryRecord");
+		SceneManager.LoadScene("TutorialLevel");
 	}
 
 	public void QuitGame()

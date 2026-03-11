@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/PauseMenu.unity
     guid: 8c8d15598441f334b9e2036d5d8ca6db
   - enabled: 1
+    path: Assets/_Project/Scenes/TutorialLevel.unity
+    guid: 746c86ac94e31e74d9312970dd85faa3
+  - enabled: 1
     path: Assets/_Project/Scenes/TryRecord.unity
     guid: a93cfc6183d3f6e4d9e443e8d2f401c6
   - enabled: 1

@@ -13,8 +13,8 @@ public class SceneController : MonoBehaviour
     [SerializeField] private float recordingDuration = 5.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure más o menos
 
     [Header("Objetos en escena")]
-    [SerializeField] private GameObject spawnPoint;
-    [SerializeField] private GameObject personaje;
+	[SerializeField] private Transform currentSpawnPoint;
+	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
     [SerializeField] private GameObject[] inanimateObjects;
     [SerializeField] private GameObject[] enemies;
@@ -68,10 +68,14 @@ public class SceneController : MonoBehaviour
 			LoadState();
 		}
 	}
+	public void UpdateSpawnPoint(Transform newSpawn)
+	{
+		currentSpawnPoint = newSpawn;
+	}
 	private void CreateOpit()
     {
         opit = Instantiate<GameObject>(personaje);
-        opit.transform.position = spawnPoint.transform.position;
+        opit.transform.position = currentSpawnPoint.transform.position;
     }
     private void CreateClone()
     {
@@ -92,12 +96,15 @@ public class SceneController : MonoBehaviour
     {
         opit.GetComponent<OpitControllerRewind>().StartRecording(); //opit
         Destroy(clone); //clone
-        for (int i=0; i < inanimateObjects.Length; i++)
-        {
-            positions[i] = inanimateObjects[i].transform.position;
-            //add the status that u want
-        }
-        for (int i = 0; i < enemies.Length; i++)
+		for (int i = 0; i < inanimateObjects.Length; i++)
+		{
+			var movable = inanimateObjects[i].GetComponent<MovableObject>();
+			if (movable != null)
+				movable.RecordCurrentState();
+			else
+				positions[i] = inanimateObjects[i].transform.position; // Backup por si no tiene el script
+		}
+		for (int i = 0; i < enemies.Length; i++)
         {
              positions[i + inanimateObjects.Length] = enemies[i].transform.position;
              velocitys[i + inanimateObjects.Length] =enemies[i].GetComponent<Rigidbody2D>().linearVelocity;
@@ -109,13 +116,16 @@ public class SceneController : MonoBehaviour
     {
         opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
         CreateClone();
-        for (int i = 0; i < inanimateObjects.Length; i++)
-        {
-             inanimateObjects[i].transform.position = positions[i];
-            //add the status that u want
-        }
+		for (int i = 0; i < inanimateObjects.Length; i++)
+		{
+			var movable = inanimateObjects[i].GetComponent<MovableObject>();
+			if (movable != null)
+				movable.RestoreState();
+			else
+				inanimateObjects[i].transform.position = positions[i];
+		}
 
-        for (int i = 0; i < enemies.Length; i++)
+		for (int i = 0; i < enemies.Length; i++)
         {
             enemies[i].transform.position = positions[i + inanimateObjects.Length];
             enemies[i].GetComponent<Rigidbody2D>().linearVelocity = velocitys[i + inanimateObjects.Length];
@@ -144,5 +154,20 @@ public class SceneController : MonoBehaviour
 		// Cargamos la siguiente escena
 		Debug.Log("<color=green>[SCENE] Nivel Completado. Cargando: " + sceneName + "</color>");
 		SceneManager.LoadScene(sceneName);
+	}
+	public void CancelarGrabacion()
+	{
+		if (isRecording)
+		{
+			isRecording = false;
+			recordingTime = 0;
+
+			if (opit != null)
+			{
+				opit.GetComponent<OpitControllerRewind>().CancelRecording();
+			}
+
+			Debug.Log("Habilidad cancelada: El personaje se queda donde está.");
+		}
 	}
 }

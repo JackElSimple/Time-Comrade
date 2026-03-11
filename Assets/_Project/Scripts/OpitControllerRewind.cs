@@ -166,5 +166,10 @@ public class OpitControllerRewind : MonoBehaviour
         return recordedInputs;
     }
 
-
+	public void CancelRecording()
+	{
+		Debug.Log("Grabación cancelada: Datos eliminados sin teletransporte.");
+		isRecording = false;
+		recordedInputs.Clear(); // Limpia la lista de frames grabados
+	}
 }

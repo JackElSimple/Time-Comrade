@@ -422,6 +422,10 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 274185057}
+    - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
+      propertyPath: currentSpawnPoint
+      value: 
+      objectReference: {fileID: 274185058}
     - target: {fileID: 3859752712268003237, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.7498814
@@ -522,6 +526,10 @@ PrefabInstance:
     - target: {fileID: 4729075737650607715, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
       propertyPath: m_Name
       value: VictoryPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759449685961582430, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
+      propertyPath: nextSceneName
+      value: PruebaKill
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
