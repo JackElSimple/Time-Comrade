@@ -26,7 +26,7 @@ public class MainMenuSceneManager : MonoBehaviour
 
 	void Start()
 	{
-		EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
+		//EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
 	}
 
 	public void StartGame()

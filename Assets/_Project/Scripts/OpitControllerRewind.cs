@@ -55,8 +55,12 @@ public class OpitControllerRewind : MonoBehaviour
 
     void Update()
     {
-        // Inputs
-        horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
+		// Si el manager dice que estamos pausados, salimos del Update antes de leer nada
+		if (PauseMenuHandler.Instance != null && PauseMenuHandler.Instance.isPaused)
+			return;
+
+		// Inputs
+		horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
 
         
         // Lógica de Flip
