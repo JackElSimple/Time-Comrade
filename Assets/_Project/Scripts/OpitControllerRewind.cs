@@ -78,8 +78,18 @@ public class OpitControllerRewind : MonoBehaviour
             wantsToJump = true;
         }
 
-        // Check de suelo
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+		if (Input.GetMouseButtonDown(0))
+		{
+			SceneController sc = Object.FindAnyObjectByType<SceneController>();
+			if (sc != null) sc.GestionarHabilidad();
+		}
+		/*if (isRecording)
+		{
+			recordedInputs.Add(new PlayerInputFrame(horizontalInput, Input.GetKey(KeyCode.Space)));
+		}*/
+
+		// Check de suelo
+		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         if (isRecording)
         {
             float h = Input.GetAxisRaw("Horizontal");

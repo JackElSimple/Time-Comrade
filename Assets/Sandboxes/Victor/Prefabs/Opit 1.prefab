@@ -140,19 +140,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4027544381892727008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b1505821f8bf4349bff76a62b108b5c, type: 3}
+  m_Script: {fileID: 11500000, guid: ad7b0fc902d384046a1e4992603b3a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterSprite: {fileID: 4014104476283108704}
   moveSpeed: 8
   jumpForce: 12
   gravityScale: 3
   fallMultiplier: 1.5
   lowJumpMultiplier: 2
-  groundCheck: {fileID: 5083744215702249505}
+  groundCheck: {fileID: 0}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  cloneDistance: 0.5
 --- !u!1 &7776761363849256584
 GameObject:
   m_ObjectHideFlags: 0

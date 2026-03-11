@@ -33,20 +33,12 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!isRecording)
-            {
-                recordingTime = Time.deltaTime;//cuenta un frame
-                isRecording = true;
-                SaveState();
-            }
-            else
-            {
-                isRecording = false;
-                LoadState();
-            }
-        }
+
+		// Si el manager dice que estamos pausados, salimos del Update antes de leer nada
+		if (PauseMenuHandler.Instance != null && PauseMenuHandler.Instance.isPaused)
+			return;
+
+
         if (isRecording)
         {
             recordingTime += Time.deltaTime;
@@ -61,7 +53,21 @@ public class SceneController : MonoBehaviour
         
 
     }
-    private void CreateOpit()
+	public void GestionarHabilidad()
+	{
+		if (!isRecording)
+		{
+			recordingTime = 0; // antes recordingTime = Time.deltaTime;
+			isRecording = true;
+			SaveState();
+		}
+		else
+		{
+			isRecording = false;
+			LoadState();
+		}
+	}
+	private void CreateOpit()
     {
         opit = Instantiate<GameObject>(personaje);
         opit.transform.position = spawnPoint.transform.position;

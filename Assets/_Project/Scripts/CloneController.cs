@@ -49,7 +49,11 @@ public class CloneController : MonoBehaviour
 
     void Update()
     {
-        timeAwake+= Time.deltaTime;
+		// Si el manager dice que estamos pausados, salimos del Update antes de leer nada
+		if (PauseMenuHandler.Instance != null && PauseMenuHandler.Instance.isPaused)
+			return;
+
+		timeAwake += Time.deltaTime;
         if(timeAwake >= delayTime)
         {
             if (dormido)
