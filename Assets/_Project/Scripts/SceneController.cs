@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static OpitControllerRewind;
 
 public class SceneController : MonoBehaviour
@@ -134,5 +135,14 @@ public class SceneController : MonoBehaviour
     {
         Destroy(clone);
     }
+	public void CompleteLevel(string sceneName)
+	{
+		//  detenemos la grabacion si estaba activa
+		if (opit != null)
+			opit.GetComponent<OpitControllerRewind>().FinishRecording();
 
+		// Cargamos la siguiente escena
+		Debug.Log("<color=green>[SCENE] Nivel Completado. Cargando: " + sceneName + "</color>");
+		SceneManager.LoadScene(sceneName);
+	}
 }

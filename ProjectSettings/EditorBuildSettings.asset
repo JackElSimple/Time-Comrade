@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/TryRecord.unity
     guid: a93cfc6183d3f6e4d9e443e8d2f401c6
   - enabled: 1
-    path: Assets/_Project/Scenes/Testing.unity
-    guid: 8a36d4c4337fb9f40915d759f7b41203
+    path: Assets/_Project/Scenes/PruebaKill.unity
+    guid: e81a7f5528ce69640b6739936d53fcb3
+  - enabled: 1
+    path: Assets/_Project/Scenes/button.unity
+    guid: 07aa9c888b2ff45c89425e25545ac82f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
