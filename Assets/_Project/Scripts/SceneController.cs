@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour
 {
 
     [Header("Cosas Rewind")]
-    [SerializeField] private float recordingDuration = 5.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure más o menos
+    [SerializeField] private float recordingDuration = 5.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mï¿½s o menos
 
     [Header("Objetos en escena")]
 	[SerializeField] private Transform currentSpawnPoint;
@@ -18,6 +18,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject sombra;
     [SerializeField] private GameObject[] inanimateObjects;
     [SerializeField] private GameObject[] enemies;
+    public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
 
     private bool isRecording;
     private float recordingTime = 0;
@@ -61,13 +62,28 @@ public class SceneController : MonoBehaviour
 			recordingTime = 0; // antes recordingTime = Time.deltaTime;
 			isRecording = true;
 			SaveState();
+            notifyListenersStart();
+            
 		}
 		else
 		{
 			isRecording = false;
 			LoadState();
+            notifyListenersStop();
 		}
 	}
+
+    public void notifyListenersStart()
+    {
+        foreach (var obj in recordingListeners)
+            obj.OnRecordingStart();
+    }
+    public void notifyListenersStop()
+    {
+        foreach (var obj in recordingListeners)
+            obj.OnRecordingStop();
+    }
+
 	public void UpdateSpawnPoint(Transform newSpawn)
 	{
 		currentSpawnPoint = newSpawn;
@@ -167,7 +183,7 @@ public class SceneController : MonoBehaviour
 				opit.GetComponent<OpitControllerRewind>().CancelRecording();
 			}
 
-			Debug.Log("Habilidad cancelada: El personaje se queda donde está.");
+			Debug.Log("Habilidad cancelada: El personaje se queda donde estï¿½.");
 		}
 	}
 }
