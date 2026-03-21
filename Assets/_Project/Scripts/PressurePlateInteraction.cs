@@ -1,70 +1,60 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PressurePlateInteraction : MonoBehaviour
+public class PressurePlatePlatform : MovingPlatformBase
 {
-    private float pressDepth = 0.1f;
-    private float pressSpeed = 2f;
-
-    private bool pressed = false;
-    private bool doublePressed = false; //para que el clon no se quite
+    [Header("Events")]
     public UnityEvent onPressed;
     public UnityEvent onReleased;
 
-    private Vector3 initialPos;
+    private bool pressed = false;
+    private bool doublePressed = false;  
     private bool playerOnPlate = false;
 
-    void Start()
+    protected override void Awake()
     {
-        initialPos = transform.position;
+        base.Awake();
+
+        currentTarget = transform.position;
     }
 
-    void Update()
+    protected override void Update()
     {
-        Vector3 targetPos = playerOnPlate 
-            ? initialPos + Vector3.down * pressDepth 
-            : initialPos;
+        if (targetPoint == null) return;
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetPos,
-            pressSpeed * Time.deltaTime
-        );
+        currentTarget = playerOnPlate ? targetPoint.position : startPos;
+
+        Move();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!collision.transform.CompareTag("Player")) return;
 
-        if (collision.transform.tag == "Player")
-        {   
-            if (pressed){
-                doublePressed = true;
-            }
-            else { 
-                doublePressed= false; //por si acaso
-                pressed = true;
-                collision.transform.SetParent(transform); 
-                playerOnPlate = true;
-                onPressed?.Invoke();
-            }
+        if (pressed)
+            doublePressed = true;
+        else
+        {
+            doublePressed = false;
+            pressed = true;
+            playerOnPlate = true;
+            HandlePassenger(collision.transform, true); // parent player
+            onPressed?.Invoke();
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-       
-        if (collision.transform.tag == "Player")
+        if (!collision.transform.CompareTag("Player")) return;
+
+        if (doublePressed)
+            doublePressed = false;
+        else
         {
-            if (doublePressed)
-            {
-                doublePressed = false;
-            }
-            else { 
-                pressed = false;
-                collision.transform.SetParent(null);
-                playerOnPlate = false;
-                onReleased?.Invoke();
-            }
+            pressed = false;
+            playerOnPlate = false;
+            HandlePassenger(collision.transform, false); // unparent player
+            onReleased?.Invoke();
         }
     }
 }

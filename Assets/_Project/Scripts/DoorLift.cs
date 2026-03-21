@@ -1,39 +1,22 @@
 using UnityEngine;
 
-public class DoorLift : MonoBehaviour
+public class MovingPlatformButton : MovingPlatformBase
 {
-    Vector3 closedPos;
-
-    public float liftHeight = 3f;
-    public float speed = 2f;
-
-    bool open = false;
-
-    void Start()
+    protected override void Awake()
     {
-        closedPos = transform.position;
+        base.Awake();
+        currentTarget = transform.position;;
     }
 
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector3 target = open
-            ? closedPos + Vector3.up * liftHeight //vector3 is directional vector for y axis
-            : closedPos;
-
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            target,
-            speed * Time.deltaTime
-        );
+        if (collision.transform.CompareTag("Player"))
+            HandlePassenger(collision.transform, true);
     }
 
-    public void OpenDoor()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        open = true;
-    }
-
-    public void CloseDoor()
-    {
-        open = false;
+        if (collision.transform.CompareTag("Player"))
+            HandlePassenger(collision.transform, false);
     }
 }
