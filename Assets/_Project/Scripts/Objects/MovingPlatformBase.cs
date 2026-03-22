@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MovingPlatformBase : MonoBehaviour
+public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
 {
     [Header("Target Setup")]
     public Transform targetPoint;
@@ -10,6 +10,8 @@ public abstract class MovingPlatformBase : MonoBehaviour
 
     protected Vector3 startPos;
     protected Vector3 currentTarget;
+    private Vector3 savedPosition;
+    private Vector3 savedTarget;
 
     protected virtual void Awake()
     {
@@ -56,6 +58,21 @@ public abstract class MovingPlatformBase : MonoBehaviour
     {
         currentTarget = startPos;
     }
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            HandlePassenger(collision.transform, true);
+        }
+    }
+
+    protected virtual void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            HandlePassenger(collision.transform, false);
+        }
+    }
 
     protected void HandlePassenger(Transform passenger, bool onPlatform)
     {
@@ -65,5 +82,15 @@ public abstract class MovingPlatformBase : MonoBehaviour
             passenger.SetParent(transform);
         else
             passenger.SetParent(null);
+    }
+    public virtual void SaveState()
+    {
+        savedPosition = transform.position;
+        savedTarget = currentTarget;
+    }
+    public virtual void LoadState()
+    {
+        transform.position = savedPosition;
+        currentTarget = savedTarget;
     }
 }

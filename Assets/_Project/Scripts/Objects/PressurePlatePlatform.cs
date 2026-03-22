@@ -27,7 +27,7 @@ public class PressurePlatePlatform : MovingPlatformBase
         Move();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.transform.CompareTag("Player")) return;
 
@@ -43,7 +43,7 @@ public class PressurePlatePlatform : MovingPlatformBase
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    protected override void OnCollisionExit2D(Collision2D collision)
     {
         if (!collision.transform.CompareTag("Player")) return;
 

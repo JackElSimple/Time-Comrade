@@ -3,6 +3,7 @@ using UnityEngine;
 public class MovingPlatformAuto : MovingPlatformBase
 {
     private bool movingForward = true;
+    private bool savedMovingForward;
 
     protected override void Update()
     {
@@ -20,15 +21,15 @@ public class MovingPlatformAuto : MovingPlatformBase
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public override void SaveState()
     {
-        if (collision.transform.CompareTag("Player"))
-            HandlePassenger(collision.transform, true);
+        base.SaveState();
+        savedMovingForward = movingForward;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    public override void LoadState()
     {
-        if (collision.transform.CompareTag("Player"))
-            HandlePassenger(collision.transform, false);
+        base.LoadState();
+        movingForward = savedMovingForward;
     }
 }

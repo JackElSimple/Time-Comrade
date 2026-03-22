@@ -8,16 +8,6 @@ public class RecordingTimeWall : MonoBehaviour, RecordSwitch
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
     }
-    private void OnEnable()
-    {
-        SceneController.recordingListeners.Add(this);
-    }
-
-    private void OnDisable()
-    {
-
-        SceneController.recordingListeners.Remove(this);
-    }
 
     public void OnRecordingStart()
     {
