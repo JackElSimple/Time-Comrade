@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovableObject : MonoBehaviour
 {
-	[Header("Configuración Inicial")]
+	[Header("Configuraciï¿½n Inicial")]
 	public Vector3 customScale = Vector3.one;
 	public Vector3 customRotation = Vector3.zero;
 
@@ -37,7 +37,7 @@ public class MovableObject : MonoBehaviour
 		}
 	}
 
-	// El SceneController llama a estos métodos
+	// El SceneController llama a estos mï¿½todos
 	public void RecordCurrentState()
 	{
 		savedPosition = transform.position;

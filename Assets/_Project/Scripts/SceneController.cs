@@ -16,21 +16,45 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private Transform currentSpawnPoint;
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
-    [SerializeField] private GameObject[] inanimateObjects;
-    [SerializeField] private GameObject[] enemies;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
+    public static List<SaveListener> saveListeners = new List<SaveListener>();
 
     private bool isRecording;
     private float recordingTime = 0;
     private GameObject opit;
     private GameObject clone;
-    private Vector3[] positions = new Vector3[100];
-    private Vector3[] velocitys = new Vector3[100];
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
-    {
+    {  
         CreateOpit();
+        RegisterRecordingListeners();
+        RegisterSaveListeners();
     }
+    private void RegisterRecordingListeners()
+    {
+        MonoBehaviour[] allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+
+        foreach (MonoBehaviour component in allComponents)
+        {
+            if (component is RecordSwitch recordSwitch)
+            {
+                recordingListeners.Add(recordSwitch);
+            }
+        }
+    }
+    private void RegisterSaveListeners()
+    {
+        MonoBehaviour[] allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+
+        foreach (MonoBehaviour component in allComponents)
+        {
+            if (component is SaveListener saveListener)
+            {
+                saveListeners.Add(saveListener);
+            }
+        }
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -51,8 +75,6 @@ public class SceneController : MonoBehaviour
 
             }
         }
-
-        
 
     }
 	public void GestionarHabilidad()
@@ -112,54 +134,20 @@ public class SceneController : MonoBehaviour
     {
         opit.GetComponent<OpitControllerRewind>().StartRecording(); //opit
         Destroy(clone); //clone
-		for (int i = 0; i < inanimateObjects.Length; i++)
-		{
-			var movable = inanimateObjects[i].GetComponent<MovableObject>();
-			if (movable != null)
-				movable.RecordCurrentState();
-			else
-				positions[i] = inanimateObjects[i].transform.position; // Backup por si no tiene el script
-		}
-		for (int i = 0; i < enemies.Length; i++)
-        {
-            var movable = inanimateObjects[i].GetComponent<TurretController>();
-            if (movable != null)
-                movable.RecordCurrentState(); 
-            else
-                positions[i + inanimateObjects.Length] = enemies[i].transform.position;
-                velocitys[i + inanimateObjects.Length] =enemies[i].GetComponent<Rigidbody2D>().linearVelocity;
-            //add the status that u want
-        }
+		foreach (var obj in saveListeners)
+            obj.SaveState();
     }
 
     private void LoadState()
     {
         opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
         CreateClone();
-		for (int i = 0; i < inanimateObjects.Length; i++)
-		{
-			var movable = inanimateObjects[i].GetComponent<MovableObject>();
-			if (movable != null)
-				movable.RestoreState();
-			else
-				inanimateObjects[i].transform.position = positions[i];
-		}
-
-		for (int i = 0; i < enemies.Length; i++)
-        {
-            var movable = inanimateObjects[i].GetComponent<TurretController>();
-            if (movable != null)
-                movable.RestoreState();
-            else
-                enemies[i].transform.position = positions[i + inanimateObjects.Length];
-                enemies[i].GetComponent<Rigidbody2D>().linearVelocity = velocitys[i + inanimateObjects.Length];
-                //add the status that u want
-        }
+		foreach (var obj in saveListeners)
+            obj.LoadState();
     }
 
     public void KillPlayer()//and respwan it
     {
-
         Destroy(opit);
         Destroy(clone);
         isRecording = false;
@@ -194,4 +182,8 @@ public class SceneController : MonoBehaviour
 			Debug.Log("Habilidad cancelada: El personaje se queda donde est�.");
 		}
 	}
+    private void OnDestroy()
+    {
+        recordingListeners.Clear();
+    }
 }
