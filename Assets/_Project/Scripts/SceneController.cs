@@ -122,8 +122,12 @@ public class SceneController : MonoBehaviour
 		}
 		for (int i = 0; i < enemies.Length; i++)
         {
-             positions[i + inanimateObjects.Length] = enemies[i].transform.position;
-             velocitys[i + inanimateObjects.Length] =enemies[i].GetComponent<Rigidbody2D>().linearVelocity;
+            var movable = inanimateObjects[i].GetComponent<TurretController>();
+            if (movable != null)
+                movable.RecordCurrentState(); 
+            else
+                positions[i + inanimateObjects.Length] = enemies[i].transform.position;
+                velocitys[i + inanimateObjects.Length] =enemies[i].GetComponent<Rigidbody2D>().linearVelocity;
             //add the status that u want
         }
     }
@@ -143,9 +147,13 @@ public class SceneController : MonoBehaviour
 
 		for (int i = 0; i < enemies.Length; i++)
         {
-            enemies[i].transform.position = positions[i + inanimateObjects.Length];
-            enemies[i].GetComponent<Rigidbody2D>().linearVelocity = velocitys[i + inanimateObjects.Length];
-            //add the status that u want
+            var movable = inanimateObjects[i].GetComponent<TurretController>();
+            if (movable != null)
+                movable.RestoreState();
+            else
+                enemies[i].transform.position = positions[i + inanimateObjects.Length];
+                enemies[i].GetComponent<Rigidbody2D>().linearVelocity = velocitys[i + inanimateObjects.Length];
+                //add the status that u want
         }
     }
 
