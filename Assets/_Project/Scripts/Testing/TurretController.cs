@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using static OpitControllerRewind;
 
-public class TurretController : MovableObject
+
+public class TurretController : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 3.0f;
@@ -11,11 +13,21 @@ public class TurretController : MovableObject
     private float savedCooldown;
     private Vector3 direction;
     private List<BulletData> bulletsList = new List<BulletData>();
+    private List<BulletData> bulletsSaved = new List<BulletData>();
+    private Vector3 savedPosition;
+    private Quaternion savedRotation;
+    private int numberBullets = 0;
+    private int distanciaRayo = 10;
+    private Vector2 Horizontal = new Vector2(-1,0);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         timeCooldown = shootInterval;
-        InvokeRepeating("Fire", 0.0f, shootInterval);
+
+        Debug.Log(transform.GetChild(0).transform.position);
+        Debug.Log(transform.GetChild(1).transform.position);
+       
+        
     }
     void Fire()
     {
@@ -24,6 +36,8 @@ public class TurretController : MovableObject
         obj.transform.position = transform.GetChild(0).position;
         Projectil proj = obj.GetComponent<Projectil>();
         proj.speed = bulletSpeed * direction;
+        bulletsList.Add(new BulletData(obj,obj.transform.position,proj.speed));
+        numberBullets++;
     }
 
     public struct BulletData //Struct for saving all the data of a bullet
@@ -31,42 +45,87 @@ public class TurretController : MovableObject
         public GameObject bullet;
         public Vector3 position;
         public Vector3 speed;
-        public bool alive;
 
-        public BulletData(GameObject b, Vector3 p, Vector3 s, bool a)
+        public BulletData(GameObject b, Vector3 p, Vector3 s)
         {
+
             bullet = b;
             position = p;
             speed = s;
-            alive = a;
         }
     }
     void Update()
     {
+        Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
         timeCooldown += Time.deltaTime;// cada shootInterval segundos dispara y se reinicia el contador
         if (timeCooldown > shootInterval)
-        {
-            Fire();
-            timeCooldown = 0;
+        { //solo si ve al jugador que no sea a través del muro
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
+            foreach(RaycastHit2D hit in hits) {
+                if( hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    { break;}
+                if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
+                {
+                    Fire();
+                    timeCooldown = 0;
+                    break;
+                }
+            }
+            
+                
+            
+        }
+        for (int i = 0; i < numberBullets; i++)
+        { 
+            BulletData data = bulletsList[i];
+            if (data.bullet != null){ 
+                data.position = data.bullet.transform.position;
+                data.speed = data.bullet.GetComponent<Projectil>().speed;
+            }
         }
     }
-    public void RecordCurrentState()
+    public void SaveState()
     {
+        Debug.Log("xd");
         savedCooldown = timeCooldown;
         savedPosition = transform.position;
         savedRotation = transform.rotation;
-        savedScale = transform.localScale;
+        bulletsSaved = bulletsList;
+       
     }
 
-    public void RestoreState()
+    public void LoadState()
     {
+        Debug.Log("xdd");
         timeCooldown = savedCooldown;
         transform.position = savedPosition;
         transform.rotation = savedRotation;
-        transform.localScale = savedScale;
+        UpdateBullets();
+        bulletsList = bulletsSaved;
+        
 
     }
 
+    private void UpdateBullets()
+    {
+        for (int i = 0; i < numberBullets; i++)
+        {
+            BulletData data = bulletsList[i];
+            if (data.bullet != null)
+            {
+                Destroy(data.bullet); //delete the bullet
+            }
+            BulletData updatedBullets = bulletsSaved[i];
+            if(data.bullet != null) //generates the bullets in the state which were saved
+            {
+                direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
+                GameObject obj = Instantiate<GameObject>(bullet);
+                obj.transform.position = data.position;
+                Projectil proj = obj.GetComponent<Projectil>();
+                proj.speed = data.speed;
+            }
+        }
+    }
     // Update is called once per frame
     
 }
