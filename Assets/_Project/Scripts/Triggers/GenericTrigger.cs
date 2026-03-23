@@ -15,7 +15,8 @@ public class GenericTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (IsTargetTag(other.tag))
+		Debug.Log("macarrones");
+		if (IsTargetTag(other.transform.tag))
 		{
 			// Ejecuta los metodos configurados en el Inspector
 			onTriggerEnter?.Invoke();
