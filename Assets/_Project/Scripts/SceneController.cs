@@ -27,34 +27,7 @@ public class SceneController : MonoBehaviour
     void Start()
     {  
         CreateOpit();
-        RegisterRecordingListeners();
-        RegisterSaveListeners();
     }
-    private void RegisterRecordingListeners()
-    {
-        MonoBehaviour[] allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
-
-        foreach (MonoBehaviour component in allComponents)
-        {
-            if (component is RecordSwitch recordSwitch)
-            {
-                recordingListeners.Add(recordSwitch);
-            }
-        }
-    }
-    private void RegisterSaveListeners()
-    {
-        MonoBehaviour[] allComponents = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
-
-        foreach (MonoBehaviour component in allComponents)
-        {
-            if (component is SaveListener saveListener)
-            {
-                saveListeners.Add(saveListener);
-            }
-        }
-    }
-    
 
     // Update is called once per frame
     void Update()
@@ -185,5 +158,6 @@ public class SceneController : MonoBehaviour
     private void OnDestroy()
     {
         recordingListeners.Clear();
+        saveListeners.Clear();
     }
 }

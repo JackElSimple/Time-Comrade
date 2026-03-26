@@ -20,4 +20,13 @@ public class RecordingCamera2D : MonoBehaviour, RecordSwitch
             overlay.enabled = false;
         }
     }
+    void OnEnable()
+    {
+        SceneController.recordingListeners.Add(this);
+    }
+
+    void OnDisable()
+    {
+        SceneController.recordingListeners.Remove(this);
+    }
 }

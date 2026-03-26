@@ -93,4 +93,13 @@ public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
         transform.position = savedPosition;
         currentTarget = savedTarget;
     }
+    void OnEnable()
+    {
+        SceneController.saveListeners.Add(this);
+    }
+
+    void OnDisable()
+    {
+        SceneController.saveListeners.Remove(this);
+    }
 }
