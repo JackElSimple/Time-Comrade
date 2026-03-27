@@ -17,7 +17,7 @@ public class TurretController : MonoBehaviour, SaveListener
     private Vector3 savedPosition;
     private Quaternion savedRotation;
     private int numberBullets = 0;
-    private int distanciaRayo = 10;
+    [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -38,6 +38,7 @@ public class TurretController : MonoBehaviour, SaveListener
         proj.speed = bulletSpeed * direction;
         bulletsList.Add(new BulletData(obj,obj.transform.position,proj.speed));
         numberBullets++;
+        print(numberBullets);
     }
 
     public struct BulletData //Struct for saving all the data of a bullet
@@ -79,9 +80,11 @@ public class TurretController : MonoBehaviour, SaveListener
         { 
             BulletData data = bulletsList[i];
             if (data.bullet != null){ 
+               
                 data.position = data.bullet.transform.position;
                 data.speed = data.bullet.GetComponent<Projectil>().speed;
             }
+            bulletsList[i]= data;
         }
     }
     public void SaveState()
@@ -114,15 +117,17 @@ public class TurretController : MonoBehaviour, SaveListener
             if (data.bullet != null)
             {
                 Destroy(data.bullet); //delete the bullet
+                data.bullet = null;
             }
             BulletData updatedBullets = bulletsSaved[i];
-            if(data.bullet != null) //generates the bullets in the state which were saved
+            if(updatedBullets.bullet != null) //generates the bullets in the state which were saved
             {
+                Debug.Log(updatedBullets.position);
                 direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
                 GameObject obj = Instantiate<GameObject>(bullet);
-                obj.transform.position = data.position;
+                obj.transform.position = updatedBullets.position;
                 Projectil proj = obj.GetComponent<Projectil>();
-                proj.speed = data.speed;
+                proj.speed = updatedBullets.speed;
             }
         }
     }

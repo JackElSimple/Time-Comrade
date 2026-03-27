@@ -91,4 +91,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e4dff149d383e46a2c7d75f1b9b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: TryRecord
+  nextSceneName: MainMenu
