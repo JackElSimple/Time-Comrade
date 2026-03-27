@@ -45,7 +45,7 @@ public class SceneController : MonoBehaviour
             {
                 isRecording = false;
                 LoadState();
-
+                notifyListenersStop();
             }
         }
 
