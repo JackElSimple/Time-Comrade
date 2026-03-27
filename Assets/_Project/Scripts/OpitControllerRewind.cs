@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
@@ -25,6 +26,7 @@ public class OpitControllerRewind : MonoBehaviour
     [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverá al jugador esta distancia a la izquierda
 
     private Rigidbody2D rb;
+    private Animator _anim;
     private float horizontalInput;
     private bool isGrounded;
     private bool wantsToJump;
@@ -51,6 +53,7 @@ public class OpitControllerRewind : MonoBehaviour
         rb.gravityScale = gravityScale;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.freezeRotation = true;
+        _anim =transform.GetChild(1).GetComponent<Animator>(); //el child 1 es el sprite con la animacion
     }
 
     void Update()
@@ -98,6 +101,8 @@ public class OpitControllerRewind : MonoBehaviour
             recordedInputs.Add(new PlayerInputFrame(h, j));
 
         }
+        
+        _anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
     }
 
     void FixedUpdate()

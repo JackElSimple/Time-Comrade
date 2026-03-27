@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class TurretController : MonoBehaviour
+public class TurretController : MonoBehaviour, SaveListener
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 3.0f;
@@ -127,5 +127,13 @@ public class TurretController : MonoBehaviour
         }
     }
     // Update is called once per frame
-    
+    void OnEnable()
+    {
+        SceneController.saveListeners.Add(this);
+    }
+
+    void OnDisable()
+    {
+        SceneController.saveListeners.Remove(this);
+    }
 }

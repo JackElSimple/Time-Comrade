@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 6399f987b414f934995e210fa39469af
+guid: ab0f6b663dfeaa34a80cb221f56ffddc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7956840128487281000
-    second: Opit_andando_0
+      213: -2644502226827586898
+    second: opit_idle_0
   - first:
-      213: -6924500372380518037
-    second: Opit_andando_1
+      213: 1270767646569859359
+    second: opit_idle_1
   - first:
-      213: -1009586541681787058
-    second: Opit_andando_2
+      213: 6218425224333162145
+    second: opit_idle_2
   - first:
-      213: 6976337725513364275
-    second: Opit_andando_3
+      213: -2209985150108105538
+    second: opit_idle_3
   - first:
-      213: -71667830510124897
-    second: Opit_andando_4
+      213: 4897172846162485997
+    second: opit_idle_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 90
+  spritePixelsToUnits: 900
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,43 +108,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Opit_andando_0
+      name: opit_idle_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 260
-        width: 47
-        height: 95
+        x: 427
+        y: 2599
+        width: 452
+        height: 932
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 861de0190ff5c6e60800000000000000
-      internalID: 7956840128487281000
+      spriteID: ea256326c37dc4bd0800000000000000
+      internalID: -2644502226827586898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Opit_andando_1
+      name: opit_idle_1
       rect:
         serializedVersion: 2
-        x: 167
-        y: 259
-        width: 47
-        height: 95
+        x: 1669
+        y: 2599
+        width: 452
+        height: 932
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b69f231599b37ef90800000000000000
-      internalID: -6924500372380518037
+      spriteID: f190bd5117ca2a110800000000000000
+      internalID: 1270767646569859359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Opit_andando_2
+      name: opit_idle_2
       rect:
         serializedVersion: 2
-        x: 42
-        y: 135
-        width: 47
-        height: 95
+        x: 429
+        y: 1359
+        width: 452
+        height: 932
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4fba0da36a3df1f0800000000000000
-      internalID: -1009586541681787058
+      spriteID: 1a6f4be7bc84c4650800000000000000
+      internalID: 6218425224333162145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Opit_andando_3
+      name: opit_idle_3
       rect:
         serializedVersion: 2
-        x: 166
-        y: 135
-        width: 47
-        height: 95
+        x: 1679
+        y: 1359
+        width: 452
+        height: 932
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 333716af23ee0d060800000000000000
-      internalID: 6976337725513364275
+      spriteID: eb40be8073e8451e0800000000000000
+      internalID: -2209985150108105538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Opit_andando_4
+      name: opit_idle_4
       rect:
         serializedVersion: 2
-        x: 41
-        y: 11
-        width: 47
-        height: 95
+        x: 429
+        y: 119
+        width: 452
+        height: 932
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f900f94ec72610ff0800000000000000
-      internalID: -71667830510124897
+      spriteID: de2243bd1c046f340800000000000000
+      internalID: 4897172846162485997
       vertices: []
       indices: 
       edges: []
@@ -251,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 57f4ab3897b5e6544a2a5e23d16013e1
+    spriteID: eb01aab28cfc1804f8d7a5270b5b1dc3
     internalID: 0
     vertices: []
     indices: 
@@ -261,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Opit_andando_0: 7956840128487281000
-      Opit_andando_1: -6924500372380518037
-      Opit_andando_2: -1009586541681787058
-      Opit_andando_3: 6976337725513364275
-      Opit_andando_4: -71667830510124897
+      opit_idle_0: -2644502226827586898
+      opit_idle_1: 1270767646569859359
+      opit_idle_2: 6218425224333162145
+      opit_idle_3: -2209985150108105538
+      opit_idle_4: 4897172846162485997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
