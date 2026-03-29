@@ -56,6 +56,6 @@ public class MainMenuSceneManager : MonoBehaviour
 
 	public void OnMusicVolume(float volume)
 	{
-		Debug.Log("Volumen de Música: " + volume);
+		Debug.Log("Volumen de MÃºsica: " + volume);
 	}
 }

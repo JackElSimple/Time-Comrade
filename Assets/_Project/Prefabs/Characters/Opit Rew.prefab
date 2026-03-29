@@ -265,11 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6174384511088916617, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6174384511088916617, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6174384511088916617, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_LocalPosition.z
@@ -353,7 +353,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  cloneDistance: 0.5
+  cloneDistance: 0
 --- !u!212 &8918541659605375447
 SpriteRenderer:
   m_ObjectHideFlags: 0

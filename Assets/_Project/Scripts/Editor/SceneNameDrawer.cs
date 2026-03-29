@@ -15,14 +15,14 @@ public class SceneNameDrawer : PropertyDrawer
 
 		if (scenes.Length == 0)
 		{
-			EditorGUI.LabelField(position, label.text, "Añade escenas al Build Settings");
+			EditorGUI.LabelField(position, label.text, "AÃ±ade escenas al Build Settings");
 			return;
 		}
 
-		// Buscamos cuál es la escena seleccionada actualmente
+		// Buscamos cuÃ¡l es la escena seleccionada actualmente
 		int currentIndex = Mathf.Max(0, System.Array.IndexOf(scenes, property.stringValue));
 
-		// Dibujamos el menú desplegable
+		// Dibujamos el menÃº desplegable
 		currentIndex = EditorGUI.Popup(position, label.text, currentIndex, scenes);
 
 		// Guardamos la escena seleccionada de vuelta en el string

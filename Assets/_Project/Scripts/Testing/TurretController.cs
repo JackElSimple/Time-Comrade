@@ -31,7 +31,7 @@ public class TurretController : MonoBehaviour, SaveListener
     }
     void Fire()
     {
-        direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
+        direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - caÃ±on
         GameObject obj = Instantiate<GameObject>(bullet);
         obj.transform.position = transform.GetChild(0).position;
         Projectil proj = obj.GetComponent<Projectil>();
@@ -60,7 +60,7 @@ public class TurretController : MonoBehaviour, SaveListener
         Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
         timeCooldown += Time.deltaTime;// cada shootInterval segundos dispara y se reinicia el contador
         if (timeCooldown > shootInterval)
-        { //solo si ve al jugador que no sea a través del muro
+        { //solo si ve al jugador que no sea a travÃ©s del muro
             RaycastHit2D[] hits = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
             foreach(RaycastHit2D hit in hits) {
                 if( hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -123,7 +123,7 @@ public class TurretController : MonoBehaviour, SaveListener
             if(updatedBullets.bullet != null) //generates the bullets in the state which were saved
             {
                 Debug.Log(updatedBullets.position);
-                direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
+                direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - caÃ±on
                 GameObject obj = Instantiate<GameObject>(bullet);
                 obj.transform.position = updatedBullets.position;
                 Projectil proj = obj.GetComponent<Projectil>();

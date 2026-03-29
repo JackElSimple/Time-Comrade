@@ -23,7 +23,7 @@ public class OpitControllerRewind : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Cosas Rewind")]
-    [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverá al jugador esta distancia a la izquierda
+    [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverÃ¡ al jugador esta distancia a la izquierda
 
     private Rigidbody2D rb;
     private Animator _anim;
@@ -58,15 +58,13 @@ public class OpitControllerRewind : MonoBehaviour
 
     void Update()
     {
-		// Si el manager dice que estamos pausados, salimos del Update antes de leer nada
-		if (PauseMenuHandler.Instance != null && PauseMenuHandler.Instance.isPaused)
-			return;
+		if (Time.timeScale == 0f) return;
 
 		// Inputs
 		horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
 
         
-        // Lógica de Flip
+        // LÃ³gica de Flip
         if (horizontalInput > 0)
         {
             characterSprite.flipX = true; // Mirando a la derecha (D)
@@ -139,6 +137,12 @@ public class OpitControllerRewind : MonoBehaviour
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
+
+        // --- INSTRUMENTACION: LOG DE PLAYER ---
+        if (isRecording)
+        {
+            Debug.Log($"[PLAYER] Tick: {Time.fixedTime:F3} | Pos: {rb.position.x:F3},{rb.position.y:F3} | Vel: {rb.linearVelocity.x:F3},{rb.linearVelocity.y:F3} | Suelo: {isGrounded}");
+        }
     }
 
     
@@ -173,7 +177,7 @@ public class OpitControllerRewind : MonoBehaviour
 
 	public void CancelRecording()
 	{
-		Debug.Log("Grabación cancelada: Datos eliminados sin teletransporte.");
+		Debug.Log("GrabaciÃ³n cancelada: Datos eliminados sin teletransporte.");
 		isRecording = false;
 		recordedInputs.Clear(); // Limpia la lista de frames grabados
 	}

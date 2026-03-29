@@ -49,9 +49,8 @@ public class CloneController : MonoBehaviour
 
     void Update()
     {
-		// Si el manager dice que estamos pausados, salimos del Update antes de leer nada
-		if (PauseMenuHandler.Instance != null && PauseMenuHandler.Instance.isPaused)
-			return;
+		if (Time.timeScale == 0f) return;
+
 
 		timeAwake += Time.deltaTime;
         if(timeAwake >= delayTime)
@@ -74,7 +73,7 @@ public class CloneController : MonoBehaviour
             frame = recordedInputs[frameNumber];
 
 
-            // L�gica de Flip
+            // Lógica de Flip
             if (frame.horizontal > 0)
             {
                 characterSprite.flipX = true; // Mirando a la derecha (D)
@@ -128,6 +127,19 @@ public class CloneController : MonoBehaviour
         else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+        }
+
+        // --- INSTRUMENTACION: LOG DE CLON Y COMPARACION ---
+        if (!dormido)
+        {
+            Debug.Log($"[CLONE] Tick: {(Time.fixedTime - delayTime):F3} | Pos: {rb.position.x:F3},{rb.position.y:F3} | Vel: {rb.linearVelocity.x:F3},{rb.linearVelocity.y:F3} | Suelo: {isGrounded}");
+            
+            OpitControllerRewind player = Object.FindAnyObjectByType<OpitControllerRewind>();
+            if (player != null)
+            {
+                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+                Debug.Log($"[COMPARE] Tick {Time.fixedTime:F3} | ΔPos: {(playerRb.position - rb.position).magnitude:F5} | ΔVel: {(playerRb.linearVelocity - rb.linearVelocity).magnitude:F5}");
+            }
         }
     }
     public void SetListaInputs(List<PlayerInputFrame> listaInputs)

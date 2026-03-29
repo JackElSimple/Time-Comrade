@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class VictoryController : MonoBehaviour
 {
-	[Header("Selecciona la escena del menú")]
-	[SceneName] // <--- Esta es la magia
+	[Header("Selecciona la escena del menÃº")]
+	[SceneName] 
 	[SerializeField] private string nextSceneName;
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -13,7 +13,7 @@ public class VictoryController : MonoBehaviour
 			SceneController sc = FindFirstObjectByType<SceneController>();
 			if (sc != null)
 			{
-				// Aquí usamos el string que el desplegable rellenó por nosotros
+				// AquÃ­ usamos el string que el desplegable rellenÃ³ por nosotros
 				sc.CompleteLevel(nextSceneName);
 			}
 		}

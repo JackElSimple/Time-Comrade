@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class GenericTrigger : MonoBehaviour
 {
-	[Header("Configuración de Filtro")]
+	[Header("ConfiguraciÃ³n de Filtro")]
 	[Tooltip("Lista de Tags que pueden activar este trigger")]
 	[SerializeField] private List<string> targetTags = new List<string> { "Player" };
 

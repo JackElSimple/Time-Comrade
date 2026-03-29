@@ -33,9 +33,7 @@ public class SceneController : MonoBehaviour
     void Update()
     {
 
-		// Si el manager dice que estamos pausados, salimos del Update antes de leer nada
-		if (PauseMenuHandler.Instance != null && PauseMenuHandler.Instance.isPaused)
-			return;
+        if (Time.timeScale == 0f) return;
 
 
         if (isRecording)

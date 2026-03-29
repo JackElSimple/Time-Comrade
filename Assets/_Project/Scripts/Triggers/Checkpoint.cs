@@ -6,7 +6,7 @@ public class Checkpoint : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			// Buscamos el SceneController y le pasamos nuestra posiciÛn
+			// Buscamos el SceneController y le pasamos nuestra posici√≥n
 			SceneController sc = FindFirstObjectByType<SceneController>();
 			if (sc != null)
 			{
@@ -14,7 +14,7 @@ public class Checkpoint : MonoBehaviour
 				Debug.Log("Checkpoint alcanzado: " + gameObject.name);
 			}
 
-			// Desactivar el trigger para que no se use m·s de una vez
+			// Desactivar el trigger para que no se use m√°s de una vez
 			GetComponent<Collider2D>().enabled = false;
 		}
 	}

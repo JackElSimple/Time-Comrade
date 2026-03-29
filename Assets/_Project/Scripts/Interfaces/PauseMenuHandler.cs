@@ -25,7 +25,7 @@ public class PauseMenuHandler : MonoBehaviour
 	bool CanPauseInCurrentScene()
     {
         string escenaActiva = SceneManager.GetActiveScene().name;
-        // Solo permitimos pausar si NO estamos en menús principales
+        // Solo permitimos pausar si NO estamos en menÃºs principales
         return escenaActiva != "MainMenu" && escenaActiva != "Splash" && escenaActiva != pauseSceneName;
     }
 
