@@ -138,11 +138,7 @@ public class OpitControllerRewind : MonoBehaviour
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
 
-        // --- INSTRUMENTACION: LOG DE PLAYER ---
-        if (isRecording)
-        {
-            Debug.Log($"[PLAYER] Tick: {Time.fixedTime:F3} | Pos: {rb.position.x:F3},{rb.position.y:F3} | Vel: {rb.linearVelocity.x:F3},{rb.linearVelocity.y:F3} | Suelo: {isGrounded}");
-        }
+        
     }
 
     
