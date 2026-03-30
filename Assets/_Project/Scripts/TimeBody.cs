@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class TimeBody : MonoBehaviour
 {
+	public bool isRecording = false;
 	public bool isRewinding = false;
 	public float recordTime = 10f;
 	List<PointInTime> pointsInTime;
@@ -17,38 +18,49 @@ public class TimeBody : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-			StartRewind();
-
-		if (Input.GetKeyUp(KeyCode.K))
-			StopRewind();
+		if (isRewinding) { return; }
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			if (!isRecording) { 
+				isRecording = true;
+			}
+			else {
+				isRecording = false;
+				StartRewind();
+			}
+		}
 	}
 
 	void FixedUpdate()
 	{
+		if (isRecording)
+			Record();
 		if (isRewinding)
 			Rewind();
-		else
-			Record();
 	}
 
 	void Record()
 	{
-		if (pointsInTime.Count > Mathf.Round(recordTime / Time.fixedDeltaTime)) // Si han pasado mas de 10 segundos, eliminar el punto mas antiguo
+		if (pointsInTime.Count > Mathf.Round(recordTime / Time.fixedDeltaTime)) // Si han pasado mas de 10 segundos, dejar de grabar, rebobinar y reproducir la grabacion
 		{
-			pointsInTime.RemoveAt(pointsInTime.Count - 1);
+			isRecording = false;
+			StartRewind();
 		}
-		pointsInTime.Insert(0,new PointInTime(transform.position, transform.rotation));
+		Vector2 velocity = rb != null ? rb.linearVelocity : Vector2.zero;
+		pointsInTime.Add(new PointInTime(transform.position, transform.rotation, velocity)); // Agregar el nuevo punto al final de la lista
 	}
 
 	void Rewind()
 	{
-		if (pointsInTime.Count > 0)
+		if (pointsInTime.Count > 0) // Si hay puntos guardados, rebobinar y eliminarlos puntos de la lista
 		{
-			PointInTime pointInTime = pointsInTime[0];
+
+			PointInTime pointInTime = pointsInTime[pointsInTime.Count - 1];
+			float error = Vector2.Distance(transform.position, pointInTime.position); Debug.Log("Error: " + error);
+			
 			transform.position = pointInTime.position;
 			transform.rotation = pointInTime.rotation;
-			pointsInTime.RemoveAt(0);
+			pointsInTime.RemoveAt(pointsInTime.Count - 1);
 		}
 		else
 		{
@@ -58,14 +70,18 @@ public class TimeBody : MonoBehaviour
 	public void StartRewind()
 	{
 		isRewinding = true;
-		if (rb != null) { rb.bodyType = RigidbodyType2D.Kinematic; }
-
-
+		if (rb != null) {
+			rb.simulated = false;
+		}
 	}
 
 	public void StopRewind ()
 	{
 		isRewinding = false;
-		if (rb != null) {rb.bodyType = RigidbodyType2D.Dynamic;}
+		if (rb != null) {
+			rb.simulated = true;
+			rb.linearVelocity = Vector2.zero;
+			rb.angularVelocity = 0f;
+		}
 	}
 }
