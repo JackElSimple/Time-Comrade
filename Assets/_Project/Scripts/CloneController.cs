@@ -67,10 +67,7 @@ public class CloneController : MonoBehaviour
 
 			frameNumber++;
 		}
-		else
-		{
-			ReiniciarBucle();
-		}
+		else { ReiniciarBucle(); }
 	}
 	private void ReiniciarBucle()
 	{
