@@ -1,42 +1,19 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
-public class OpitControllerRewind : MonoBehaviour
+public class OpitControllerRewind : BaseCharacterController
 {
-    [Header("Referencias Visuales")]
-    [SerializeField] private SpriteRenderer characterSprite;
-
-    [Header("Configuraci?n de Movimiento")]
-    [SerializeField] private float moveSpeed = 8f;
-    [SerializeField] private float jumpForce = 12f;
-
-    [Header("Fisicas de Salto")]
-    [SerializeField] private float gravityScale = 3f;      // Gravedad base
-    [SerializeField] private float fallMultiplier = 1.5f;   // Cae mas rapido de lo que sube
-    [SerializeField] private float lowJumpMultiplier = 2f; // Salto corto si sueltas rapido el espacio
-
-    [Header("Deteccion de Suelo")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
-
     [Header("Cosas Rewind")]
     [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverá al jugador esta distancia a la izquierda
 
-    private Rigidbody2D rb;
     private Animator _anim;
     private float horizontalInput;
-    private bool isGrounded;
 	private bool jumpBuffered;
 	private bool isJumpHeld;
 	private bool isRecording;
-    private Vector3 initialPosition; //the position of the player when the rewind  is pushed
-    private Vector3 initialVelocity; //the vector of movement of the player when the rewind is pushed
 
-    private List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
+
 
     public struct PlayerInputFrame //Struct for saving all imputs, at the moment the horizontal and the jump
     {
@@ -51,13 +28,9 @@ public class OpitControllerRewind : MonoBehaviour
 			jumpHeld = jHeld;
         }
     }
-    void Awake()
+    protected override void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = gravityScale;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.freezeRotation = true;
-
+		base.Awake();
         _anim =transform.GetChild(1).GetComponent<Animator>(); //el child 1 es el sprite con la animacion
     }
 
@@ -71,7 +44,7 @@ public class OpitControllerRewind : MonoBehaviour
 
 		if (Input.GetButtonDown("Jump")){ jumpBuffered = true; }
 
-		HandleVisuals(); // Voltea el sprite
+		HandleVisuals(horizontalInput); // Voltea el sprite
 		
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -90,52 +63,21 @@ public class OpitControllerRewind : MonoBehaviour
 
 		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontalInput, jumpBuffered, isJumpHeld)); }
 
-		ApplyMovement();
+		ApplyMovement(horizontalInput);
         ApplyJump();
-        ApplyBetterFall();
+        ApplyBetterFall(isJumpHeld);
 
 		jumpBuffered = false; // Resetea el buffer de salto despues de procesarlo en ApplyJump()
 	}
-
-	private void HandleVisuals()
-	{
-		if (horizontalInput > 0)
-		{
-			characterSprite.flipX = true; // Mirando a la derecha (D)
-		}
-		else if (horizontalInput < 0)
-		{
-			characterSprite.flipX = false;  // Mirando a la izquierda (A)
-		}
-	}
-	private void ApplyMovement()
-    {
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
-    }
 
     private void ApplyJump()
     {
         if (jumpBuffered && isGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+           ExecuteJump();
         }
     }
 
-    private void ApplyBetterFall()
-    {
-        // Si estas cayendo, aumenta la gravedad
-        // Si estas subiendo pero soltaste el boton de salto, frena la subida (salto variable).
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (rb.linearVelocity.y > 0 && !isJumpHeld)
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
-
-        
-    }
 
     public void StartRecording()
     {
