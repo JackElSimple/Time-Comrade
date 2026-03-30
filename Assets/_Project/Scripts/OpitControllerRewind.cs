@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
@@ -29,8 +30,9 @@ public class OpitControllerRewind : MonoBehaviour
     private Animator _anim;
     private float horizontalInput;
     private bool isGrounded;
-    private bool wantsToJump;
-    private bool isRecording;
+	private bool jumpBuffered;
+	private bool isJumpHeld;
+	private bool isRecording;
     private Vector3 initialPosition; //the position of the player when the rewind  is pushed
     private Vector3 initialVelocity; //the vector of movement of the player when the rewind is pushed
 
@@ -39,12 +41,14 @@ public class OpitControllerRewind : MonoBehaviour
     public struct PlayerInputFrame //Struct for saving all imputs, at the moment the horizontal and the jump
     {
         public float horizontal;
-        public bool jump;
+        public bool jumpPressed;
+		public bool jumpHeld;
 
-        public PlayerInputFrame(float h, bool j)
-        {
+		public PlayerInputFrame(float h, bool jPressed, bool jHeld)
+		{
             horizontal = h;
-            jump = j;
+            jumpPressed = jPressed;
+			jumpHeld = jHeld;
         }
     }
     void Awake()
@@ -53,6 +57,7 @@ public class OpitControllerRewind : MonoBehaviour
         rb.gravityScale = gravityScale;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.freezeRotation = true;
+
         _anim =transform.GetChild(1).GetComponent<Animator>(); //el child 1 es el sprite con la animacion
     }
 
@@ -62,66 +67,57 @@ public class OpitControllerRewind : MonoBehaviour
 
 		// Inputs
 		horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
+		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
-        
-        // Lógica de Flip
-        if (horizontalInput > 0)
-        {
-            characterSprite.flipX = true; // Mirando a la derecha (D)
-        }
-        else if (horizontalInput < 0)
-        {
-            characterSprite.flipX = false;  // Mirando a la izquierda (A)
-        }
+		if (Input.GetButtonDown("Jump")){ jumpBuffered = true; }
 
-        if (Input.GetButtonDown("Jump") && isGrounded) // Espacio
-        {
-            wantsToJump = true;
-        }
-
+		HandleVisuals(); // Voltea el sprite
+		
 		if (Input.GetMouseButtonDown(0))
 		{
 			SceneController sc = Object.FindAnyObjectByType<SceneController>();
 			if (sc != null) sc.GestionarHabilidad();
 		}
-		/*if (isRecording)
-		{
-			recordedInputs.Add(new PlayerInputFrame(horizontalInput, Input.GetKey(KeyCode.Space)));
-		}*/
 
-		// Check de suelo
-		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (isRecording)
-        {
-            float h = Input.GetAxisRaw("Horizontal");
-            bool j = Input.GetKey(KeyCode.Space);
+		_anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
 
-            recordedInputs.Add(new PlayerInputFrame(h, j));
-
-        }
-        
-        _anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
     }
 
     void FixedUpdate()
     {
-        ApplyMovement();
+		// Check de suelo
+		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontalInput, jumpBuffered, isJumpHeld)); }
+
+		ApplyMovement();
         ApplyJump();
         ApplyBetterFall();
-    }
 
-    private void ApplyMovement()
+		jumpBuffered = false; // Resetea el buffer de salto despues de procesarlo en ApplyJump()
+	}
+
+	private void HandleVisuals()
+	{
+		if (horizontalInput > 0)
+		{
+			characterSprite.flipX = true; // Mirando a la derecha (D)
+		}
+		else if (horizontalInput < 0)
+		{
+			characterSprite.flipX = false;  // Mirando a la izquierda (A)
+		}
+	}
+	private void ApplyMovement()
     {
-        // Movimiento horizontal directo (evita el "deslizamiento" del hielo)
         rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
     }
 
     private void ApplyJump()
     {
-        if (wantsToJump)
+        if (jumpBuffered && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            wantsToJump = false;
         }
     }
 
@@ -133,7 +129,7 @@ public class OpitControllerRewind : MonoBehaviour
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
+        else if (rb.linearVelocity.y > 0 && !isJumpHeld)
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
@@ -141,11 +137,10 @@ public class OpitControllerRewind : MonoBehaviour
         
     }
 
-    
     public void StartRecording()
     {
         Debug.Log("Grabacion comenzada");
-        recordedInputs = new List<PlayerInputFrame>();//we empty the list when we start another recording
+		recordedInputs.Clear();
         isRecording = true;
         initialPosition = transform.position;
         initialVelocity = rb.linearVelocity;
@@ -155,7 +150,6 @@ public class OpitControllerRewind : MonoBehaviour
     {
         Debug.Log("Grabacion terminada");
         isRecording = false;
-        //transform.position = initialPosition; //terminar
         rb.linearVelocity = initialVelocity;
         transform.position = initialPosition; 
         

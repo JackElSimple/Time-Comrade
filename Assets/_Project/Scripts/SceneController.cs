@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour
 {
 
     [Header("Cosas Rewind")]
-    [SerializeField] private float recordingDuration = 5.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure m�s o menos
+    [SerializeField] private float recordingDuration = 10.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mas o menos
 
     [Header("Objetos en escena")]
 	[SerializeField] private Transform currentSpawnPoint;
@@ -89,27 +89,29 @@ public class SceneController : MonoBehaviour
     private void CreateClone()
     {
 
-        clone = Instantiate<GameObject>(sombra);
+		if (sombra == null) return;
 
-        clone.transform.position = opit.GetComponent<OpitControllerRewind>().getInitialPosition();
-        clone.GetComponent<CloneController>().SetInitialPosition(clone.transform.position);
+		clone = Instantiate(sombra);
+		OpitControllerRewind playerScript = opit.GetComponent<OpitControllerRewind>();
+		CloneController cloneScript = clone.GetComponent<CloneController>();
 
-        clone.GetComponent<Rigidbody2D>().linearVelocity = opit.GetComponent<OpitControllerRewind>().getInitialVelocity();
-        clone.GetComponent<CloneController>().SetInitialVelocity(clone.GetComponent<Rigidbody2D>().linearVelocity);
-        List<PlayerInputFrame> listaInputs = opit.GetComponent<OpitControllerRewind>().getImputsList();
+		// Pasamos todos los datos de una vez
+		cloneScript.SetData(
+			playerScript.getImputsList(),
+			playerScript.getInitialPosition(),
+			playerScript.getInitialVelocity()
+		);
+	}
 
-        clone.GetComponent<CloneController>().SetListaInputs(listaInputs);
-    }
+	private void SaveState()
+	{
+		if (opit != null) opit.GetComponent<OpitControllerRewind>().StartRecording();
+		if (clone != null) Destroy(clone); // Limpiamos el clon anterior si existe
 
-    private void SaveState()
-    {
-        opit.GetComponent<OpitControllerRewind>().StartRecording(); //opit
-        Destroy(clone); //clone
-		foreach (var obj in saveListeners)
-            obj.SaveState();
-    }
+		foreach (var obj in saveListeners) obj.SaveState();
+	}
 
-    private void LoadState()
+	private void LoadState()
     {
         opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
         CreateClone();

@@ -8,7 +8,7 @@ public class CloneController : MonoBehaviour
     [Header("Referencias Visuales")]
     [SerializeField] private SpriteRenderer characterSprite;
 
-    [Header("Configuraci?n de Movimiento")]
+    [Header("Configuracion de Movimiento")]
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float jumpForce = 12f;
 
@@ -22,11 +22,10 @@ public class CloneController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Rewind y tal")]
+    [Header("Rewind Settings")]
     [SerializeField] private float delayTime = 1.0f;
 
-    private Rigidbody2D rb;
-    private float horizontalInput;
+	private Rigidbody2D rb;
     private bool isGrounded;
     private bool wantsToJump;
 
@@ -34,77 +33,54 @@ public class CloneController : MonoBehaviour
     private int frameNumber;
     private Vector3 initialPosition; //the position of the player when the rewind  is pushed
     private Vector3 initialVelocity; //the vector of movement of the player when the rewind is pushed
-    private PlayerInputFrame frame;
-    private float timeAwake = 0.0f;
-    private bool dormido = true;
-
-    void Awake()
+    private PlayerInputFrame currentFrame;
+	void Awake()
     {
         Debug.Log("Clon despertado");
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravityScale;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.freezeRotation = true;
-    }
+	}
 
     void Update()
     {
 		if (Time.timeScale == 0f) return;
-
-
-		timeAwake += Time.deltaTime;
-        if(timeAwake >= delayTime)
-        {
-            if (dormido)
-            {
-                dormido= false;
-                rb.linearVelocity = initialVelocity;
-            }
-            if(frameNumber >= recordedInputs.Count)
-            {
-                transform.position= initialPosition;
-        
-                frameNumber= 0;
-                timeAwake = 0.0f;
-                dormido= true;
-            }
-            // Inputs
-            //horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
-            frame = recordedInputs[frameNumber];
-
-
-            // Lógica de Flip
-            if (frame.horizontal > 0)
-            {
-                characterSprite.flipX = true; // Mirando a la derecha (D)
-            }
-            else if (frame.horizontal < 0)
-            {
-                characterSprite.flipX = false;  // Mirando a la izquierda (A)
-            }
-
-            if (frame.jump && isGrounded) // Espacio
-            {
-               wantsToJump = true;
-            }
-
-            // Check de suelo
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-            frameNumber++;
-        }
     }
 
     void FixedUpdate()
     {
-        ApplyMovement();
-        ApplyJump();
-        ApplyBetterFall();
-    }
+		if (recordedInputs.Count == 0) return;
 
-    private void ApplyMovement()
+		if (frameNumber < recordedInputs.Count)
+		{
+			currentFrame = recordedInputs[frameNumber];
+
+			isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+			if (currentFrame.jumpPressed && isGrounded) wantsToJump = true;
+
+			ApplyMovement();
+			ApplyJump();
+			ApplyBetterFall();
+			HandleVisuals();
+
+			frameNumber++;
+		}
+		else
+		{
+			ReiniciarBucle();
+		}
+	}
+	private void ReiniciarBucle()
+	{
+		frameNumber = 0;       
+		rb.linearVelocity = initialVelocity;
+		transform.position = initialPosition;
+	}
+	private void ApplyMovement()
     {
-        // Movimiento horizontal directo (evita el "deslizamiento" del hielo)
-        rb.linearVelocity = new Vector2(frame.horizontal * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(currentFrame.horizontal * moveSpeed, rb.linearVelocity.y);
     }
 
     private void ApplyJump()
@@ -118,38 +94,24 @@ public class CloneController : MonoBehaviour
 
     private void ApplyBetterFall()
     {
-        // Si estas cayendo, aumenta la gravedad
-        // Si estas subiendo pero soltaste el boton de salto, frena la subida (salto variable).
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
+		if (rb.linearVelocity.y < 0)
+			rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+		else if (rb.linearVelocity.y > 0 && !currentFrame.jumpHeld) 
+			rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+	}
+	private void HandleVisuals()
+	{
+		if (currentFrame.horizontal > 0) characterSprite.flipX = true;
+		else if (currentFrame.horizontal < 0) characterSprite.flipX = false;
+	}
 
-        if (!dormido)
-        {
-            
-            OpitControllerRewind player = Object.FindAnyObjectByType<OpitControllerRewind>();
-            if (player != null)
-            {
-                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
-            }
-        }
-    }
-    public void SetListaInputs(List<PlayerInputFrame> listaInputs)
-    {
-        recordedInputs = listaInputs;
-    }
-    public void SetInitialPosition(Vector3 pos)
-    {
-        initialPosition = pos;
-    }
-    public void SetInitialVelocity(Vector3 vel)
-    {
-        initialVelocity = vel;
-    }
+	public void SetData(List<PlayerInputFrame> inputs, Vector3 pos, Vector3 vel)
+	{
+		// Crear una nueva lista para que no apunte a la del jugador que se va a borrar
+		recordedInputs = new List<PlayerInputFrame>(inputs);
+		initialPosition = pos;
+		initialVelocity = vel;
+		transform.position = pos;
+	}
 
 }
