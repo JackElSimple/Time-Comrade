@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static OpitControllerRewind;
 
 public class SceneController : MonoBehaviour
 {
@@ -22,7 +21,8 @@ public class SceneController : MonoBehaviour
 	private float recordingTime = 0;
     private GameObject opit;
     private GameObject clone;
-
+	private OpitControllerRewind opitScript;
+	private CloneController cloneScript;
 	void Start()
     {  
         CreateOpit();
@@ -82,7 +82,9 @@ public class SceneController : MonoBehaviour
 	private void CreateOpit()
     {
         opit = Instantiate<GameObject>(personaje);
-        opit.transform.position = currentSpawnPoint.transform.position;
+		opitScript = opit.GetComponent<OpitControllerRewind>();
+
+		opit.transform.position = currentSpawnPoint.transform.position;
     }
     private void CreateClone()
     {
@@ -90,21 +92,21 @@ public class SceneController : MonoBehaviour
 		if (sombra == null) return;
 
 		clone = Instantiate(sombra);
-		OpitControllerRewind playerScript = opit.GetComponent<OpitControllerRewind>();
-		CloneController cloneScript = clone.GetComponent<CloneController>();
+		
+		cloneScript = clone.GetComponent<CloneController>();
 
 		// Pasamos todos los datos de una vez
 		cloneScript.SetData(
-			playerScript.getImputsList(),
-			playerScript.getInitialPosition(),
-			playerScript.getInitialVelocity()
+			opitScript.recordedInputs,
+			opitScript.initialPosition,
+			opitScript.initialVelocity
 		);
 	}
 
 	private void SaveState()
 	{
 		if (opit != null) { 
-			opit.GetComponent<OpitControllerRewind>().StartRecording();
+			opitScript.StartRecording();
 			isRecording = true;
 		}
 		if (clone != null) Destroy(clone); // Limpiamos el clon anterior si existe
@@ -116,7 +118,7 @@ public class SceneController : MonoBehaviour
     {
 		if (opit != null)
 		{
-			opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
+			opitScript.FinishRecording(); 
 			isRecording = false;
 		}
 		CreateClone();
@@ -139,7 +141,7 @@ public class SceneController : MonoBehaviour
 	{
 		//  detenemos la grabacion si estaba activa
 		if (opit != null)
-			opit.GetComponent<OpitControllerRewind>().FinishRecording();
+			opitScript.FinishRecording();
 
 		// Cargamos la siguiente escena
 		Debug.Log("<color=green>[SCENE] Nivel Completado. Cargando: " + sceneName + "</color>");
@@ -154,7 +156,7 @@ public class SceneController : MonoBehaviour
 
 			if (opit != null)
 			{
-				opit.GetComponent<OpitControllerRewind>().CancelRecording();
+				opitScript.CancelRecording();
 				isRecording = false;
 			}
 

@@ -24,9 +24,9 @@ public abstract class BaseCharacterController : MonoBehaviour
 	protected Rigidbody2D rb;
 	protected bool isGrounded;
 	protected bool wantsToJump;
-	protected Vector3 initialPosition;
-	protected Vector3 initialVelocity;
-	protected List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
+	public Vector3 initialPosition { get; protected set; }
+	public  Vector3 initialVelocity{ get; protected set; }
+	public List<PlayerInputFrame> recordedInputs { get; protected set; } = new List<PlayerInputFrame>(); 
 	protected SceneController sc;
 
 

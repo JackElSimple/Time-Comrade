@@ -68,16 +68,6 @@ public class OpitControllerRewind : BaseCharacterController
         
      }
 
-    public Vector3 getInitialPosition() {  
-        return initialPosition;
-    }
-    public Vector3 getInitialVelocity(){
-        return initialVelocity; 
-     }
-    public List<PlayerInputFrame> getImputsList() {
-        return recordedInputs;
-    }
-
 	public void CancelRecording()
 	{
 		Debug.Log("Grabación cancelada: Datos eliminados sin teletransporte.");
