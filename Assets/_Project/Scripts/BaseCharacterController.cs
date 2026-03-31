@@ -27,13 +27,17 @@ public abstract class BaseCharacterController : MonoBehaviour
 	protected Vector3 initialPosition;
 	protected Vector3 initialVelocity;
 	protected List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
+	protected SceneController sc;
 
 	protected virtual void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		sc = Object.FindAnyObjectByType<SceneController>();
+
 		rb.gravityScale = gravityScale;
 		rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		rb.freezeRotation = true;
+
 	}
 
 	protected void ApplyMovement(float horizontal)

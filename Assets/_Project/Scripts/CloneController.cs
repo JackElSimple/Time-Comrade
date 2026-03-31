@@ -26,7 +26,7 @@ public class CloneController : BaseCharacterController
 			if (currentFrame.jumpPressed && isGrounded) wantsToJump = true;
 
 			ApplyMovement(currentFrame.horizontal);
-			ApplyJump();
+			if (wantsToJump) { ExecuteJump(); wantsToJump = false; }
 			ApplyBetterFall(currentFrame.jumpHeld);
 			HandleVisuals(currentFrame.horizontal);
 
@@ -41,16 +41,6 @@ public class CloneController : BaseCharacterController
 		rb.linearVelocity = initialVelocity;
 		transform.position = initialPosition;
 	}
-
-    private void ApplyJump()
-    {
-        if (wantsToJump)
-        {
-			ExecuteJump();
-			wantsToJump = false;
-        }
-    }
-
 
 
 	public void SetData(List<PlayerInputFrame> inputs, Vector3 pos, Vector3 vel)

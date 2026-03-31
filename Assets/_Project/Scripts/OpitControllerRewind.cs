@@ -32,6 +32,7 @@ public class OpitControllerRewind : BaseCharacterController
     {
 		base.Awake();
         _anim =transform.GetChild(1).GetComponent<Animator>(); //el child 1 es el sprite con la animacion
+
     }
 
     void Update()
@@ -48,7 +49,6 @@ public class OpitControllerRewind : BaseCharacterController
 		
 		if (Input.GetMouseButtonDown(0))
 		{
-			SceneController sc = Object.FindAnyObjectByType<SceneController>();
 			if (sc != null) sc.GestionarHabilidad();
 		}
 
@@ -64,19 +64,11 @@ public class OpitControllerRewind : BaseCharacterController
 		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontalInput, jumpBuffered, isJumpHeld)); }
 
 		ApplyMovement(horizontalInput);
-        ApplyJump();
-        ApplyBetterFall(isJumpHeld);
+        if (jumpBuffered && isGrounded){  ExecuteJump(); }
+		ApplyBetterFall(isJumpHeld);
 
 		jumpBuffered = false; // Resetea el buffer de salto despues de procesarlo en ApplyJump()
 	}
-
-    private void ApplyJump()
-    {
-        if (jumpBuffered && isGrounded)
-        {
-           ExecuteJump();
-        }
-    }
 
 
     public void StartRecording()

@@ -52,7 +52,7 @@ public class SceneController : MonoBehaviour
 	{
 		if (!isRecording)
 		{
-			recordingTime = 0; // antes recordingTime = Time.deltaTime;
+			recordingTime = 0; 
 			isRecording = true;
 			SaveState();
             notifyListenersStart();
@@ -152,7 +152,7 @@ public class SceneController : MonoBehaviour
 				opit.GetComponent<OpitControllerRewind>().CancelRecording();
 			}
 
-			Debug.Log("Habilidad cancelada: El personaje se queda donde est�.");
+			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
 	}
     private void OnDestroy()
