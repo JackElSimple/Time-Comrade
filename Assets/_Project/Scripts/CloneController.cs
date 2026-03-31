@@ -13,6 +13,8 @@ public class CloneController : BaseCharacterController
 
     void FixedUpdate()
     {
+		if (Time.timeScale == 0f) return;
+
 		if (recordedInputs.Count == 0) return;
 
 		if (frameNumber < recordedInputs.Count)

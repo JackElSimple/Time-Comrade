@@ -41,6 +41,7 @@ public class OpitControllerRewind : BaseCharacterController
 
     void FixedUpdate()
     {
+		if (Time.timeScale == 0f) return;
 		// Check de suelo
 		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 		if (sc != null && sc.isRecording) { recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
@@ -52,7 +53,7 @@ public class OpitControllerRewind : BaseCharacterController
 	}
 
 
-    public void StartRecording()
+    public void StartRecording() //añadir rewind
     {
         Debug.Log("Grabacion comenzada");
 		recordedInputs.Clear();
@@ -60,7 +61,7 @@ public class OpitControllerRewind : BaseCharacterController
         initialVelocity = rb.linearVelocity;
 
     }
-    public void FinishRecording()
+    public void FinishRecording() // cambiar por rewind
     {
         Debug.Log("Grabacion terminada");
 		rb.linearVelocity = initialVelocity;

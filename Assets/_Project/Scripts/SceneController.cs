@@ -18,6 +18,7 @@ public class SceneController : MonoBehaviour
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
+	public bool isRewinding { get; private set; }
 	private float recordingTime = 0;
     private GameObject opit;
     private GameObject clone;
@@ -28,17 +29,16 @@ public class SceneController : MonoBehaviour
         CreateOpit();
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         if (Time.timeScale == 0f) return;
 
-
         if (isRecording)
         {
-            recordingTime += Time.deltaTime;
-            if (recordingTime >= recordingDuration)
-            {
+            recordingTime += Time.fixedDeltaTime;
+            if (recordingTime >= recordingDuration) // terminar grabacion y reproducirla
+			{
                 isRecording = false;
                 LoadState();
                 notifyListenersStop();
@@ -105,9 +105,9 @@ public class SceneController : MonoBehaviour
 
 	private void SaveState()
 	{
-		if (opit != null) { 
-			opitScript.StartRecording();
+		if (opit != null) {
 			isRecording = true;
+			opitScript.StartRecording();
 		}
 		if (clone != null) Destroy(clone); // Limpiamos el clon anterior si existe
 
@@ -118,12 +118,12 @@ public class SceneController : MonoBehaviour
     {
 		if (opit != null)
 		{
-			opitScript.FinishRecording(); 
 			isRecording = false;
+			opitScript.FinishRecording(); 
 		}
 		CreateClone();
-		foreach (var obj in saveListeners)
-            obj.LoadState();
+
+		foreach (var obj in saveListeners) obj.LoadState();
     }
 
     public void KillPlayer()//and respawn it

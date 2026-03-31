@@ -3,25 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 public class TimeBody : MonoBehaviour
 {
-	public bool isRecording = false;
-	public bool isRewinding = false;
-	public float recordTime = 10f;
+	//public bool isRecording = false;
+	//public bool isRewinding = false;
+	//public float recordTime = 10f;
 	List<PointInTime> pointsInTime;
 	Rigidbody2D rb;
+	private SceneController sc;
 
 
 	void Start()
     {
         pointsInTime = new List<PointInTime>();
 		rb = GetComponent<Rigidbody2D>();
+		sc = Object.FindAnyObjectByType<SceneController>();
+
 	}
 
-    void Update()
+	void Update()
     {
-		if (isRewinding) { return; }
+		if (sc.isRewinding) { return; }
 		if (Input.GetKeyDown(KeyCode.K))
 		{
-			if (!isRecording) { 
+			if (!sc.isRecording) { 
 				isRecording = true;
 			}
 			else {
@@ -33,9 +36,9 @@ public class TimeBody : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (isRecording)
+		if (sc.isRecording)
 			Record();
-		if (isRewinding)
+		if (sc.isRewinding)
 			Rewind();
 	}
 
