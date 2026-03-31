@@ -22,12 +22,12 @@ public class CloneController : BaseCharacterController
 
 			isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-			if (currentFrame.jumpPressed && isGrounded) wantsToJump = true;
+			if (currentFrame.jumpPressedInput && isGrounded) wantsToJump = true;
 
-			ApplyMovement(currentFrame.horizontal);
+			ApplyMovement(currentFrame.horizontalInput);
 			ApplyJump();
-			ApplyBetterFall(currentFrame.jumpHeld);
-			HandleVisuals(currentFrame.horizontal);
+			ApplyBetterFall(currentFrame.jumpHeldInput);
+			HandleVisuals(currentFrame.horizontalInput);
 
 			frameNumber++;
 		}

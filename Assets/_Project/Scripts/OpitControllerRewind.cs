@@ -8,7 +8,7 @@ public class OpitControllerRewind : BaseCharacterController
     [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverá al jugador esta distancia a la izquierda
 
     private Animator _anim;
-    private float horizontalInput;
+    private float horizontal;
 	private bool isJumpHeld;
 	private bool isRecording;
 
@@ -26,12 +26,12 @@ public class OpitControllerRewind : BaseCharacterController
 		if (Time.timeScale == 0f) return;
 
 		// Inputs
-		horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
+		horizontal = Input.GetAxisRaw("Horizontal"); // A,D
 		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
 		if (Input.GetButtonDown("Jump")){ wantsToJump = true; }
 
-		HandleVisuals(horizontalInput); // Voltea el sprite
+		HandleVisuals(horizontal); // Voltea el sprite
 		
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -47,9 +47,9 @@ public class OpitControllerRewind : BaseCharacterController
 		// Check de suelo
 		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontalInput, wantsToJump, isJumpHeld)); }
+		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
 
-		ApplyMovement(horizontalInput);
+		ApplyMovement(horizontal);
 		ApplyJump();
 		ApplyBetterFall(isJumpHeld);
 

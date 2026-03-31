@@ -33,15 +33,15 @@ public abstract class BaseCharacterController : MonoBehaviour
 
 	public struct PlayerInputFrame //Struct for saving all imputs
 	{
-		public float horizontal;
-		public bool jumpPressed;
-		public bool jumpHeld;
+		public float horizontalInput;
+		public bool jumpPressedInput;
+		public bool jumpHeldInput;
 
 		public PlayerInputFrame(float h, bool jPressed, bool jHeld)
 		{
-			horizontal = h;
-			jumpPressed = jPressed;
-			jumpHeld = jHeld;
+			horizontalInput = h;
+			jumpPressedInput = jPressed;
+			jumpHeldInput = jHeld;
 		}
 	}
 
