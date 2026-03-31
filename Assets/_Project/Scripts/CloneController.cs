@@ -4,7 +4,6 @@ using static OpitControllerRewind;
 
 public class CloneController : BaseCharacterController
 {
-    private bool wantsToJump;
     private int frameNumber;
     private PlayerInputFrame currentFrame;
 
@@ -26,7 +25,7 @@ public class CloneController : BaseCharacterController
 			if (currentFrame.jumpPressed && isGrounded) wantsToJump = true;
 
 			ApplyMovement(currentFrame.horizontal);
-			if (wantsToJump) { ExecuteJump(); wantsToJump = false; }
+			ApplyJump();
 			ApplyBetterFall(currentFrame.jumpHeld);
 			HandleVisuals(currentFrame.horizontal);
 

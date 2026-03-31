@@ -9,25 +9,11 @@ public class OpitControllerRewind : BaseCharacterController
 
     private Animator _anim;
     private float horizontalInput;
-	private bool jumpBuffered;
 	private bool isJumpHeld;
 	private bool isRecording;
 
 
 
-    public struct PlayerInputFrame //Struct for saving all imputs, at the moment the horizontal and the jump
-    {
-        public float horizontal;
-        public bool jumpPressed;
-		public bool jumpHeld;
-
-		public PlayerInputFrame(float h, bool jPressed, bool jHeld)
-		{
-            horizontal = h;
-            jumpPressed = jPressed;
-			jumpHeld = jHeld;
-        }
-    }
     protected override void Awake()
     {
 		base.Awake();
@@ -43,7 +29,7 @@ public class OpitControllerRewind : BaseCharacterController
 		horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
 		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
-		if (Input.GetButtonDown("Jump")){ jumpBuffered = true; }
+		if (Input.GetButtonDown("Jump")){ wantsToJump = true; }
 
 		HandleVisuals(horizontalInput); // Voltea el sprite
 		
@@ -61,13 +47,12 @@ public class OpitControllerRewind : BaseCharacterController
 		// Check de suelo
 		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontalInput, jumpBuffered, isJumpHeld)); }
+		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontalInput, wantsToJump, isJumpHeld)); }
 
 		ApplyMovement(horizontalInput);
-        if (jumpBuffered && isGrounded){  ExecuteJump(); }
+		ApplyJump();
 		ApplyBetterFall(isJumpHeld);
 
-		jumpBuffered = false; // Resetea el buffer de salto despues de procesarlo en ApplyJump()
 	}
 
 

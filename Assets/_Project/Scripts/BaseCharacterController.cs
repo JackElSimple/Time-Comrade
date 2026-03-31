@@ -24,10 +24,26 @@ public abstract class BaseCharacterController : MonoBehaviour
 
 	protected Rigidbody2D rb;
 	protected bool isGrounded;
+	protected bool wantsToJump;
 	protected Vector3 initialPosition;
 	protected Vector3 initialVelocity;
 	protected List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
 	protected SceneController sc;
+
+
+	public struct PlayerInputFrame //Struct for saving all imputs
+	{
+		public float horizontal;
+		public bool jumpPressed;
+		public bool jumpHeld;
+
+		public PlayerInputFrame(float h, bool jPressed, bool jHeld)
+		{
+			horizontal = h;
+			jumpPressed = jPressed;
+			jumpHeld = jHeld;
+		}
+	}
 
 	protected virtual void Awake()
 	{
@@ -45,9 +61,13 @@ public abstract class BaseCharacterController : MonoBehaviour
 		rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
 	}
 
-	protected void ExecuteJump()
+	protected void ApplyJump()
 	{
-		rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+		if (wantsToJump && isGrounded)
+		{
+			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+		}
+		wantsToJump = false;
 	}
 
 	protected void ApplyBetterFall(bool jumpHeld)
