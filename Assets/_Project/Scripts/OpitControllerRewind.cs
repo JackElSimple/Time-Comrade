@@ -10,11 +10,9 @@ public class OpitControllerRewind : BaseCharacterController
     private Animator _anim;
     private float horizontal;
 	private bool isJumpHeld;
-	private bool isRecording;
 
 
-
-    protected override void Awake()
+	protected override void Awake()
     {
 		base.Awake();
         _anim =transform.GetChild(1).GetComponent<Animator>(); //el child 1 es el sprite con la animacion
@@ -31,23 +29,21 @@ public class OpitControllerRewind : BaseCharacterController
 
 		if (Input.GetButtonDown("Jump")){ wantsToJump = true; }
 
-		HandleVisuals(horizontal); // Voltea el sprite
 		
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (sc != null) sc.GestionarHabilidad();
 		}
 
+		HandleVisuals(horizontal); // Voltea el sprite
 		_anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
-
     }
 
     void FixedUpdate()
     {
 		// Check de suelo
 		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-		if (isRecording){ recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
+		if (sc != null && sc.isRecording) { recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
 
 		ApplyMovement(horizontal);
 		ApplyJump();
@@ -60,16 +56,14 @@ public class OpitControllerRewind : BaseCharacterController
     {
         Debug.Log("Grabacion comenzada");
 		recordedInputs.Clear();
-        isRecording = true;
-        initialPosition = transform.position;
+		initialPosition = transform.position;
         initialVelocity = rb.linearVelocity;
 
     }
     public void FinishRecording()
     {
         Debug.Log("Grabacion terminada");
-        isRecording = false;
-        rb.linearVelocity = initialVelocity;
+		rb.linearVelocity = initialVelocity;
         transform.position = initialPosition; 
         
      }
@@ -87,7 +81,6 @@ public class OpitControllerRewind : BaseCharacterController
 	public void CancelRecording()
 	{
 		Debug.Log("Grabación cancelada: Datos eliminados sin teletransporte.");
-		isRecording = false;
 		recordedInputs.Clear(); // Limpia la lista de frames grabados
 	}
 }

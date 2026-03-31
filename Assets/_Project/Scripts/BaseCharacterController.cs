@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static OpitControllerRewind;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 public abstract class BaseCharacterController : MonoBehaviour

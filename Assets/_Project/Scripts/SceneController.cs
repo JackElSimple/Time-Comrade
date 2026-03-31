@@ -18,18 +18,16 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject sombra;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
-
-    private bool isRecording;
-    private float recordingTime = 0;
+	public bool isRecording { get; private set; } 
+	private float recordingTime = 0;
     private GameObject opit;
     private GameObject clone;
 
-    void Start()
+	void Start()
     {  
         CreateOpit();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -105,7 +103,10 @@ public class SceneController : MonoBehaviour
 
 	private void SaveState()
 	{
-		if (opit != null) opit.GetComponent<OpitControllerRewind>().StartRecording();
+		if (opit != null) { 
+			opit.GetComponent<OpitControllerRewind>().StartRecording();
+			isRecording = true;
+		}
 		if (clone != null) Destroy(clone); // Limpiamos el clon anterior si existe
 
 		foreach (var obj in saveListeners) obj.SaveState();
@@ -113,13 +114,17 @@ public class SceneController : MonoBehaviour
 
 	private void LoadState()
     {
-        opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
-        CreateClone();
+		if (opit != null)
+		{
+			opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
+			isRecording = false;
+		}
+		CreateClone();
 		foreach (var obj in saveListeners)
             obj.LoadState();
     }
 
-    public void KillPlayer()//and respwan it
+    public void KillPlayer()//and respawn it
     {
         Destroy(opit);
         Destroy(clone);
@@ -150,6 +155,7 @@ public class SceneController : MonoBehaviour
 			if (opit != null)
 			{
 				opit.GetComponent<OpitControllerRewind>().CancelRecording();
+				isRecording = false;
 			}
 
 			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static OpitControllerRewind;
 
 public class CloneController : BaseCharacterController
 {
@@ -19,10 +18,8 @@ public class CloneController : BaseCharacterController
 		if (frameNumber < recordedInputs.Count)
 		{
 			currentFrame = recordedInputs[frameNumber];
-
 			isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-			if (currentFrame.jumpPressedInput && isGrounded) wantsToJump = true;
+			wantsToJump = currentFrame.jumpPressedInput;
 
 			ApplyMovement(currentFrame.horizontalInput);
 			ApplyJump();
