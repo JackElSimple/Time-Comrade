@@ -113,7 +113,7 @@ public class TurretController : TimeBody
 	public override void OnRewindFinished(){ 
 		base.OnRewindFinished();
 		bulletsList = bulletsSaved;
-		UpdateBullets();
+		//UpdateBullets();
 
 	}
 

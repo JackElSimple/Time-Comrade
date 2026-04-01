@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class OpitControllerRewind : BaseCharacterController
 {
-    [Header("Cosas Rewind")]
-    [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverá al jugador esta distancia a la izquierda
-
     private Animator _anim;
     private float horizontal;
 	private bool isJumpHeld;
