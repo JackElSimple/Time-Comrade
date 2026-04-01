@@ -9,10 +9,11 @@ public abstract class MovingPlatformBase : TimeBody
     public float speed = 2f;
 
     protected Vector3 startPos;
-    protected Vector3 currentTarget;
+	[SerializeField]
+	protected Vector3 currentTarget;
    
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
 		base.Awake();
         startPos = transform.position;
@@ -27,12 +28,11 @@ public abstract class MovingPlatformBase : TimeBody
         currentTarget = targetPoint.position;
     }
 
-    protected virtual void Update()
-    {
-        Move();
-    }
-
-    protected void Move()
+	protected override void OnUpdate()
+	{
+		Move();
+	}
+	protected void Move()
 {
     if (targetPoint == null) return;
 

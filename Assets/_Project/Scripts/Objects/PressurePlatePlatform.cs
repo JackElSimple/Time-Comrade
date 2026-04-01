@@ -18,9 +18,11 @@ public class PressurePlatePlatform : MovingPlatformBase
         currentTarget = transform.position;
     }
 
-    protected override void Update()
+    protected override void OnUpdate()
     {
-        if (targetPoint == null) return;
+		base.OnUpdate();
+
+		if (targetPoint == null) return;
 
         currentTarget = playerOnPlate ? targetPoint.position : startPos;
 

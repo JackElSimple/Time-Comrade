@@ -7,9 +7,14 @@ public class TimeBody : MonoBehaviour, SaveListener
 	Rigidbody2D rb;
 	private SceneController sc;
 
-	protected virtual void Update()
+	protected void Update()
 	{
 		if (sc != null && sc.isRewinding) return;
+		OnUpdate();
+	}
+	protected virtual void OnUpdate()
+	{
+		// Vacio, para ser sobrescrito
 	}
 	protected virtual void Awake()
     {
@@ -87,7 +92,7 @@ public class TimeBody : MonoBehaviour, SaveListener
 	{
 		StartRewind();
 	}
-	public void OnRewindFinished()
+	public virtual void OnRewindFinished()
 	{
 		StopRewind();
 	}
