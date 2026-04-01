@@ -19,8 +19,8 @@ public class TurretController : TimeBody
     private int numberBullets = 0;
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+	private SceneController sc;
+	private void Start()
     {
         timeCooldown = shootInterval;
 
@@ -55,9 +55,9 @@ public class TurretController : TimeBody
             speed = s;
         }
     }
-    void Update()
+     protected override void OnUpdate()
     {
-        Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
+		Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
         timeCooldown += Time.deltaTime;// cada shootInterval segundos dispara y se reinicia el contador
         if (timeCooldown > shootInterval)
         { //solo si ve al jugador que no sea a través del muro
@@ -106,13 +106,19 @@ public class TurretController : TimeBody
        // transform.position = savedPosition;
        // transform.rotation = savedRotation;
 	   base.LoadState();
-		UpdateBullets();
-        bulletsList = bulletsSaved;
+		//UpdateBullets();
+       // bulletsList = bulletsSaved;
         
 
     }
+	public override void OnRewindFinished(){ 
+		base.OnRewindFinished();
+		bulletsList = bulletsSaved;
+		UpdateBullets();
 
-    private void UpdateBullets()
+	}
+
+	private void UpdateBullets()
     {
         for (int i = 0; i < numberBullets; i++)
         {
