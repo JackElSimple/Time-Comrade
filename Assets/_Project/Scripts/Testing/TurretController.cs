@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class TurretController : MonoBehaviour, SaveListener
+public class TurretController : TimeBody
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 3.0f;
@@ -14,8 +14,8 @@ public class TurretController : MonoBehaviour, SaveListener
     private Vector3 direction;
     private List<BulletData> bulletsList = new List<BulletData>();
     private List<BulletData> bulletsSaved = new List<BulletData>();
-    private Vector3 savedPosition;
-    private Quaternion savedRotation;
+    //private Vector3 savedPosition;
+    //private Quaternion savedRotation;
     private int numberBullets = 0;
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
@@ -87,23 +87,26 @@ public class TurretController : MonoBehaviour, SaveListener
             bulletsList[i]= data;
         }
     }
-    public void SaveState()
+
+    public override void SaveState()
     {
         Debug.Log("xd");
         savedCooldown = timeCooldown;
-        savedPosition = transform.position;
-        savedRotation = transform.rotation;
-        bulletsSaved = bulletsList;
+		base.SaveState();
+		//savedPosition = transform.position;
+		//savedRotation = transform.rotation;
+		bulletsSaved = bulletsList;
        
     }
 
-    public void LoadState()
+    public override void LoadState()
     {
         Debug.Log("xdd");
         timeCooldown = savedCooldown;
-        transform.position = savedPosition;
-        transform.rotation = savedRotation;
-        UpdateBullets();
+       // transform.position = savedPosition;
+       // transform.rotation = savedRotation;
+	   base.LoadState();
+		UpdateBullets();
         bulletsList = bulletsSaved;
         
 
@@ -130,15 +133,5 @@ public class TurretController : MonoBehaviour, SaveListener
                 proj.speed = updatedBullets.speed;
             }
         }
-    }
-    // Update is called once per frame
-    void OnEnable()
-    {
-        SceneController.saveListeners.Add(this);
-    }
-
-    void OnDisable()
-    {
-        SceneController.saveListeners.Remove(this);
     }
 }

@@ -44,10 +44,32 @@ public class SceneController : MonoBehaviour
                 notifyListenersStop();
             }
         }
+		if (isRewinding)
+		{
+			recordingTime -= Time.fixedDeltaTime; // El tiempo corre hacia atras
 
-    }
+			if (recordingTime <= 0)
+			{
+				isRewinding = false;
+				recordingTime = 0;
+				EndGlobalRewind();
+			}
+		}
+
+	}
+	private void EndGlobalRewind()
+	{
+		isRewinding = false;
+		foreach (var obj in saveListeners)
+		{
+			obj.OnRewindFinished();
+		}
+		CreateClone();
+		Debug.Log("Sincronizacion completa: Todos los objetos han salido del modo rebobinado.");
+	}
 	public void GestionarHabilidad()
 	{
+		if (isRewinding) return;
 		if (!isRecording)
 		{
 			recordingTime = 0; 
@@ -105,23 +127,24 @@ public class SceneController : MonoBehaviour
 
 	private void SaveState()
 	{
+		foreach (var obj in saveListeners) obj.SaveState();
+
 		if (opit != null) {
 			isRecording = true;
 			opitScript.StartRecording();
 		}
 		if (clone != null) Destroy(clone); // Limpiamos el clon anterior si existe
 
-		foreach (var obj in saveListeners) obj.SaveState();
 	}
 
-	private void LoadState()
-    {
+	private void LoadState() // Recording time ends or Player stops it manually
+	{
 		if (opit != null)
 		{
 			isRecording = false;
+			isRewinding = true;
 			opitScript.FinishRecording(); 
 		}
-		CreateClone();
 
 		foreach (var obj in saveListeners) obj.LoadState();
     }
@@ -152,6 +175,7 @@ public class SceneController : MonoBehaviour
 		if (isRecording)
 		{
 			isRecording = false;
+			isRewinding = false; // SHouldnt happen but just in case
 			recordingTime = 0;
 
 			if (opit != null)

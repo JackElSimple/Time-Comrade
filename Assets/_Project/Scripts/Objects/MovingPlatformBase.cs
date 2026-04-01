@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
+public abstract class MovingPlatformBase : TimeBody
 {
     [Header("Target Setup")]
     public Transform targetPoint;
@@ -10,11 +10,11 @@ public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
 
     protected Vector3 startPos;
     protected Vector3 currentTarget;
-    private Vector3 savedPosition;
-    private Vector3 savedTarget;
+   
 
     protected virtual void Awake()
     {
+		base.Awake();
         startPos = transform.position;
 
         if (targetPoint == null)
@@ -83,23 +83,5 @@ public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
         else
             passenger.SetParent(null);
     }
-    public virtual void SaveState()
-    {
-        savedPosition = transform.position;
-        savedTarget = currentTarget;
-    }
-    public virtual void LoadState()
-    {
-        transform.position = savedPosition;
-        currentTarget = savedTarget;
-    }
-    void OnEnable()
-    {
-        SceneController.saveListeners.Add(this);
-    }
 
-    void OnDisable()
-    {
-        SceneController.saveListeners.Remove(this);
-    }
 }

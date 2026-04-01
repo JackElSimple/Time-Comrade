@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class MovingPlatformAuto : MovingPlatformBase
 {
+[SerializeField]
     private bool movingForward = true;
-    private bool savedMovingForward;
+	[SerializeField]
+
+	private bool savedMovingForward;
 
     protected override void Update()
     {
