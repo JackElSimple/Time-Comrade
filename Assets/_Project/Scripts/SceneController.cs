@@ -4,13 +4,12 @@ using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static OpitControllerRewind;
 
 public class SceneController : MonoBehaviour
 {
 
     [Header("Cosas Rewind")]
-    [SerializeField] private float recordingDuration = 5.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure m�s o menos
+    [SerializeField] private float recordingDuration = 10.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mas o menos
 
     [Header("Objetos en escena")]
 	[SerializeField] private Transform currentSpawnPoint;
@@ -18,41 +17,66 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject sombra;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
-
-    private bool isRecording;
-    private float recordingTime = 0;
+	public bool isRecording { get; private set; } 
+	public bool isRewinding { get; private set; }
+	private float recordingTime = 0;
     private GameObject opit;
     private GameObject clone;
-
-    void Start()
+	private OpitControllerRewind opitScript;
+	private CloneController cloneScript;
+	void Start()
     {  
         CreateOpit();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (Time.timeScale == 0f) return;
 
-
         if (isRecording)
         {
-            recordingTime += Time.deltaTime;
-            if (recordingTime >= recordingDuration)
-            {
+            recordingTime += Time.fixedDeltaTime;
+            if (recordingTime >= recordingDuration) // terminar grabacion y reproducirla
+			{
                 isRecording = false;
                 LoadState();
                 notifyListenersStop();
             }
         }
+		if (isRewinding)
+		{
+			recordingTime -= Time.fixedDeltaTime; // El tiempo corre hacia atras
 
-    }
+			if (recordingTime <= 0)
+			{
+				isRewinding = false;
+				recordingTime = 0;
+				EndGlobalRewind();
+			}
+		}
+
+	}
+	private void EndGlobalRewind()
+	{
+		isRewinding = false;
+		for (int i = saveListeners.Count - 1; i >= 0; i--)
+		{
+			
+			if (i < saveListeners.Count && saveListeners[i] != null)
+			{
+				saveListeners[i].OnRewindFinished();
+			}
+		}
+		CreateClone();
+		Debug.Log("Sincronizacion completa: Todos los objetos han salido del modo rebobinado.");
+	}
 	public void GestionarHabilidad()
 	{
+		if (isRewinding) return;
 		if (!isRecording)
 		{
-			recordingTime = 0; // antes recordingTime = Time.deltaTime;
+			recordingTime = 0; 
 			isRecording = true;
 			SaveState();
             notifyListenersStart();
@@ -84,40 +108,52 @@ public class SceneController : MonoBehaviour
 	private void CreateOpit()
     {
         opit = Instantiate<GameObject>(personaje);
-        opit.transform.position = currentSpawnPoint.transform.position;
+		opitScript = opit.GetComponent<OpitControllerRewind>();
+
+		opit.transform.position = currentSpawnPoint.transform.position;
     }
     private void CreateClone()
     {
 
-        clone = Instantiate<GameObject>(sombra);
+		if (sombra == null) return;
 
-        clone.transform.position = opit.GetComponent<OpitControllerRewind>().getInitialPosition();
-        clone.GetComponent<CloneController>().SetInitialPosition(clone.transform.position);
+		clone = Instantiate(sombra);
+		
+		cloneScript = clone.GetComponent<CloneController>();
 
-        clone.GetComponent<Rigidbody2D>().linearVelocity = opit.GetComponent<OpitControllerRewind>().getInitialVelocity();
-        clone.GetComponent<CloneController>().SetInitialVelocity(clone.GetComponent<Rigidbody2D>().linearVelocity);
-        List<PlayerInputFrame> listaInputs = opit.GetComponent<OpitControllerRewind>().getImputsList();
+		// Pasamos todos los datos de una vez
+		cloneScript.SetData(
+			opitScript.recordedInputs,
+			opitScript.initialPosition,
+			opitScript.initialVelocity
+		);
+	}
 
-        clone.GetComponent<CloneController>().SetListaInputs(listaInputs);
+	private void SaveState()
+	{
+		foreach (var obj in saveListeners) obj.SaveState();
+
+		if (opit != null) {
+			isRecording = true;
+			opitScript.StartRecording();
+		}
+		if (clone != null) Destroy(clone); // Limpiamos el clon anterior si existe
+
+	}
+
+	private void LoadState() // Recording time ends or Player stops it manually
+	{
+		if (opit != null)
+		{
+			isRecording = false;
+			isRewinding = true;
+			opitScript.FinishRecording(); 
+		}
+
+		foreach (var obj in saveListeners) obj.LoadState();
     }
 
-    private void SaveState()
-    {
-        opit.GetComponent<OpitControllerRewind>().StartRecording(); //opit
-        Destroy(clone); //clone
-		foreach (var obj in saveListeners)
-            obj.SaveState();
-    }
-
-    private void LoadState()
-    {
-        opit.GetComponent<OpitControllerRewind>().FinishRecording(); //change because the OpitControllerRewind can change
-        CreateClone();
-		foreach (var obj in saveListeners)
-            obj.LoadState();
-    }
-
-    public void KillPlayer()//and respwan it
+    public void KillPlayer()//and respawn it
     {
         Destroy(opit);
         Destroy(clone);
@@ -132,7 +168,7 @@ public class SceneController : MonoBehaviour
 	{
 		//  detenemos la grabacion si estaba activa
 		if (opit != null)
-			opit.GetComponent<OpitControllerRewind>().FinishRecording();
+			opitScript.FinishRecording();
 
 		// Cargamos la siguiente escena
 		Debug.Log("<color=green>[SCENE] Nivel Completado. Cargando: " + sceneName + "</color>");
@@ -143,14 +179,16 @@ public class SceneController : MonoBehaviour
 		if (isRecording)
 		{
 			isRecording = false;
+			isRewinding = false; // SHouldnt happen but just in case
 			recordingTime = 0;
 
 			if (opit != null)
 			{
-				opit.GetComponent<OpitControllerRewind>().CancelRecording();
+				opitScript.CancelRecording();
+				isRecording = false;
 			}
 
-			Debug.Log("Habilidad cancelada: El personaje se queda donde est�.");
+			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
 	}
     private void OnDestroy()

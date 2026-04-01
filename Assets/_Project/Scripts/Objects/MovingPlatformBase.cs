@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
+public abstract class MovingPlatformBase : TimeBody
 {
     [Header("Target Setup")]
     public Transform targetPoint;
@@ -9,12 +9,13 @@ public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
     public float speed = 2f;
 
     protected Vector3 startPos;
-    protected Vector3 currentTarget;
-    private Vector3 savedPosition;
-    private Vector3 savedTarget;
+	[SerializeField]
+	protected Vector3 currentTarget;
+   
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+		base.Awake();
         startPos = transform.position;
 
         if (targetPoint == null)
@@ -27,12 +28,11 @@ public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
         currentTarget = targetPoint.position;
     }
 
-    protected virtual void Update()
-    {
-        Move();
-    }
-
-    protected void Move()
+	protected override void OnUpdate()
+	{
+		Move();
+	}
+	protected void Move()
 {
     if (targetPoint == null) return;
 
@@ -83,23 +83,5 @@ public abstract class MovingPlatformBase : MonoBehaviour, SaveListener
         else
             passenger.SetParent(null);
     }
-    public virtual void SaveState()
-    {
-        savedPosition = transform.position;
-        savedTarget = currentTarget;
-    }
-    public virtual void LoadState()
-    {
-        transform.position = savedPosition;
-        currentTarget = savedTarget;
-    }
-    void OnEnable()
-    {
-        SceneController.saveListeners.Add(this);
-    }
 
-    void OnDisable()
-    {
-        SceneController.saveListeners.Remove(this);
-    }
 }

@@ -15,7 +15,7 @@ public class GenericTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("macarrones");
+		Debug.Log("Generic Trigger: gameObject detected");
 		if (IsTargetTag(other.transform.tag))
 		{
 			// Ejecuta los metodos configurados en el Inspector

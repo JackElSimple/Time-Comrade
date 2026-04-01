@@ -2,34 +2,50 @@ using UnityEngine;
 
 public class MovingPlatformAuto : MovingPlatformBase
 {
-    private bool movingForward = true;
-    private bool savedMovingForward;
+	[SerializeField]
+	private bool movingForward = true;
+	[SerializeField]
 
-    protected override void Update()
-    {
-        base.Update(); 
+	private bool savedMovingForward;
 
-        if (targetPoint == null) return;
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
 
-        if (Vector3.Distance(transform.position, currentTarget) < 0.01f)
-        {
-            if (movingForward)
-                MoveToStart();
-            else
-                MoveToTarget();
-            movingForward = !movingForward;
-        }
-    }
+		if (targetPoint == null) return;
 
-    public override void SaveState()
-    {
-        base.SaveState();
-        savedMovingForward = movingForward;
-    }
+		if (Vector3.Distance(transform.position, currentTarget) < 0.01f)
+		{
+			if (movingForward)
+				MoveToStart();
+			else
+				MoveToTarget();
+			movingForward = !movingForward;
+		}
+	}
 
-    public override void LoadState()
-    {
-        base.LoadState();
-        movingForward = savedMovingForward;
-    }
+	public override void SaveState()
+	{
+		base.SaveState();
+		savedMovingForward = movingForward;
+	}
+
+	public override void LoadState()
+	{
+		base.LoadState();
+	}
+
+	public override void OnRewindFinished()
+	{
+		base.OnRewindFinished();
+		movingForward = savedMovingForward;
+		if (movingForward)
+		{
+			currentTarget = targetPoint.position;
+		}
+		else
+		{
+			currentTarget = startPos;
+		}
+	}
 }

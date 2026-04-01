@@ -2,58 +2,18 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
-public class OpitControllerRewind : MonoBehaviour
+public class OpitControllerRewind : BaseCharacterController
 {
-    [Header("Referencias Visuales")]
-    [SerializeField] private SpriteRenderer characterSprite;
-
-    [Header("Configuraci?n de Movimiento")]
-    [SerializeField] private float moveSpeed = 8f;
-    [SerializeField] private float jumpForce = 12f;
-
-    [Header("Fisicas de Salto")]
-    [SerializeField] private float gravityScale = 3f;      // Gravedad base
-    [SerializeField] private float fallMultiplier = 1.5f;   // Cae mas rapido de lo que sube
-    [SerializeField] private float lowJumpMultiplier = 2f; // Salto corto si sueltas rapido el espacio
-
-    [Header("Deteccion de Suelo")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
-
-    [Header("Cosas Rewind")]
-    [SerializeField] private float cloneDistance = 0.5f; // para no complicarse ahora lo de que el clon se atraviese con el jugador, se moverá al jugador esta distancia a la izquierda
-
-    private Rigidbody2D rb;
     private Animator _anim;
-    private float horizontalInput;
-    private bool isGrounded;
-    private bool wantsToJump;
-    private bool isRecording;
-    private Vector3 initialPosition; //the position of the player when the rewind  is pushed
-    private Vector3 initialVelocity; //the vector of movement of the player when the rewind is pushed
+    private float horizontal;
+	private bool isJumpHeld;
 
-    private List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
 
-    public struct PlayerInputFrame //Struct for saving all imputs, at the moment the horizontal and the jump
+	protected override void Awake()
     {
-        public float horizontal;
-        public bool jump;
-
-        public PlayerInputFrame(float h, bool j)
-        {
-            horizontal = h;
-            jump = j;
-        }
-    }
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = gravityScale;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.freezeRotation = true;
+		base.Awake();
         _anim =transform.GetChild(1).GetComponent<Animator>(); //el child 1 es el sprite con la animacion
+
     }
 
     void Update()
@@ -61,120 +21,54 @@ public class OpitControllerRewind : MonoBehaviour
 		if (Time.timeScale == 0f) return;
 
 		// Inputs
-		horizontalInput = Input.GetAxisRaw("Horizontal"); // A,D
+		horizontal = Input.GetAxisRaw("Horizontal"); // A,D
+		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
-        
-        // Lógica de Flip
-        if (horizontalInput > 0)
-        {
-            characterSprite.flipX = true; // Mirando a la derecha (D)
-        }
-        else if (horizontalInput < 0)
-        {
-            characterSprite.flipX = false;  // Mirando a la izquierda (A)
-        }
+		if (Input.GetButtonDown("Jump")){ wantsToJump = true; }
 
-        if (Input.GetButtonDown("Jump") && isGrounded) // Espacio
-        {
-            wantsToJump = true;
-        }
-
+		
 		if (Input.GetMouseButtonDown(0))
 		{
-			SceneController sc = Object.FindAnyObjectByType<SceneController>();
 			if (sc != null) sc.GestionarHabilidad();
 		}
-		/*if (isRecording)
-		{
-			recordedInputs.Add(new PlayerInputFrame(horizontalInput, Input.GetKey(KeyCode.Space)));
-		}*/
 
-		// Check de suelo
-		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (isRecording)
-        {
-            float h = Input.GetAxisRaw("Horizontal");
-            bool j = Input.GetKey(KeyCode.Space);
-
-            recordedInputs.Add(new PlayerInputFrame(h, j));
-
-        }
-        
-        _anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
+		HandleVisuals(horizontal); // Voltea el sprite
+		_anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
     }
 
     void FixedUpdate()
     {
-        ApplyMovement();
-        ApplyJump();
-        ApplyBetterFall();
-    }
+		if (Time.timeScale == 0f) return;
+		// Check de suelo
+		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+		if (sc != null && sc.isRecording) { recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
 
-    private void ApplyMovement()
-    {
-        // Movimiento horizontal directo (evita el "deslizamiento" del hielo)
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
-    }
+		ApplyMovement(horizontal);
+		ApplyJump();
+		ApplyBetterFall(isJumpHeld);
 
-    private void ApplyJump()
-    {
-        if (wantsToJump)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            wantsToJump = false;
-        }
-    }
+	}
 
-    private void ApplyBetterFall()
-    {
-        // Si estas cayendo, aumenta la gravedad
-        // Si estas subiendo pero soltaste el boton de salto, frena la subida (salto variable).
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
 
-        
-    }
-
-    
-    public void StartRecording()
+    public void StartRecording() //añadir rewind
     {
         Debug.Log("Grabacion comenzada");
-        recordedInputs = new List<PlayerInputFrame>();//we empty the list when we start another recording
-        isRecording = true;
-        initialPosition = transform.position;
+		recordedInputs.Clear();
+		initialPosition = transform.position;
         initialVelocity = rb.linearVelocity;
 
     }
-    public void FinishRecording()
+    public void FinishRecording() // cambiar por rewind
     {
         Debug.Log("Grabacion terminada");
-        isRecording = false;
-        //transform.position = initialPosition; //terminar
-        rb.linearVelocity = initialVelocity;
+		rb.linearVelocity = initialVelocity;
         transform.position = initialPosition; 
         
      }
 
-    public Vector3 getInitialPosition() {  
-        return initialPosition;
-    }
-    public Vector3 getInitialVelocity(){
-        return initialVelocity; 
-     }
-    public List<PlayerInputFrame> getImputsList() {
-        return recordedInputs;
-    }
-
 	public void CancelRecording()
 	{
 		Debug.Log("Grabación cancelada: Datos eliminados sin teletransporte.");
-		isRecording = false;
 		recordedInputs.Clear(); // Limpia la lista de frames grabados
 	}
 }

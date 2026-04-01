@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class TurretController : MonoBehaviour, SaveListener
+public class TurretController : TimeBody
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 3.0f;
@@ -14,13 +14,12 @@ public class TurretController : MonoBehaviour, SaveListener
     private Vector3 direction;
     private List<BulletData> bulletsList = new List<BulletData>();
     private List<BulletData> bulletsSaved = new List<BulletData>();
-    private Vector3 savedPosition;
-    private Quaternion savedRotation;
+    //private Vector3 savedPosition;
+    //private Quaternion savedRotation;
     private int numberBullets = 0;
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+	private void Start()
     {
         timeCooldown = shootInterval;
 
@@ -55,9 +54,9 @@ public class TurretController : MonoBehaviour, SaveListener
             speed = s;
         }
     }
-    void Update()
+     protected override void OnUpdate()
     {
-        Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
+		Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
         timeCooldown += Time.deltaTime;// cada shootInterval segundos dispara y se reinicia el contador
         if (timeCooldown > shootInterval)
         { //solo si ve al jugador que no sea a través del muro
@@ -87,29 +86,38 @@ public class TurretController : MonoBehaviour, SaveListener
             bulletsList[i]= data;
         }
     }
-    public void SaveState()
+
+    public override void SaveState()
     {
         Debug.Log("xd");
         savedCooldown = timeCooldown;
-        savedPosition = transform.position;
-        savedRotation = transform.rotation;
-        bulletsSaved = bulletsList;
+		base.SaveState();
+		//savedPosition = transform.position;
+		//savedRotation = transform.rotation;
+		bulletsSaved = bulletsList;
        
     }
 
-    public void LoadState()
+    public override void LoadState()
     {
         Debug.Log("xdd");
         timeCooldown = savedCooldown;
-        transform.position = savedPosition;
-        transform.rotation = savedRotation;
-        UpdateBullets();
-        bulletsList = bulletsSaved;
+       // transform.position = savedPosition;
+       // transform.rotation = savedRotation;
+	   base.LoadState();
+		//UpdateBullets();
+       // bulletsList = bulletsSaved;
         
 
     }
+	public override void OnRewindFinished(){ 
+		base.OnRewindFinished();
+		bulletsList = bulletsSaved;
+		//UpdateBullets();
 
-    private void UpdateBullets()
+	}
+
+	private void UpdateBullets()
     {
         for (int i = 0; i < numberBullets; i++)
         {
@@ -130,15 +138,5 @@ public class TurretController : MonoBehaviour, SaveListener
                 proj.speed = updatedBullets.speed;
             }
         }
-    }
-    // Update is called once per frame
-    void OnEnable()
-    {
-        SceneController.saveListeners.Add(this);
-    }
-
-    void OnDisable()
-    {
-        SceneController.saveListeners.Remove(this);
     }
 }

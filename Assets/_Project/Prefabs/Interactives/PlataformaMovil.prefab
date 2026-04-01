@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6040663539501845152}
   - component: {fileID: 3771664574723525450}
   - component: {fileID: 7100859246434249575}
+  - component: {fileID: 195462877693380119}
   m_Layer: 6
   m_Name: PlataformaMovil
   m_TagString: Untagged
@@ -197,3 +198,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &195462877693380119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4756096958053175912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRecording: 0
+  isRewinding: 0
+  recordTime: 10
