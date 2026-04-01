@@ -60,9 +60,13 @@ public class SceneController : MonoBehaviour
 	private void EndGlobalRewind()
 	{
 		isRewinding = false;
-		foreach (var obj in saveListeners)
+		for (int i = saveListeners.Count - 1; i >= 0; i--)
 		{
-			obj.OnRewindFinished();
+			
+			if (i < saveListeners.Count && saveListeners[i] != null)
+			{
+				saveListeners[i].OnRewindFinished();
+			}
 		}
 		CreateClone();
 		Debug.Log("Sincronizacion completa: Todos los objetos han salido del modo rebobinado.");

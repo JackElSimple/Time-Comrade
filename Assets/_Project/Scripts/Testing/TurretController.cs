@@ -19,7 +19,6 @@ public class TurretController : TimeBody
     private int numberBullets = 0;
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
-	private SceneController sc;
 	private void Start()
     {
         timeCooldown = shootInterval;

@@ -5,9 +5,9 @@ public class TimeBody : MonoBehaviour, SaveListener
 {
 	List<PointInTime> pointsInTime = new List<PointInTime>();
 	Rigidbody2D rb;
-	private SceneController sc;
+	protected SceneController sc;
 
-	protected void Update()
+	protected void Update() 
 	{
 		if (sc != null && sc.isRewinding) return;
 		OnUpdate();
