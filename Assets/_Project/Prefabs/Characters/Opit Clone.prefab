@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5510966557441468940}
   m_Layer: 6
   m_Name: PlatformHead
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +175,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098655262627490801, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 50d3d8abca595bb44bb6d5b1f100b419, type: 2}
+    - target: {fileID: 8098655262627490801, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
@@ -228,6 +232,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  coyoteTime: 0.1
 --- !u!212 &7238039428569924174 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}

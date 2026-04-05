@@ -20,17 +20,26 @@ public abstract class BaseCharacterController : MonoBehaviour
 	[SerializeField] protected Transform groundCheck;
 	[SerializeField] protected float groundCheckRadius = 0.2f;
 	[SerializeField] protected LayerMask groundLayer;
+    protected ContactFilter2D groundFilter;
+    protected readonly Collider2D[] results = new Collider2D[4];
 
-	protected Rigidbody2D rb;
-	protected bool isGrounded;
+    [Header("Coyote time")]
+    [SerializeField] protected float coyoteTime = 0.1f;
+    protected float coyoteTimeCounter = 0.05f;
+    protected bool isGrounded => coyoteTimeCounter > 0f;
+
+    protected Rigidbody2D rb;
+	//protected bool isGrounded;
 	protected bool wantsToJump;
 	public Vector3 initialPosition { get; protected set; }
 	public  Vector3 initialVelocity{ get; protected set; }
 	public List<PlayerInputFrame> recordedInputs { get; protected set; } = new List<PlayerInputFrame>(); 
 	protected SceneController sc;
 
+    protected float deltaX = 0;
 
-	public struct PlayerInputFrame //Struct for saving all imputs
+
+    public struct PlayerInputFrame //Struct for saving all imputs
 	{
 		public float horizontalInput;
 		public bool jumpPressedInput;
@@ -53,7 +62,16 @@ public abstract class BaseCharacterController : MonoBehaviour
 		rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		rb.freezeRotation = true;
 
-	}
+        groundFilter = new ContactFilter2D
+        {
+            useLayerMask = true,
+            layerMask = groundLayer,
+            useNormalAngle = true,
+            minNormalAngle = 35f,
+            maxNormalAngle = 145f
+        };
+
+    }
 
 	protected void ApplyMovement(float horizontal)
 	{
@@ -82,4 +100,43 @@ public abstract class BaseCharacterController : MonoBehaviour
 		if (h > 0) characterSprite.flipX = true;
 		else if (h < 0) characterSprite.flipX = false;
 	}
+	protected void ApplyCoyoteTime() //also it maintains the clone
+	{
+        int count = rb.GetContacts(groundFilter, results);
+        bool isGroundedRaw = count > 0;
+        if (isGroundedRaw)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.fixedDeltaTime;
+        }
+
+		if (isGroundedRaw) { rb.gravityScale = 0; }
+		else
+		{
+			rb.gravityScale = gravityScale;
+		}
+
+		if (isGroundedRaw)
+		{
+			var onPlatform = results[0].gameObject;
+			if (onPlatform.transform.parent != null)
+			{ 
+				if (onPlatform.transform.parent.gameObject != null)
+                {
+                    onPlatform = onPlatform.transform.parent.gameObject;//si tiene padre obtiene el padre (para coger a opit a partir de la plataforma) }
+
+                }
+            }
+            if (onPlatform.CompareTag("Player")) //si está encima del clon va con el pegado
+			{
+
+				var prb = onPlatform.GetComponent<Rigidbody2D>();
+				rb.linearVelocityX += prb.linearVelocityX;
+			}
+		}
+    }
+
 }

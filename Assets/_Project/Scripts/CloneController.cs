@@ -20,11 +20,13 @@ public class CloneController : BaseCharacterController
 		if (frameNumber < recordedInputs.Count)
 		{
 			currentFrame = recordedInputs[frameNumber];
-			isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-			wantsToJump = currentFrame.jumpPressedInput;
+            //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); upgraded on ApplyCoyoteTime()
+            wantsToJump = currentFrame.jumpPressedInput;
 
-			ApplyMovement(currentFrame.horizontalInput);
-			ApplyJump();
+			
+            ApplyMovement(currentFrame.horizontalInput);
+            ApplyCoyoteTime();
+            ApplyJump();
 			ApplyBetterFall(currentFrame.jumpHeldInput);
 			HandleVisuals(currentFrame.horizontalInput);
 

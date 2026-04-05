@@ -307,6 +307,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8098655262627490801, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 50d3d8abca595bb44bb6d5b1f100b419, type: 2}
     m_RemovedComponents:
     - {fileID: 3868538044293155330, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
     m_RemovedGameObjects: []
@@ -356,7 +360,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  cloneDistance: 0
+  coyoteTime: 0.1
 --- !u!212 &8918541659605375447
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -424,7 +428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRewinding: 0
 --- !u!212 &814075470256104743 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}

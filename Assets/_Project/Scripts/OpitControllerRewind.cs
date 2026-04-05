@@ -40,11 +40,13 @@ public class OpitControllerRewind : BaseCharacterController
     {
 		if (Time.timeScale == 0f) return;
 		// Check de suelo
-		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+		//isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); Upgraded o applycoyote time
 		if (sc != null && sc.isRecording) { recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
 
+		
 		ApplyMovement(horizontal);
-		ApplyJump();
+        ApplyCoyoteTime();
+        ApplyJump();
 		ApplyBetterFall(isJumpHeld);
 
 	}
