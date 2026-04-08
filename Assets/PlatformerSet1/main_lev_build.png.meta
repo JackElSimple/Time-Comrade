@@ -18403,6 +18403,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: wallRight
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 1120
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f80ee02cfaae9e04c9e39b88674e9795
+      internalID: -2037353706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -19248,6 +19270,7 @@ TextureImporter:
       techo4: -1100662737
       techo5: 222437233
       ventana: 53251986
+      wallRight: -2037353706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

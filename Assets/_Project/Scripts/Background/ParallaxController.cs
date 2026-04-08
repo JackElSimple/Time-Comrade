@@ -1,26 +1,50 @@
 using UnityEngine;
 
-public class ParallaxController : MonoBehaviour
+public class ParallaxLayer : MonoBehaviour
 {
-    private Vector2 size, startPosition;
+    [Header("Parallax")]
+    [Range(0f, 1f)] public float parallaxX = 0.2f;
+    [Range(0f, 1f)] public float parallaxY = 0f;
+
     private Transform cam;
-    public Vector2 parallaxFraction;
+    private Vector3 initialCamPosition;
+    private Vector3 initialLayerPosition;
+    private bool initialized = false;
+
     void Start()
     {
-        startPosition = transform.position;
-        size = GetComponent<SpriteRenderer>().bounds.size;
-        cam = Camera.main.transform;
+        initialLayerPosition = transform.position;
+        TryFindCamera();
     }
+
     void LateUpdate()
     {
-        Vector2 offset = (cam.position * parallaxFraction);
-        Vector2 temp = new Vector2(cam.position.x, cam.position.y) - offset;
-        if (temp.x > startPosition.x + size.x) startPosition.x += size.x;
-        else if (temp.x < startPosition.x - size.x) startPosition.x -= size.x;
-        if (parallaxFraction.y > 0f && temp.y > startPosition.y + size.y)
-            startPosition.y += size.y;
-        else if (parallaxFraction.y > 0f && temp.y < startPosition.y - size.y) startPosition.y -= size.y;
-        transform.position = new Vector3(startPosition.x + offset.x, startPosition.y + offset.y,
-                transform.position.z);
+        if (cam == null)
+        {
+            TryFindCamera();
+            return;
+        }
+
+        if (!initialized)
+        {
+            initialCamPosition = cam.position;
+            initialized = true;
+        }
+
+        Vector3 delta = cam.position - initialCamPosition;
+
+        transform.position = new Vector3(
+            initialLayerPosition.x + delta.x * parallaxX,
+            initialLayerPosition.y + delta.y * parallaxY,
+            initialLayerPosition.z
+        );
+    }
+
+    void TryFindCamera()
+    {
+        if (Camera.main != null)
+        {
+            cam = Camera.main.transform;
+        }
     }
 }
