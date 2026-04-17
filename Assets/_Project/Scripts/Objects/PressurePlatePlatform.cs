@@ -31,7 +31,7 @@ public class PressurePlatePlatform : MovingPlatformBase
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.transform.CompareTag("Player")) return;
+        if (!(collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone"))) return;
 
         if (pressed)
             doublePressed = true;
@@ -47,7 +47,7 @@ public class PressurePlatePlatform : MovingPlatformBase
 
     protected override void OnCollisionExit2D(Collision2D collision)
     {
-        if (!collision.transform.CompareTag("Player")) return;
+        if (!(collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone"))) return;
 
         if (doublePressed)
             doublePressed = false;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5510966557441468940}
   m_Layer: 6
   m_Name: PlatformHead
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4027544381892727008, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Clone
       objectReference: {fileID: 0}
     - target: {fileID: 6174384511088916617, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_LocalPosition.x
