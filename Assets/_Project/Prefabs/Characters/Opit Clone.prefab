@@ -227,8 +227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 7238039428569924174}
   moveSpeed: 8
-  jumpForce: 12
-  gravityScale: 3
+  jumpForce: 9
+  gravityScale: 4
   fallMultiplier: 1.5
   lowJumpMultiplier: 2
   groundCheck: {fileID: 1534406065912241935}
