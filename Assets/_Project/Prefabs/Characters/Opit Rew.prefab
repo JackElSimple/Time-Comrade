@@ -225,9 +225,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -2094765165
+  m_SortingLayer: 3
+  m_SortingOrder: 99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.39215687, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -351,8 +351,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 814075470256104743}
   moveSpeed: 8
-  jumpForce: 12
-  gravityScale: 3
+  jumpForce: 9
+  gravityScale: 4
   fallMultiplier: 1.5
   lowJumpMultiplier: 2
   groundCheck: {fileID: 8824185538814720102}

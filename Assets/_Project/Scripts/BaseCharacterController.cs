@@ -9,10 +9,10 @@ public abstract class BaseCharacterController : MonoBehaviour
 
 	[Header("Configuracion de Movimiento")]
 	[SerializeField] protected float moveSpeed = 8f;
-	[SerializeField] protected float jumpForce = 12f;
+	[SerializeField] protected float jumpForce = 9f;
 
 	[Header("Fisicas de Salto")]
-	[SerializeField] protected float gravityScale = 3f;
+	[SerializeField] protected float gravityScale = 4f;
 	[SerializeField] protected float fallMultiplier = 1.5f;
 	[SerializeField] protected float lowJumpMultiplier = 2f;
 

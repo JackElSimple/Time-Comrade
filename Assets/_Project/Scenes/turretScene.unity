@@ -318,9 +318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecording: 0
-  isRewinding: 0
-  recordTime: 10
 --- !u!1 &558268705
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,9 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecording: 0
-  isRewinding: 0
-  recordTime: 10
 --- !u!1 &1092306719
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +880,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlataformaMovil
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6040663539501845152, guid: 4eeb6097569ec76b68ae4c13182f50c2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 98871325322725280, guid: 4eeb6097569ec76b68ae4c13182f50c2, type: 3}

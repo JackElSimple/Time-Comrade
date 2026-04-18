@@ -60,7 +60,7 @@ public abstract class MovingPlatformBase : TimeBody
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone"))
         {
             HandlePassenger(collision.transform, true);
         }
@@ -68,7 +68,7 @@ public abstract class MovingPlatformBase : TimeBody
 
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone"))
         {
             HandlePassenger(collision.transform, false);
         }
