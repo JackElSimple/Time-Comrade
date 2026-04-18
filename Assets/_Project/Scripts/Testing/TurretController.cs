@@ -17,6 +17,7 @@ public class TurretController : TimeBody
     //private Vector3 savedPosition;
     //private Quaternion savedRotation;
     private int numberBullets = 0;
+    [SerializeField] private bool automated = false; //if true it shoots all the time
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
 	private void Start()
@@ -60,20 +61,26 @@ public class TurretController : TimeBody
         timeCooldown += Time.deltaTime;// cada shootInterval segundos dispara y se reinicia el contador
         if (timeCooldown > shootInterval)
         { //solo si ve al jugador que no sea a través del muro
-            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
-            foreach(RaycastHit2D hit in hits) {
-                if( hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                    { break;}
-                if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
-                {
-                    Fire();
-                    timeCooldown = 0;
-                    break;
+            if (automated){ 
+                Fire();
+                timeCooldown = 0;
+            }
+            else { 
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
+                foreach(RaycastHit2D hit in hits) {
+                    if( hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                        { break;}
+                    if ((hit.collider != null && hit.collider.gameObject.CompareTag("Player")))
+                    {
+                        Fire();
+                        timeCooldown = 0;
+                        break;
+                    }
                 }
             }
-            
-                
-            
+
+
+
         }
         for (int i = 0; i < numberBullets; i++)
         { 
