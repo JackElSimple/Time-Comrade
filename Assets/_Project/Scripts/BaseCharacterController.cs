@@ -38,6 +38,8 @@ public abstract class BaseCharacterController : MonoBehaviour
 
     protected float deltaX = 0;
 
+	protected int framesArrastrar = 0;
+	protected Rigidbody2D cloneReference;
 
     public struct PlayerInputFrame //Struct for saving all imputs
 	{
@@ -106,6 +108,39 @@ public abstract class BaseCharacterController : MonoBehaviour
         bool isGroundedRaw = count > 0;
         if (isGroundedRaw)
         {
+            var onPlatform = results[0].gameObject;
+            if (onPlatform.transform.parent != null)
+            {
+                if (onPlatform.transform.parent.gameObject != null)
+                {
+                    onPlatform = onPlatform.transform.parent.gameObject;//si tiene padre obtiene el padre (para coger a opit a partir de la plataforma) }
+
+                }
+            }
+            if (onPlatform.CompareTag("Clone")) //si est� encima del clon va con el pegado
+            {
+                var prb = onPlatform.GetComponent<Rigidbody2D>();
+				cloneReference = prb;
+                rb.linearVelocityX += prb.linearVelocityX;
+				framesArrastrar = 3;
+            }
+        }
+		if (framesArrastrar > 0) //it will detect as opit is on the clone "framesArrastrar" frames more
+		{
+			try
+			{
+                var prb = cloneReference.GetComponent<Rigidbody2D>();
+                rb.linearVelocityX += prb.linearVelocityX;
+                framesArrastrar -= 1;
+            }
+			catch (System.Exception)
+			{
+                framesArrastrar -= 1;
+                throw;
+			}      
+        }
+        if (isGroundedRaw)
+        {
             coyoteTimeCounter = coyoteTime;
         }
         else
@@ -119,23 +154,7 @@ public abstract class BaseCharacterController : MonoBehaviour
 			rb.gravityScale = gravityScale;
 		}
 
-		if (isGroundedRaw)
-		{
-			var onPlatform = results[0].gameObject;
-			if (onPlatform.transform.parent != null)
-			{
-				if (onPlatform.transform.parent.gameObject != null)
-                {
-                    onPlatform = onPlatform.transform.parent.gameObject;//si tiene padre obtiene el padre (para coger a opit a partir de la plataforma) }
-
-                }
-            }
-            if (onPlatform.CompareTag("Clone")) //si est� encima del clon va con el pegado
-			{
-				var prb = onPlatform.GetComponent<Rigidbody2D>();
-				rb.linearVelocityX += prb.linearVelocityX;
-			}
-		}
+		
     }
 
 }

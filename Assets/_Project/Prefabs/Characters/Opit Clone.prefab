@@ -107,8 +107,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3191208045581972351, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Direction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191208045581972351, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4014104476283108704, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_Size.x
@@ -176,6 +180,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6174384511088916617, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098655262627490801, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_Mass
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098655262627490801, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}
+      propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098655262627490801, guid: 211fa359ffd13b74ebe042652c61be65, type: 3}

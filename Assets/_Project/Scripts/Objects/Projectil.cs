@@ -18,5 +18,10 @@ public class Projectil : TimeBody
 			Destroy(gameObject);
 			sc.KillPlayer();
 		}
-	}
+        if (collision.gameObject.CompareTag("Clone"))
+        {
+            Debug.Log("El proyectil ha golpeado al clon");
+            Destroy(gameObject);
+        }
+    }
 }
