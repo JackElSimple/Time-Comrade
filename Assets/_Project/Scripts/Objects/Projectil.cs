@@ -12,7 +12,7 @@ public class Projectil : TimeBody
     }
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
 		{
 			Debug.Log("El proyectil ha golpeado al jugador");
 			Destroy(gameObject);
@@ -21,6 +21,11 @@ public class Projectil : TimeBody
         if (collision.gameObject.CompareTag("Clone"))
         {
             Debug.Log("El proyectil ha golpeado al clon");
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("El proyectil ha golpeado una pared");
             Destroy(gameObject);
         }
     }

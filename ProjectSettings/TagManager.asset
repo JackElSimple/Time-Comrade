@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ControladorEscena
   - Clone
+  - Wall
   layers:
   - Default
   - TransparentFX

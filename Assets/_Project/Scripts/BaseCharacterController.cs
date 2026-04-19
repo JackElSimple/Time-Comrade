@@ -131,6 +131,10 @@ public abstract class BaseCharacterController : MonoBehaviour
 			{
                 var prb = cloneReference.GetComponent<Rigidbody2D>();
                 rb.linearVelocityX += prb.linearVelocityX;
+				if (rb.linearVelocityY <= prb.linearVelocityY) {
+					rb.linearVelocityY = prb.linearVelocityY;
+
+                }
                 framesArrastrar -= 1;
             }
 			catch (System.Exception)
