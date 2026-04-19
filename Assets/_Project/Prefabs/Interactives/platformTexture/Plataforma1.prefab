@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6688273175088310589}
   - component: {fileID: 3650327117994363393}
+  - component: {fileID: 60214564371145757}
+  - component: {fileID: 1661985834499111176}
+  - component: {fileID: -3160560176083876484}
   m_Layer: 6
   m_Name: Plataforma1
   m_TagString: Untagged
@@ -50,6 +53,83 @@ MonoBehaviour:
   currentTarget: {x: 0, y: 0, z: 0}
   movingForward: 1
   savedMovingForward: 0
+--- !u!251 &60214564371145757
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107580881229274774}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!61 &1661985834499111176
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107580881229274774}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.2425754}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 0.5148492}
+  m_EdgeRadius: 0
+--- !u!114 &-3160560176083876484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107580881229274774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8830930346457028796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102,40 +182,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5326856805030804577, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4279304570107344779, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4589496552307829135}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
 --- !u!4 &1614041327517023756 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7848646418993145520, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
   m_PrefabInstance: {fileID: 8830930346457028796}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4750981539464867639 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4279304570107344779, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
-  m_PrefabInstance: {fileID: 8830930346457028796}
-  m_PrefabAsset: {fileID: 0}
---- !u!251 &4589496552307829135
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4750981539464867639}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
