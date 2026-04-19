@@ -15,12 +15,11 @@ public class GenericTriggerLayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("macarrones");
         if (IsTargetLayer(other.gameObject.layer))
         {
             // Ejecuta los metodos configurados en el Inspector
             onTriggerEnter?.Invoke();
-
+            Debug.Log("patata");
             if (destroyAfterUse)
             {
                 Destroy(gameObject);

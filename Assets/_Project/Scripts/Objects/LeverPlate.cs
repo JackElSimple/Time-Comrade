@@ -41,7 +41,7 @@ public class LeverPlate: MovingPlatformBase
             pressed = true;
             playerOnPlate = true;
             HandlePassenger(collision.transform, true); // parent player
-            if (active) {
+            if (!active) {
                 on?.Invoke();
             }
             else
