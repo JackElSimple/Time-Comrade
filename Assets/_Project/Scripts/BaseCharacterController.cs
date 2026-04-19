@@ -123,16 +123,15 @@ public abstract class BaseCharacterController : MonoBehaviour
 		{
 			var onPlatform = results[0].gameObject;
 			if (onPlatform.transform.parent != null)
-			{ 
+			{
 				if (onPlatform.transform.parent.gameObject != null)
                 {
                     onPlatform = onPlatform.transform.parent.gameObject;//si tiene padre obtiene el padre (para coger a opit a partir de la plataforma) }
 
                 }
             }
-            if (onPlatform.CompareTag("Player")) //si está encima del clon va con el pegado
+            if (onPlatform.CompareTag("Clone")) //si estï¿½ encima del clon va con el pegado
 			{
-
 				var prb = onPlatform.GetComponent<Rigidbody2D>();
 				rb.linearVelocityX += prb.linearVelocityX;
 			}
