@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5360711907171065474}
   - component: {fileID: 8055198033932131863}
+  - component: {fileID: 6594626570226009938}
+  - component: {fileID: 8318255202319941428}
+  - component: {fileID: 5364652485428221800}
   m_Layer: 6
   m_Name: Plataforma4
   m_TagString: Untagged
@@ -49,10 +52,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 0}
-  speed: 2
+  speed: 1.5
   currentTarget: {x: 0, y: 0, z: 0}
   movingForward: 1
   savedMovingForward: 0
+--- !u!114 &6594626570226009938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302936825186342630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!251 &8318255202319941428
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302936825186342630}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!61 &5364652485428221800
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302936825186342630}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0039162636, y: -0.2394023}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4.0073423, y: 0.5211954}
+  m_EdgeRadius: 0
 --- !u!1001 &1152320310293873358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,6 +144,10 @@ PrefabInstance:
     - target: {fileID: 4279304570107344779, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
       propertyPath: m_Name
       value: platformPiece
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326856805030804577, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7848646418993145520, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -154,6 +238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: platformPiece (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5326856805030804577, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7848646418993145520, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -243,6 +331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: platformPiece (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5326856805030804577, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7848646418993145520, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -331,6 +423,10 @@ PrefabInstance:
     - target: {fileID: 4279304570107344779, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
       propertyPath: m_Name
       value: platformPiece (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326856805030804577, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7848646418993145520, guid: 3758c781fe2d13c43b948f1d80ae0d5d, type: 3}
       propertyPath: m_LocalPosition.x
