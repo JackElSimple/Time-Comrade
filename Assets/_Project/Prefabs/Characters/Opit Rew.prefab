@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 814075470256104743}
-  moveSpeed: 8
+  moveSpeed: 6
   jumpForce: 9
   gravityScale: 4
   fallMultiplier: 1.5
