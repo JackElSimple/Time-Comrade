@@ -20,17 +20,18 @@ public class TurretController : TimeBody
     [SerializeField] private bool automated = false; //if true it shoots all the time
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
-	private void Start()
+    private SceneController sc;
+    private void Start()
     {
+        sc = FindFirstObjectByType<SceneController>();
         timeCooldown = shootInterval;
 
-        Debug.Log(transform.GetChild(0).transform.position);
-        Debug.Log(transform.GetChild(1).transform.position);
        
         
     }
     void Fire()
     {
+        sc.ReproducirDisparo();
         direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
         GameObject obj = Instantiate<GameObject>(bullet);
         obj.transform.position = transform.GetChild(0).position;
@@ -38,7 +39,6 @@ public class TurretController : TimeBody
         proj.speed = bulletSpeed * direction;
         bulletsList.Add(new BulletData(obj,obj.transform.position,proj.speed));
         numberBullets++;
-        print(numberBullets);
     }
 
     public struct BulletData //Struct for saving all the data of a bullet
@@ -96,7 +96,6 @@ public class TurretController : TimeBody
 
     public override void SaveState()
     {
-        Debug.Log("xd");
         savedCooldown = timeCooldown;
 		base.SaveState();
 		//savedPosition = transform.position;
@@ -107,7 +106,6 @@ public class TurretController : TimeBody
 
     public override void LoadState()
     {
-        Debug.Log("xdd");
         timeCooldown = savedCooldown;
        // transform.position = savedPosition;
        // transform.rotation = savedRotation;
@@ -137,7 +135,6 @@ public class TurretController : TimeBody
             BulletData updatedBullets = bulletsSaved[i];
             if(updatedBullets.bullet != null) //generates the bullets in the state which were saved
             {
-                Debug.Log(updatedBullets.position);
                 direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
                 GameObject obj = Instantiate<GameObject>(bullet);
                 obj.transform.position = updatedBullets.position;
