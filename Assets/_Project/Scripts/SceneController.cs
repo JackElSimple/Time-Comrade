@@ -18,7 +18,7 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
 	[Header("Sonidos")]
-    [SerializeField] private AudioClip theme, turretSound, levelEndsSound;
+    [SerializeField] private AudioClip theme, turretSound, levelEndsSound, deathSound, footstepSound;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -165,6 +165,8 @@ public class SceneController : MonoBehaviour
     public void KillPlayer()//and respawn it
     {
         Destroy(opit);
+        if (deathSound != null)
+            GameManager.Instance.audioManager.PlaySound(deathSound);
         Destroy(clone);
         isRecording = false;
         CreateOpit();
