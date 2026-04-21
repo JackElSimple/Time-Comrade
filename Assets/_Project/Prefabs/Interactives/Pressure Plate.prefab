@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 0}
   speed: 2
+  currentTarget: {x: 0, y: 0, z: 0}
   onPressed:
     m_PersistentCalls:
       m_Calls: []
@@ -257,9 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecording: 0
-  isRewinding: 0
-  recordTime: 10
 --- !u!1 &8368968364316409631
 GameObject:
   m_ObjectHideFlags: 0

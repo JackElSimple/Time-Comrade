@@ -92,6 +92,16 @@ public class TimeBody : MonoBehaviour, SaveListener
 	{
 		StartRewind();
 	}
+
+	public virtual void CancelState()
+	{
+		pointsInTime.Clear();
+		if (rb != null)
+		{
+			rb.simulated = true;
+		}
+	}
+
 	public virtual void OnRewindFinished()
 	{
 		StopRewind();
