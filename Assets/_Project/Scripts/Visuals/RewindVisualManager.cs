@@ -25,7 +25,7 @@ public sealed class RewindVisualManager : MonoBehaviour
     [SerializeField] private float fadeOutDuration = 0.3f;
 
     [Header("Ghost Trail")]
-    [SerializeField] private float historyDuration = 1.6f;
+    [SerializeField] private float historyDuration = 10.0f;
     [SerializeField] private float historySampleInterval = 0.05f;
     [SerializeField] private float ghostSpawnInterval = 0.035f;
     [SerializeField] private float ghostLifetime = 0.45f;
@@ -36,12 +36,12 @@ public sealed class RewindVisualManager : MonoBehaviour
     [Header("Screen Glitch")]
     [SerializeField] private Color screenTint = new Color(0.92f, 0.96f, 1.08f, 1f);
     [SerializeField, Range(0f, 1f)] private float desaturation = 0.28f;
-    [SerializeField] private float distortionPixels = 1.4f;
-    [SerializeField] private float rgbSplitPixels = 1f;
+    [SerializeField] private float distortionPixels = 2.2f;
+    [SerializeField] private float rgbSplitPixels = 7.5f;
     [SerializeField] private float jitterPixels = 1.75f;
 
     [Header("Camera Feedback")]
-    [SerializeField] private float shakePixels = 1f;
+    [SerializeField] private float shakePixels = 25f;
     [SerializeField] private float shakeSpeed = 19f;
     [SerializeField] private float zoomAmount = 0.08f;
 
