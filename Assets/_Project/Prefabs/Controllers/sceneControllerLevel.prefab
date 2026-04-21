@@ -48,6 +48,6 @@ MonoBehaviour:
   currentSpawnPoint: {fileID: 0}
   personaje: {fileID: 800635597894420647, guid: 8ead75b1cf005844881800cbacb0d0c6, type: 3}
   sombra: {fileID: 7215591257669660622, guid: ee1d39cd635339546a215f5df4d41776, type: 3}
-  inanimateObjects:
-  - {fileID: 0}
-  enemies: []
+  theme: {fileID: 0}
+  turretSound: {fileID: 8300000, guid: 65e1bf759baed1b44be2dc069bae570d, type: 3}
+  levelEndsSound: {fileID: 8300000, guid: 3be400b5aff35944e8b4ec100c206b8b, type: 3}

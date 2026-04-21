@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController Instance { get; private set; }
+
 
     [Header("Cosas Rewind")]
     [SerializeField] private float recordingDuration = 10.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mas o menos
@@ -15,6 +17,8 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private Transform currentSpawnPoint;
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
+	[Header("Sonidos")]
+    [SerializeField] private AudioClip theme, turretSound, levelEndsSound, deathSound, footstepSound;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -25,8 +29,13 @@ public class SceneController : MonoBehaviour
 	private OpitControllerRewind opitScript;
 	private CloneController cloneScript;
 	void Start()
-    {  
+    {
+        if (theme != null)
+        {
+            GameManager.Instance.audioManager.PlayMusic(theme);
+        }
         CreateOpit();
+        
     }
 
     void FixedUpdate()
@@ -156,6 +165,8 @@ public class SceneController : MonoBehaviour
     public void KillPlayer()//and respawn it
     {
         Destroy(opit);
+        if (deathSound != null)
+            GameManager.Instance.audioManager.PlaySound(deathSound);
         Destroy(clone);
         isRecording = false;
         CreateOpit();
@@ -194,6 +205,20 @@ public class SceneController : MonoBehaviour
 			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
 	}
+
+	public void ReproducirDisparo()
+	{
+        if (turretSound != null)
+            GameManager.Instance.audioManager.PlaySound(turretSound);
+
+    }
+    public void ReproducirTerminarNivel()
+    {
+        if (levelEndsSound != null)
+            GameManager.Instance.audioManager.StopMusic();
+			GameManager.Instance.audioManager.PlaySound(levelEndsSound);
+
+    }
     private void OnDestroy()
     {
         recordingListeners.Clear();
