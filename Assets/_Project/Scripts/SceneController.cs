@@ -188,6 +188,9 @@ public class SceneController : MonoBehaviour
 				isRecording = false;
 			}
 
+			foreach (var obj in saveListeners) obj.CancelState();
+			notifyListenersStop();
+
 			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
 	}
