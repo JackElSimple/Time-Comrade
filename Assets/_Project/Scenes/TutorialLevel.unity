@@ -590,6 +590,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6039568866234560440, guid: 8add8fca618773f4fbd461e4cf3ea9f5, type: 3}
+      propertyPath: targetPoint
+      value: 
+      objectReference: {fileID: 1594125052}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -719,6 +723,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
+--- !u!114 &889312580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6039568866234560440, guid: 8add8fca618773f4fbd461e4cf3ea9f5, type: 3}
+  m_PrefabInstance: {fileID: 676249906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b3bd769f7f560e89b131d4c965e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &975729332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4391014434106867850, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
@@ -810,7 +825,7 @@ Transform:
   m_GameObject: {fileID: 1069712103}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.796432, y: 1.0126586, z: 1.292706}
+  m_LocalPosition: {x: -0.9, y: 1.18, z: 1.292706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -967,11 +982,11 @@ PrefabInstance:
     - target: {fileID: -7252434625051363350, guid: 20f5f4ba5bf5933208301e6053b1f4b0, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 889312580}
     - target: {fileID: -7252434625051363350, guid: 20f5f4ba5bf5933208301e6053b1f4b0, type: 3}
       propertyPath: onReleased.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 889312580}
     - target: {fileID: -7252434625051363350, guid: 20f5f4ba5bf5933208301e6053b1f4b0, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
