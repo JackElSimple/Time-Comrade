@@ -105,10 +105,10 @@ public abstract class BaseCharacterController : MonoBehaviour
 	protected void ApplyCoyoteTime() //also it maintains the clone
 	{
         int count = rb.GetContacts(groundFilter, results);
-        bool isGroundedRaw = count > 0;
+        bool isGroundedRaw = count > 0f;
+		var onPlatform = results[0].gameObject;
         if (isGroundedRaw)
         {
-            var onPlatform = results[0].gameObject;
             if (onPlatform.transform.parent != null)
             {
                 if (onPlatform.transform.parent.gameObject != null)
@@ -140,7 +140,11 @@ public abstract class BaseCharacterController : MonoBehaviour
                 throw;
 			}      
         }
-        if (isGroundedRaw)
+		if (onPlatform.CompareTag("Clone"))
+		{
+			coyoteTimeCounter = 0.3f;
+		}
+        else if (isGroundedRaw)
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -154,8 +158,6 @@ public abstract class BaseCharacterController : MonoBehaviour
 		{
 			rb.gravityScale = gravityScale;
 		}
-
-		
     }
 
 }
