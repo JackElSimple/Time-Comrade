@@ -219,6 +219,12 @@ public class SceneController : MonoBehaviour
 			GameManager.Instance.audioManager.PlaySound(levelEndsSound);
 
     }
+    public void ReproducirPisada()
+    {
+        if (footstepSound != null)
+            GameManager.Instance.audioManager.PlaySound(footstepSound);
+
+    }
     private void OnDestroy()
     {
         recordingListeners.Clear();
