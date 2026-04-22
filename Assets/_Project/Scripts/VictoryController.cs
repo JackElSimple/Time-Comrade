@@ -11,6 +11,7 @@ public class VictoryController : MonoBehaviour
 		if (collision.CompareTag("Player"))
 		{
 			SceneController sc = FindFirstObjectByType<SceneController>();
+			sc.ReproducirTerminarNivel();
 			if (sc != null)
 			{
 				// Aquí usamos el string que el desplegable rellenó por nosotros

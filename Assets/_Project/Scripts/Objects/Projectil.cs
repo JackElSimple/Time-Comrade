@@ -25,7 +25,6 @@ public class Projectil : TimeBody
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("El proyectil ha golpeado una pared");
             Destroy(gameObject);
         }
     }
