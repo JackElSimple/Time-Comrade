@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -7,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public static SceneController Instance { get; private set; }
-
+    public static event Action RewindStarted;
+    public static event Action RewindEnded;
 
     [Header("Cosas Rewind")]
     [SerializeField] private float recordingDuration = 10.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mas o menos
@@ -78,6 +79,7 @@ public class SceneController : MonoBehaviour
 			}
 		}
 		CreateClone();
+        RewindEnded?.Invoke();
 		Debug.Log("Sincronizacion completa: Todos los objetos han salido del modo rebobinado.");
 	}
 	public void GestionarHabilidad()
@@ -157,6 +159,7 @@ public class SceneController : MonoBehaviour
 			isRecording = false;
 			isRewinding = true;
 			opitScript.FinishRecording(); 
+            RewindStarted?.Invoke();
 		}
 
 		foreach (var obj in saveListeners) obj.LoadState();
