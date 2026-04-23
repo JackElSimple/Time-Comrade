@@ -7,6 +7,7 @@ public class OpitControllerRewind : BaseCharacterController
 	private Animator _anim;
 	private float horizontal;
 	private bool isJumpHeld;
+	private float cooldownFootstep =0;
 
 
 	protected override void Awake()
@@ -24,6 +25,12 @@ public class OpitControllerRewind : BaseCharacterController
 		horizontal = Input.GetAxisRaw("Horizontal"); // A,D
 		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
+		if (isGrounded && math.abs(rb.linearVelocity.x) > 0.1 && cooldownFootstep >0.3)
+		{
+			doingWalkingSound();
+			cooldownFootstep = 0;
+		}
+
 		if (Input.GetButtonDown("Jump")) { wantsToJump = true; }
 
 
@@ -34,6 +41,8 @@ public class OpitControllerRewind : BaseCharacterController
 
 		HandleVisuals(horizontal); // Voltea el sprite
 		_anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
+
+		cooldownFootstep += Time.deltaTime;
 	}
 
 	void FixedUpdate()

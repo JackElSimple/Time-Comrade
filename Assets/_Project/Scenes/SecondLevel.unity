@@ -327,23 +327,27 @@ PrefabInstance:
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: theme
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 2eeb28db027727146bcb66517e9944e0, type: 3}
+    - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a8014c79b99552047b1d6369d93317fd, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: deathSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: b36bff7c2787de443976ec28fe41735a, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: turretSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 65e1bf759baed1b44be2dc069bae570d, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: footstepSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: ec5ddd2623f469941abc943a87f7ba53, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: levelEndsSound
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 3be400b5aff35944e8b4ec100c206b8b, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: currentSpawnPoint
       value: 
