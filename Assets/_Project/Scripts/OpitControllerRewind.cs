@@ -8,7 +8,7 @@ public class OpitControllerRewind : BaseCharacterController
 	private float horizontal;
 	private bool isJumpHeld;
 	private float cooldownFootstep =0;
-
+	private bool inAirLastFrame=false;
 
 	protected override void Awake()
 	{
@@ -25,11 +25,7 @@ public class OpitControllerRewind : BaseCharacterController
 		horizontal = Input.GetAxisRaw("Horizontal"); // A,D
 		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
-		if (isGrounded && math.abs(rb.linearVelocity.x) > 0.1 && cooldownFootstep >0.3)
-		{
-			doingWalkingSound();
-			cooldownFootstep = 0;
-		}
+		
 
 		if (Input.GetButtonDown("Jump")) { wantsToJump = true; }
 
@@ -42,7 +38,18 @@ public class OpitControllerRewind : BaseCharacterController
 		HandleVisuals(horizontal); // Voltea el sprite
 		_anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
 
-		cooldownFootstep += Time.deltaTime;
+        if (isGrounded && math.abs(rb.linearVelocity.x) > 0.1 && cooldownFootstep > 0.3)
+        {
+            doingWalkingSound();
+            cooldownFootstep = 0;
+        }
+        cooldownFootstep += Time.deltaTime;
+		if(inAirLastFrame && isGrounded)
+		{
+			doingLandingSound();
+		}
+		inAirLastFrame = !isGrounded;
+
 	}
 
 	void FixedUpdate()
@@ -86,6 +93,11 @@ public class OpitControllerRewind : BaseCharacterController
 	{
         SceneController sc = FindFirstObjectByType<SceneController>();
         sc.ReproducirPisada();
+    }
+    public void doingLandingSound()
+    {
+        SceneController sc = FindFirstObjectByType<SceneController>();
+        sc.ReproducirAterrizaje();
     }
 
 }

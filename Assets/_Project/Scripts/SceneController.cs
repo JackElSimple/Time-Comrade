@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
 	[Header("Sonidos")]
-    [SerializeField] private AudioClip theme, turretSound, levelEndsSound, deathSound, footstepSound, jumpSound;
+    [SerializeField] private AudioClip theme, bulletDestroyedSound, levelEndsSound, deathSound, footstepSound, jumpSound, landSound, checkPointSound, leverSound, plateActivatedSound, plateDeactivatedSound;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -232,6 +232,42 @@ public class SceneController : MonoBehaviour
     {
         if (jumpSound != null)
             GameManager.Instance.audioManager.PlaySound(jumpSound);
+
+    }
+    public void ReproducirAterrizaje()
+    {
+        if (jumpSound != null)
+            GameManager.Instance.audioManager.PlaySound(landSound);
+
+    }
+    public void ReproducirCheckPoint()
+    {
+        if (checkPointSound != null)
+            GameManager.Instance.audioManager.PlaySound(checkPointSound);
+
+    }
+    public void ReproducirBalaDestruida()
+    {
+        if (bulletDestroyedSound != null)
+            GameManager.Instance.audioManager.PlaySound(bulletDestroyedSound);
+
+    }
+    public void ReproducirPalanca()
+    {
+        if (leverSound != null)
+            GameManager.Instance.audioManager.PlaySound(leverSound);
+
+    }
+    public void ReproducirPlateOn()
+    {
+        if (plateActivatedSound != null)
+            GameManager.Instance.audioManager.PlaySound(plateActivatedSound);
+
+    }
+    public void ReproducirPlateOff()
+    {
+        if (plateActivatedSound != null)
+            GameManager.Instance.audioManager.PlaySound(plateActivatedSound);
 
     }
     private void OnDestroy()

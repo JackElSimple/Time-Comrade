@@ -37,6 +37,8 @@ public class LeverPlate: MovingPlatformBase
             doublePressed = true;
         else
         {
+            SceneController sc = FindFirstObjectByType<SceneController>();
+            sc.ReproducirPalanca();
             doublePressed = false;
             pressed = true;
             playerOnPlate = true;
