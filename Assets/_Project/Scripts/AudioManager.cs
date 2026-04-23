@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    private bool isPaused;
     [SerializeField] private AudioSource musicSource, sfxSource;
     public void PlayMusic(AudioClip clip)
     {
@@ -14,6 +15,23 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
+    }
+    public void PauseMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Pause();
+            isPaused = true;
+        }
+    }
+
+    public void ResumeMusic()
+    {
+        if (isPaused)
+        {
+            musicSource.UnPause();
+            isPaused = false;
+        }
     }
     public void PlaySound(AudioClip clip)
     {

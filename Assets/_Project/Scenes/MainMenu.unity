@@ -217,6 +217,7 @@ MonoBehaviour:
   defaultButton: {fileID: 1016097773}
   canvasCredits: {fileID: 1153101616}
   canvasControls: {fileID: 1896062202}
+  theme: {fileID: 8300000, guid: 252f9cf9f8da86f48861dbe9213cbc61, type: 3}
 --- !u!4 &445327448
 Transform:
   m_ObjectHideFlags: 0
@@ -939,6 +940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseSceneName: PauseMenu
+  enterPauseSound: {fileID: 0}
+  exitPauseSound: {fileID: 0}
 --- !u!114 &832087446
 MonoBehaviour:
   m_ObjectHideFlags: 0
