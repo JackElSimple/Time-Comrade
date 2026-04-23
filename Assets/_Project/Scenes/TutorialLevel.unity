@@ -10229,13 +10229,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: d64ec73298a7e7640bb5ade0d86dfef2, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a8014c79b99552047b1d6369d93317fd, type: 3}
+    - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: deathSound
       value: 
-      objectReference: {fileID: 8300000, guid: 16b9411b78b47f64bac6ea84a2da7ca2, type: 3}
+      objectReference: {fileID: 8300000, guid: b36bff7c2787de443976ec28fe41735a, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: footstepSound
       value: 
-      objectReference: {fileID: 8300000, guid: 47c2e7b631714434b8e19b60de0e7c73, type: 3}
+      objectReference: {fileID: 8300000, guid: ec5ddd2623f469941abc943a87f7ba53, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: currentSpawnPoint
       value: 
@@ -19761,7 +19765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759449685961582430, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
       propertyPath: nextSceneName
-      value: PruebaKill
+      value: SecondLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

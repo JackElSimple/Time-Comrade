@@ -21,9 +21,11 @@ public class TurretController : TimeBody
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
     private SceneController sc;
+    private AudioSource auSo;
     private void Start()
     {
         sc = FindFirstObjectByType<SceneController>();
+        auSo = GetComponent<AudioSource>();
         timeCooldown = shootInterval;
 
        
@@ -31,7 +33,7 @@ public class TurretController : TimeBody
     }
     void Fire()
     {
-        sc.ReproducirDisparo();
+        auSo.Play();
         direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
         GameObject obj = Instantiate<GameObject>(bullet);
         obj.transform.position = transform.GetChild(0).position;

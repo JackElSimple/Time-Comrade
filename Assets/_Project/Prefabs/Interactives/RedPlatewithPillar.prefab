@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 3793842495876187188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1402822769571156772}
   m_Layer: 0
-  m_Name: destination
+  m_Name: destination1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 4768244274683558717}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.178, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 1763706808547632022}
   - component: {fileID: 1850114197339270941}
   - component: {fileID: 3598829243224440410}
-  - component: {fileID: 7463710282021986205}
+  - component: {fileID: 1088211895778679649}
   m_Layer: 6
   m_Name: PlateButton
   m_TagString: Untagged
@@ -367,7 +367,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7628994, y: 0.09608483}
   m_EdgeRadius: 0
---- !u!114 &7463710282021986205
+--- !u!114 &1088211895778679649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,13 +376,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5838746876158294709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a1e3cfc953edc599fe8a46728e2b3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 45301087c57f41b47912098794157648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 1402822769571156772}
   speed: 2
   currentTarget: {x: 0, y: 0, z: 0}
-  onPressed:
+  on:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6433864650545397015}
@@ -397,7 +397,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onReleased:
+  off:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6433864650545397015}
@@ -490,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 7044495253561320225}
     - target: {fileID: 4487030344254111504, guid: 3df18c4a0e96b5e41a4589f683ba56ab, type: 3}
       propertyPath: m_Name
-      value: pillarSize2
+      value: pilarRed
       objectReference: {fileID: 0}
     - target: {fileID: 6674210940477284461, guid: 3df18c4a0e96b5e41a4589f683ba56ab, type: 3}
       propertyPath: m_LocalPosition.x

@@ -85,6 +85,10 @@ public abstract class BaseCharacterController : MonoBehaviour
 		if (wantsToJump && isGrounded)
 		{
 			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+			if (gameObject.tag == "Player")
+			{
+				sc.ReproducirSalto();
+			}
 		}
 		wantsToJump = false;
 	}

@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
 	[Header("Sonidos")]
-    [SerializeField] private AudioClip theme, turretSound, levelEndsSound, deathSound, footstepSound;
+    [SerializeField] private AudioClip theme, turretSound, levelEndsSound, deathSound, footstepSound, jumpSound;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -209,12 +209,12 @@ public class SceneController : MonoBehaviour
 		}
 	}
 
-	public void ReproducirDisparo()
-	{
-        if (turretSound != null)
-            GameManager.Instance.audioManager.PlaySound(turretSound);
+	//public void ReproducirDisparo()
+	//{
+ //       if (turretSound != null)
+ //           GameManager.Instance.audioManager.PlaySound(turretSound);
 
-    }
+ //   }
     public void ReproducirTerminarNivel()
     {
         if (levelEndsSound != null)
@@ -226,6 +226,12 @@ public class SceneController : MonoBehaviour
     {
         if (footstepSound != null)
             GameManager.Instance.audioManager.PlaySound(footstepSound);
+
+    }
+    public void ReproducirSalto()
+    {
+        if (jumpSound != null)
+            GameManager.Instance.audioManager.PlaySound(jumpSound);
 
     }
     private void OnDestroy()
