@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/_Project/Audios/SFX/SFX_INT_PRESSUREPLATE_ACTIVATED_M_OS_01.wav.meta
-guid: 4af9b0fcb2861fd44b179acb10f2930c
-========
-guid: ec5ddd2623f469941abc943a87f7ba53
->>>>>>>> main:Assets/_Project/Audios/SFX/01-footstep.wav.meta
+guid: 594963880866ab9408ab2adacf20bd8d
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
