@@ -10,8 +10,10 @@ public class MainMenuSceneManager : MonoBehaviour
 	public Button defaultButton;
 	public GameObject canvasCredits;
 	public GameObject canvasControls;
+    [SerializeField] private AudioClip theme;
 
-	void Update()
+
+    void Update()
 	{
 		if (canvasCredits.activeSelf || canvasControls.activeSelf) 
 		{
@@ -26,8 +28,12 @@ public class MainMenuSceneManager : MonoBehaviour
 
 	void Start()
 	{
-		//EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
-	}
+        if (theme != null)
+        {
+            GameManager.Instance.audioManager.PlayMusic(theme);
+        }
+        //EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
+    }
 
 	public void StartGame()
 	{

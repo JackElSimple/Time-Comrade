@@ -69,7 +69,11 @@ public class SceneController : MonoBehaviour
 	}
 	private void EndGlobalRewind()
 	{
-		isRewinding = false;
+        if (theme != null)
+        {
+            GameManager.Instance.audioManager.ResumeMusic();
+        }
+        isRewinding = false;
 		for (int i = saveListeners.Count - 1; i >= 0; i--)
 		{
 			
@@ -163,6 +167,10 @@ public class SceneController : MonoBehaviour
 		}
 
 		foreach (var obj in saveListeners) obj.LoadState();
+        if (theme != null)
+        {
+            GameManager.Instance.audioManager.PauseMusic();
+        }
     }
 
     public void KillPlayer()//and respawn it
@@ -209,12 +217,6 @@ public class SceneController : MonoBehaviour
 		}
 	}
 
-	//public void ReproducirDisparo()
-	//{
- //       if (turretSound != null)
- //           GameManager.Instance.audioManager.PlaySound(turretSound);
-
- //   }
     public void ReproducirTerminarNivel()
     {
         if (levelEndsSound != null)
