@@ -37,6 +37,8 @@ public class PressurePlatePlatform : MovingPlatformBase
             doublePressed = true;
         else
         {
+            SceneController sc = FindFirstObjectByType<SceneController>();
+            sc.ReproducirPlateOn();
             doublePressed = false;
             pressed = true;
             playerOnPlate = true;
@@ -53,6 +55,8 @@ public class PressurePlatePlatform : MovingPlatformBase
             doublePressed = false;
         else
         {
+            SceneController sc = FindFirstObjectByType<SceneController>();
+            sc.ReproducirPlateOff();
             pressed = false;
             playerOnPlate = false;
             HandlePassenger(collision.transform, false); // unparent player

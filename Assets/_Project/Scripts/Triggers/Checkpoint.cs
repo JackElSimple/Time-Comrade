@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
 			if (sc != null)
 			{
 				sc.UpdateSpawnPoint(this.transform);
+				sc.ReproducirCheckPoint();
 				Debug.Log("Checkpoint alcanzado: " + gameObject.name);
 			}
 
