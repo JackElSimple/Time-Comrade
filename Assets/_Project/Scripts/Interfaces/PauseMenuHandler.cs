@@ -5,7 +5,9 @@ public class PauseMenuHandler : MonoBehaviour
 	public static PauseMenuHandler Instance;
 
 	[SerializeField] private string pauseSceneName = "PauseMenu";
-	public bool isPaused { get; private set; }
+	[SerializeField] private AudioClip enterPauseSound, exitPauseSound;
+
+    public bool isPaused { get; private set; }
 
 	void Awake()
 	{
@@ -35,12 +37,18 @@ public class PauseMenuHandler : MonoBehaviour
 
 		if (isPaused)
 		{
-			Time.timeScale = 0f;
+
+            if (enterPauseSound != null)
+                GameManager.Instance.audioManager.PlaySound(enterPauseSound);
+
+            Time.timeScale = 0f;
 			SceneManager.LoadScene(pauseSceneName, LoadSceneMode.Additive);
 		}
 		else
 		{
-			Time.timeScale = 1f;
+            if (exitPauseSound != null)
+                GameManager.Instance.audioManager.PlaySound(exitPauseSound);
+            Time.timeScale = 1f;
 			SceneManager.UnloadSceneAsync(pauseSceneName);
 		}
 	}
