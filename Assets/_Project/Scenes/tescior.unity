@@ -165,7 +165,7 @@ PrefabInstance:
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: jumpSound
       value: 
-      objectReference: {fileID: 8300000, guid: a8014c79b99552047b1d6369d93317fd, type: 3}
+      objectReference: {fileID: 8300000, guid: e64898142b7dff74bb508cd1dff991be, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: deathSound
       value: 
