@@ -328,6 +328,10 @@ PrefabInstance:
       propertyPath: currentSpawnPoint
       value: 
       objectReference: {fileID: 468695779}
+    - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
+      propertyPath: bulletDestroyedSound
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3859752712268003237, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

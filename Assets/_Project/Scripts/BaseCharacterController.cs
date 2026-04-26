@@ -10,8 +10,10 @@ public abstract class BaseCharacterController : MonoBehaviour
 	[Header("Configuracion de Movimiento")]
 	[SerializeField] protected float moveSpeed = 8f;
 	[SerializeField] protected float jumpForce = 9f;
+    [SerializeField] protected float jumpCooldown = 0.3f;
+	protected float jumpCooldownCount = 0.3f;
 
-	[Header("Fisicas de Salto")]
+    [Header("Fisicas de Salto")]
 	[SerializeField] protected float gravityScale = 4f;
 	[SerializeField] protected float fallMultiplier = 1.5f;
 	[SerializeField] protected float lowJumpMultiplier = 2f;
@@ -25,8 +27,8 @@ public abstract class BaseCharacterController : MonoBehaviour
 
     [Header("Coyote time")]
     [SerializeField] protected float coyoteTime = 0.1f;
-    protected float coyoteTimeCounter = 0.05f;
-    protected bool isGrounded => coyoteTimeCounter > 0f;
+	protected float coyoteTimeCounter = 0.05f;
+    [SerializeField] protected bool isGrounded => coyoteTimeCounter > 0f;
 
     protected Rigidbody2D rb;
 	//protected bool isGrounded;
@@ -82,16 +84,19 @@ public abstract class BaseCharacterController : MonoBehaviour
 
 	protected void ApplyJump()
 	{
-		if (wantsToJump && isGrounded)
+		if (wantsToJump && isGrounded && jumpCooldownCount >= jumpCooldown)
 		{
+			Debug.Log(jumpCooldownCount);
 			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 			if (gameObject.tag == "Player")
 			{
 				sc.ReproducirSalto();
 			}
+			jumpCooldownCount = 0;
 		}
 		wantsToJump = false;
-	}
+        jumpCooldownCount += Time.fixedDeltaTime;
+    }
 
 	protected void ApplyBetterFall(bool jumpHeld)
 	{
@@ -110,32 +115,42 @@ public abstract class BaseCharacterController : MonoBehaviour
 	{
         int count = rb.GetContacts(groundFilter, results);
         bool isGroundedRaw = count > 0f;
-		var onPlatform = results[0].gameObject;
+
         if (isGroundedRaw)
         {
+            var onPlatform = results[0].gameObject;
             if (onPlatform.transform.parent != null)
-            {
-                if (onPlatform.transform.parent.gameObject != null)
-                {
-                    onPlatform = onPlatform.transform.parent.gameObject;//si tiene padre obtiene el padre (para coger a opit a partir de la plataforma) }
+			{
+				if (onPlatform.transform.parent.gameObject != null)
+				{
+					onPlatform = onPlatform.transform.parent.gameObject;//si tiene padre obtiene el padre (para coger a opit a partir de la plataforma) }
 
-                }
-            }
-            if (onPlatform.CompareTag("Clone")) //si est� encima del clon va con el pegado
-            {
-                var prb = onPlatform.GetComponent<Rigidbody2D>();
+				}
+			}
+			if (onPlatform.CompareTag("Clone")) //si est� encima del clon va con el pegado
+			{
+				var prb = onPlatform.GetComponent<Rigidbody2D>();
 				cloneReference = prb;
-                rb.linearVelocityX += prb.linearVelocityX;
-				framesArrastrar = 3;
-            }
+				rb.linearVelocityX += prb.linearVelocityX;
+                coyoteTimeCounter = coyoteTime+0.2f;
+                framesArrastrar = 3;
+			}
+            coyoteTimeCounter = coyoteTime;
+            rb.gravityScale = 0;
         }
-		if (framesArrastrar > 0) //it will detect as opit is on the clone "framesArrastrar" frames more
+        else
+        {
+            coyoteTimeCounter -= Time.fixedDeltaTime;
+            rb.gravityScale = gravityScale;
+        }
+        if (framesArrastrar > 0) //it will detect as opit is on the clone "framesArrastrar" frames more
 		{
 			try
 			{
                 var prb = cloneReference.GetComponent<Rigidbody2D>();
                 rb.linearVelocityX += prb.linearVelocityX;
-				
+                coyoteTimeCounter = coyoteTime + 0.2f;
+
                 framesArrastrar -= 1;
             }
 			catch (System.Exception)
@@ -144,24 +159,7 @@ public abstract class BaseCharacterController : MonoBehaviour
                 throw;
 			}      
         }
-		if (onPlatform.CompareTag("Clone"))
-		{
-			coyoteTimeCounter = 0.3f;
-		}
-        else if (isGroundedRaw)
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.fixedDeltaTime;
-        }
 
-		if (isGroundedRaw) { rb.gravityScale = 0; }
-		else
-		{
-			rb.gravityScale = gravityScale;
-		}
     }
 
 }
