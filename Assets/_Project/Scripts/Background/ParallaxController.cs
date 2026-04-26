@@ -3,7 +3,7 @@ using UnityEngine;
 public class ParallaxLayer : MonoBehaviour
 {
     [Header("Parallax")]
-    [Range(0f, 1f)] public float parallaxX = 0.2f;
+    [Range(-1f, 1f)] public float parallaxX = 0.2f;
     [Range(0f, 1f)] public float parallaxY = 0f;
 
     private Transform cam;
