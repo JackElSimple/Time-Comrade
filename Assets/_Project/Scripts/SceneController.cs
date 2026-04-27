@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -174,13 +175,21 @@ public class SceneController : MonoBehaviour
 
     public void KillPlayer()//and respawn it
     {
-        Destroy(opit);
+        opit.GetComponent<SpriteRenderer>().color = Color.red;
+        //StartCoroutine(PararJuegoxSegundos(0.5f));
         if (deathSound != null)
             GameManager.Instance.audioManager.PlaySound(deathSound);
+        Destroy(opit);
         Destroy(clone);
         isRecording = false;
         CreateOpit();
     }
+    //IEnumerator PararJuegoxSegundos(float segundos)
+    //{
+    //    Time.timeScale = 0f; // pausa todo
+    //    yield return new WaitForSeconds(segundos);
+    //    Time.timeScale = 1f; // reanuda
+    //}
     public void KillClone()
     {
         Destroy(clone);
