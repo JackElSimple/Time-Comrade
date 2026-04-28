@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 43007daa6faf9bd4e84652ed2b5926ee
+guid: 6796d6fa7547cc949a8c1edcbda46c21
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1943140512973117139
-    second: ojoAbriendo2_0
+      213: -809245217642263312
+    second: Ojo_posibilidad_1-1.png_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ojoAbriendo2_0
+      name: Ojo_posibilidad_1-1.png_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 640
+        y: 79
         width: 320
-        height: 320
+        height: 202
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,96 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d292197aff39805e0800000000000000
-      internalID: -1943140512973117139
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ojoAbriendo2_1
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 640
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca610614bfb58674686edba135cb3ef3
-      internalID: 457213482
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ojoAbriendo2_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 320
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ddc53048f56063548b67ddb434162ea7
-      internalID: 977557853
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ojoAbriendo2_3
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 320
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4dce1f3a77b16f34e81a2a24cc9231d5
-      internalID: -2122780151
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ojoAbriendo2_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f98feb2a5d80ae4e99075c0e9fd3f37
-      internalID: -1454974849
+      spriteID: 0fccf3a13cbf4c4f0800000000000000
+      internalID: -809245217642263312
       vertices: []
       indices: 
       edges: []
@@ -239,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0e946db0525a3aa4da8e83a64eaf10b5
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -249,11 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ojoAbriendo2_0: -1943140512973117139
-      ojoAbriendo2_1: 457213482
-      ojoAbriendo2_2: 977557853
-      ojoAbriendo2_3: -2122780151
-      ojoAbriendo2_4: -1454974849
+      Ojo_posibilidad_1-1.png_0: -809245217642263312
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -22,14 +22,19 @@ public class TurretController : TimeBody
     private Vector2 Horizontal = new Vector2(-1,0);
     private SceneController sc;
     private AudioSource auSo;
+    private Animator anim;
     private void Start()
     {
         sc = FindFirstObjectByType<SceneController>();
         auSo = GetComponent<AudioSource>();
         timeCooldown = shootInterval;
+        anim = transform.GetChild(2).GameObject().GetComponent<Animator>();
+        if (automated)
+        {
+            anim.SetBool("Open",true);
+        }
 
-       
-        
+
     }
     void Fire()
     {
@@ -58,7 +63,7 @@ public class TurretController : TimeBody
         }
     }
      protected override void OnUpdate()
-    {
+     {
 		Debug.DrawRay(transform.GetChild(0).transform.position, Horizontal* distanciaRayo, Color.red);
         timeCooldown += Time.deltaTime;// cada shootInterval segundos dispara y se reinicia el contador
         if (timeCooldown > shootInterval)
@@ -80,9 +85,6 @@ public class TurretController : TimeBody
                     }
                 }
             }
-
-
-
         }
         for (int i = 0; i < numberBullets; i++)
         { 
@@ -94,7 +96,19 @@ public class TurretController : TimeBody
             }
             bulletsList[i]= data;
         }
-    }
+        RaycastHit2D[] hits2 = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
+        foreach (RaycastHit2D hit in hits2)
+        {
+            if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            { break; }
+            if ((hit.collider != null && hit.collider.gameObject.CompareTag("Player")))
+            {
+                anim.SetBool("Open", true);
+                break;
+            }
+            anim.SetBool("Open", false);
+        }
+     }
 
     public override void SaveState()
     {
@@ -123,26 +137,4 @@ public class TurretController : TimeBody
 		//UpdateBullets();
 
 	}
-
-	private void UpdateBullets()
-    {
-        for (int i = 0; i < numberBullets; i++)
-        {
-            BulletData data = bulletsList[i];
-            if (data.bullet != null)
-            {
-                Destroy(data.bullet); //delete the bullet
-                data.bullet = null;
-            }
-            BulletData updatedBullets = bulletsSaved[i];
-            if(updatedBullets.bullet != null) //generates the bullets in the state which were saved
-            {
-                direction = transform.GetChild(0).position - transform.GetChild(1).position; //punta - cañon
-                GameObject obj = Instantiate<GameObject>(bullet);
-                obj.transform.position = updatedBullets.position;
-                Projectil proj = obj.GetComponent<Projectil>();
-                proj.speed = updatedBullets.speed;
-            }
-        }
-    }
 }
