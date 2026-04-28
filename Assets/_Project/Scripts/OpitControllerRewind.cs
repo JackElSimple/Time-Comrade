@@ -7,6 +7,7 @@ public class OpitControllerRewind : BaseCharacterController
 	private Animator _anim;
 	private float horizontal;
 	private bool isJumpHeld;
+	private bool canMove = true;
 	private float cooldownFootstep =0;
 	private bool inAirLastFrame=false;
 
@@ -20,9 +21,13 @@ public class OpitControllerRewind : BaseCharacterController
 	void Update()
 	{
 		if (Time.timeScale == 0f) return;
-
-		// Inputs
-		horizontal = Input.GetAxisRaw("Horizontal"); // A,D
+		if (!canMove) { 
+            rb.linearVelocityX = 0;
+			rb.linearVelocityY = 0;
+			return;
+        }
+        // Inputs
+        horizontal = Input.GetAxisRaw("Horizontal"); // A,D
 		isJumpHeld = Input.GetButton("Jump"); // Espacio
 
 		
@@ -55,9 +60,13 @@ public class OpitControllerRewind : BaseCharacterController
 	void FixedUpdate()
 	{
 		if (Time.timeScale == 0f) return;
-		// Check de suelo
-		//isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); Upgraded o applycoyote time
-		if (sc != null && sc.isRecording) { recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
+        if (!canMove)
+		{
+            return;
+		}
+        // Check de suelo
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); Upgraded o applycoyote time
+        if (sc != null && sc.isRecording) { recordedInputs.Add(new PlayerInputFrame(horizontal, wantsToJump, isJumpHeld)); }
 
 
 		ApplyMovement(horizontal);
@@ -89,7 +98,12 @@ public class OpitControllerRewind : BaseCharacterController
 		Debug.Log("Grabación cancelada: Datos eliminados sin teletransporte.");
 		recordedInputs.Clear(); // Limpia la lista de frames grabados
 	}
-	public void doingWalkingSound()
+    public void SetCanMove(bool move)
+	{
+        canMove = move;
+	}
+
+    public void doingWalkingSound()
 	{
         SceneController sc = FindFirstObjectByType<SceneController>();
         sc.ReproducirPisada();
@@ -99,5 +113,6 @@ public class OpitControllerRewind : BaseCharacterController
         SceneController sc = FindFirstObjectByType<SceneController>();
         sc.ReproducirAterrizaje();
     }
+	
 
 }

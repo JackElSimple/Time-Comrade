@@ -86,7 +86,6 @@ public abstract class BaseCharacterController : MonoBehaviour
 	{
 		if (wantsToJump && isGrounded && jumpCooldownCount >= jumpCooldown)
 		{
-			Debug.Log(jumpCooldownCount);
 			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 			if (gameObject.tag == "Player")
 			{

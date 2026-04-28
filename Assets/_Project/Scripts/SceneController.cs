@@ -175,21 +175,24 @@ public class SceneController : MonoBehaviour
 
     public void KillPlayer()//and respawn it
     {
-        opit.GetComponent<SpriteRenderer>().color = Color.red;
-        //StartCoroutine(PararJuegoxSegundos(0.5f));
+        opitScript.CancelRecording();
+        StartCoroutine(WaitAndKill(0.5f));
+    }
+    IEnumerator WaitAndKill(float segundos)
+    {
+        opitScript.SetCanMove(false);
+        opit.transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.red;
+
+        yield return new WaitForSeconds(segundos);
+
         if (deathSound != null)
             GameManager.Instance.audioManager.PlaySound(deathSound);
+        opitScript.SetCanMove(true);
         Destroy(opit);
         Destroy(clone);
         isRecording = false;
         CreateOpit();
     }
-    //IEnumerator PararJuegoxSegundos(float segundos)
-    //{
-    //    Time.timeScale = 0f; // pausa todo
-    //    yield return new WaitForSeconds(segundos);
-    //    Time.timeScale = 1f; // reanuda
-    //}
     public void KillClone()
     {
         Destroy(clone);
