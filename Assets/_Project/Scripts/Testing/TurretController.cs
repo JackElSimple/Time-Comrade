@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -96,19 +97,21 @@ public class TurretController : TimeBody
             }
             bulletsList[i]= data;
         }
-        RaycastHit2D[] hits2 = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
-        foreach (RaycastHit2D hit in hits2)
-        {
-            if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            { break; }
-            if ((hit.collider != null && hit.collider.gameObject.CompareTag("Player")))
+        if (!automated) { 
+            RaycastHit2D[] hits2 = Physics2D.RaycastAll(transform.GetChild(0).transform.position, Horizontal, distanciaRayo);
+            foreach (RaycastHit2D hit in hits2)
             {
-                anim.SetBool("Open", true);
-                break;
+                if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                { break; }
+                if ((hit.collider != null && hit.collider.gameObject.CompareTag("Player")))
+                {
+                    anim.SetBool("Open", true);
+                    break;
+                }
+                anim.SetBool("Open", false);
             }
-            anim.SetBool("Open", false);
         }
-     }
+    }
 
     public override void SaveState()
     {
