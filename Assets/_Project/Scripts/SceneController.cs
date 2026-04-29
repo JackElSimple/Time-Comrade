@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
 	[Header("Sonidos")]
-    [SerializeField] private AudioClip theme, bulletDestroyedSound, levelEndsSound, deathSound, footstepSound, jumpSound, landSound, checkPointSound, leverSound, plateActivatedSound, plateDeactivatedSound;
+    [SerializeField] private AudioClip theme, levelEndsSound, deathSound, footstepSound, jumpSound, landSound, checkPointSound, leverSound, plateActivatedSound, plateDeactivatedSound;
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -257,12 +257,6 @@ public class SceneController : MonoBehaviour
     {
         if (checkPointSound != null)
             GameManager.Instance.audioManager.PlaySound(checkPointSound);
-
-    }
-    public void ReproducirBalaDestruida()
-    {
-        if (bulletDestroyedSound != null)
-            GameManager.Instance.audioManager.PlaySound(bulletDestroyedSound);
 
     }
     public void ReproducirPalanca()
