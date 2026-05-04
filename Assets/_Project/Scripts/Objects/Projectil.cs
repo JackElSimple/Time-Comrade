@@ -3,16 +3,10 @@ using UnityEngine;
 public class Projectil : TimeBody
 {
     public Vector2 speed;
-    private AudioSource auso;
-
-    protected override void Awake()
-    { 
-        base.Awake();
-        auso = GetComponent<AudioSource>();
-    }
     private void makeSound()
     {
-        auso.Play();
+        SceneController sc = FindFirstObjectByType<SceneController>();
+        sc.ReproducirBalaDestruida();
     }
     protected override void OnUpdate()
     {
