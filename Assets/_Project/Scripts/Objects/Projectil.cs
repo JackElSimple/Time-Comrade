@@ -8,7 +8,7 @@ public class Projectil : TimeBody
     protected override void Awake()
     { 
         base.Awake();
-        auso = GetComponent<AudioSource>();
+        auso = transform.GetComponent<AudioSource>();
     }
     private void makeSound()
     {
