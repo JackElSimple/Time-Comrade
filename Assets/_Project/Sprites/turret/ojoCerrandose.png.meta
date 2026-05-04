@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 6796d6fa7547cc949a8c1edcbda46c21
+guid: 4d84bf0ba2664244ab55ea6cb73c5fc4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -809245217642263312
-    second: Ojo_posibilidad_1-1.png_0
+      213: -2553120551324407960
+    second: ojoCerrandose_0
+  - first:
+      213: -581609469071677452
+    second: ojoCerrandose_1
+  - first:
+      213: 8090213828483807894
+    second: ojoCerrandose_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -96,43 +102,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ojo_posibilidad_1-1.png_0
+      name: ojoCerrandose_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 79
+        y: 640
         width: 320
-        height: 202
+        height: 320
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +121,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0fccf3a13cbf4c4f0800000000000000
-      internalID: -809245217642263312
+      spriteID: 8672f85b26e719cd0800000000000000
+      internalID: -2553120551324407960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ojoCerrandose_1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f7aaf5f445bde7f0800000000000000
+      internalID: -581609469071677452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ojoCerrandose_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69afabbfc96364070800000000000000
+      internalID: 8090213828483807894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ojoCerrandose_3
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 134c2de64c7e20144a6d2ef4e7b1f414
+      internalID: -1879121357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ojoCerrandose_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31f4c39ad111f88449f0186ae258f344
+      internalID: -1954392496
       vertices: []
       indices: 
       edges: []
@@ -151,7 +219,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1500657d6bace5c4d9c656de7ad41320
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +229,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ojo_posibilidad_1-1.png_0: -809245217642263312
+      ojoCerrandose_0: -2553120551324407960
+      ojoCerrandose_1: -581609469071677452
+      ojoCerrandose_2: 8090213828483807894
+      ojoCerrandose_3: -1879121357
+      ojoCerrandose_4: -1954392496
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
