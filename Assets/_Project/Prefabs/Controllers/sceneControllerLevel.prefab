@@ -49,7 +49,7 @@ MonoBehaviour:
   personaje: {fileID: 800635597894420647, guid: 8ead75b1cf005844881800cbacb0d0c6, type: 3}
   sombra: {fileID: 7215591257669660622, guid: ee1d39cd635339546a215f5df4d41776, type: 3}
   theme: {fileID: 8300000, guid: 2eeb28db027727146bcb66517e9944e0, type: 3}
-  bulletDestroyedSound: {fileID: 8300000, guid: 456b7b079ce4c934281be62ef7bb5999, type: 3}
+  bulletDestroyedSound: {fileID: 0}
   levelEndsSound: {fileID: 8300000, guid: 3be400b5aff35944e8b4ec100c206b8b, type: 3}
   deathSound: {fileID: 8300000, guid: b36bff7c2787de443976ec28fe41735a, type: 3}
   footstepSound: {fileID: 8300000, guid: ec5ddd2623f469941abc943a87f7ba53, type: 3}
