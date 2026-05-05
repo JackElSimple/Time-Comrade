@@ -20,6 +20,9 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject sombra;
 	[Header("Sonidos")]
     [SerializeField] private AudioClip theme, levelEndsSound, deathSound, footstepSound, jumpSound, landSound, checkPointSound, leverSound, plateActivatedSound, plateDeactivatedSound;
+    [Header("Interfaces")]
+    public TimeLeftHandler cooldownHandler;
+
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -29,6 +32,7 @@ public class SceneController : MonoBehaviour
     private GameObject clone;
 	private OpitControllerRewind opitScript;
 	private CloneController cloneScript;
+
 	void Start()
     {
         if (theme != null)
@@ -93,13 +97,19 @@ public class SceneController : MonoBehaviour
 		{
 			recordingTime = 0; 
 			isRecording = true;
-			SaveState();
+
+            cooldownHandler.StartCooldown(recordingDuration);
+
+            SaveState();
             notifyListenersStart();
             
 		}
 		else
 		{
 			isRecording = false;
+
+            cooldownHandler.MakeInvisible();
+
 			LoadState();
             notifyListenersStop();
 		}
@@ -223,8 +233,8 @@ public class SceneController : MonoBehaviour
 
 			foreach (var obj in saveListeners) obj.CancelState();
 			notifyListenersStop();
-
-			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
+            cooldownHandler.MakeInvisible();
+            Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
 	}
 
