@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 public class TimeBody : MonoBehaviour, SaveListener
 {
+	private const float RewindSpeedMultiplier = 2f; // Must match its scenecontroller counterpart !!!!
+	
 	List<PointInTime> pointsInTime = new List<PointInTime>();
 	Rigidbody2D rb;
 	protected SceneController sc;
+	private float rewindAccumulator = 0f;
 
 	protected void Update() 
 	{
@@ -43,16 +46,20 @@ public class TimeBody : MonoBehaviour, SaveListener
 
 	protected virtual void Rewind()
 	{
-		if (pointsInTime.Count > 0) // Si hay puntos guardados, rebobinar y eliminarlos puntos de la lista
+		rewindAccumulator += RewindSpeedMultiplier;
+		int snapshotsToRemove = Mathf.FloorToInt(rewindAccumulator);
+		
+		for (int i = 0; i < snapshotsToRemove && pointsInTime.Count > 0; i++)
 		{
-
 			PointInTime pointInTime = pointsInTime[pointsInTime.Count - 1];
-			//float error = Vector2.Distance(transform.position, pointInTime.position); Debug.Log("Error: " + error);
 			transform.position = pointInTime.position;
 			transform.rotation = pointInTime.rotation;
 			pointsInTime.RemoveAt(pointsInTime.Count - 1);
 		}
-		else
+
+		rewindAccumulator -= snapshotsToRemove;
+
+		if (pointsInTime.Count == 0)
 		{
 			StopRewind();
 		}
@@ -90,11 +97,13 @@ public class TimeBody : MonoBehaviour, SaveListener
 
 	public virtual void LoadState() // Recording time ends or Player stops it manually
 	{
+		rewindAccumulator = 0f;
 		StartRewind();
 	}
 
 	public virtual void CancelState()
 	{
+		rewindAccumulator = 0f;
 		pointsInTime.Clear();
 		if (rb != null)
 		{
@@ -104,6 +113,7 @@ public class TimeBody : MonoBehaviour, SaveListener
 
 	public virtual void OnRewindFinished()
 	{
+		rewindAccumulator = 0f;
 		StopRewind();
 	}
 	void OnEnable()

@@ -26,8 +26,8 @@ public class Projectil : TimeBody
 		{
 			Debug.Log("El proyectil ha golpeado al jugador");
 			Destroy(gameObject);
-            makeSound();
             sc.KillPlayer();
+            makeSound();
 		}
         if (collision.gameObject.CompareTag("Clone"))
         {
