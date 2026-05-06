@@ -8,7 +8,8 @@ public class RecordingCamera2D : MonoBehaviour, RecordSwitch
     {
         if (overlay != null)
         {
-            overlay.color = new Color(0, 1, 0, 0.02f);
+            //overlay.color = new Color(0, 1, 0, 0.02f);
+            overlay.color =  new Color(0f, 1f, 1f, 0.02f);
             overlay.enabled = true;
         }
     }
