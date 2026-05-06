@@ -11,6 +11,8 @@ public class SceneController : MonoBehaviour
     public static event Action RewindStarted;
     public static event Action RewindEnded;
 
+    private const float RewindSpeedMultiplier = 2f; // Must match TimeBody.RewindSpeedMultiplier otherwise the effects are longer than the recording
+
     [Header("Cosas Rewind")]
     [SerializeField] private float recordingDuration = 10.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mas o menos
 
@@ -56,7 +58,7 @@ public class SceneController : MonoBehaviour
         }
 		if (isRewinding)
 		{
-			recordingTime -= Time.fixedDeltaTime; // El tiempo corre hacia atras
+			recordingTime -= Time.fixedDeltaTime * RewindSpeedMultiplier; // El tiempo corre hacia atras
 
 			if (recordingTime <= 0)
 			{
