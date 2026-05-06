@@ -21,7 +21,10 @@ public class SceneController : MonoBehaviour
 	[SerializeField] private GameObject personaje;
     [SerializeField] private GameObject sombra;
 	[Header("Sonidos")]
-    [SerializeField] private AudioClip theme, bulletDestroyedSound, levelEndsSound, deathSound, footstepSound, jumpSound, landSound, checkPointSound, leverSound, plateActivatedSound, plateDeactivatedSound;
+    [SerializeField] private AudioClip theme, levelEndsSound, deathSound, footstepSound, jumpSound, landSound, checkPointSound, leverSound, plateActivatedSound, plateDeactivatedSound;
+    [Header("Interfaces")]
+    public TimeLeftHandler cooldownHandler;
+
     public static List<RecordSwitch> recordingListeners = new List<RecordSwitch>();
     public static List<SaveListener> saveListeners = new List<SaveListener>();
 	public bool isRecording { get; private set; } 
@@ -31,6 +34,7 @@ public class SceneController : MonoBehaviour
     private GameObject clone;
 	private OpitControllerRewind opitScript;
 	private CloneController cloneScript;
+
 	void Start()
     {
         if (theme != null)
@@ -95,13 +99,19 @@ public class SceneController : MonoBehaviour
 		{
 			recordingTime = 0; 
 			isRecording = true;
-			SaveState();
+
+            cooldownHandler.StartCooldown(recordingDuration);
+
+            SaveState();
             notifyListenersStart();
             
 		}
 		else
 		{
 			isRecording = false;
+
+            cooldownHandler.MakeInvisible();
+
 			LoadState();
             notifyListenersStop();
 		}
@@ -177,8 +187,10 @@ public class SceneController : MonoBehaviour
 
     public void KillPlayer()//and respawn it
     {
-        opitScript.CancelRecording();
-        StartCoroutine(WaitAndKill(0.5f));
+        CancelarGrabacion();
+        if (deathSound != null)
+            GameManager.Instance.audioManager.PlaySound(deathSound);
+        StartCoroutine(WaitAndKill(0.5f));    
     }
     IEnumerator WaitAndKill(float segundos)
     {
@@ -187,8 +199,6 @@ public class SceneController : MonoBehaviour
 
         yield return new WaitForSeconds(segundos);
 
-        if (deathSound != null)
-            GameManager.Instance.audioManager.PlaySound(deathSound);
         opitScript.SetCanMove(true);
         Destroy(opit);
         Destroy(clone);
@@ -216,8 +226,8 @@ public class SceneController : MonoBehaviour
 			isRecording = false;
 			isRewinding = false; // SHouldnt happen but just in case
 			recordingTime = 0;
-
-			if (opit != null)
+            cooldownHandler.MakeInvisible();
+            if (opit != null)
 			{
 				opitScript.CancelRecording();
 				isRecording = false;
@@ -225,8 +235,8 @@ public class SceneController : MonoBehaviour
 
 			foreach (var obj in saveListeners) obj.CancelState();
 			notifyListenersStop();
-
-			Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
+            
+            Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
 	}
 
@@ -259,12 +269,6 @@ public class SceneController : MonoBehaviour
     {
         if (checkPointSound != null)
             GameManager.Instance.audioManager.PlaySound(checkPointSound);
-
-    }
-    public void ReproducirBalaDestruida()
-    {
-        if (bulletDestroyedSound != null)
-            GameManager.Instance.audioManager.PlaySound(bulletDestroyedSound);
 
     }
     public void ReproducirPalanca()
