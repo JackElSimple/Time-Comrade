@@ -12,8 +12,9 @@ public class GenericTrigger : MonoBehaviour
 
 	[Header("Eventos a Ejecutar")]
 	public UnityEvent onTriggerEnter;
+    public UnityEvent onTriggerExit;
 
-	private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
 	{
 		Debug.Log("Generic Trigger: gameObject detected");
 		if (IsTargetTag(other.transform.tag))
@@ -27,8 +28,22 @@ public class GenericTrigger : MonoBehaviour
 			}
 		}
 	}
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log("Generic Trigger: gameObject detected");
+        if (IsTargetTag(other.transform.tag))
+        {
+            // Ejecuta los metodos configurados en el Inspector
+            onTriggerExit?.Invoke();
 
-	private bool IsTargetTag(string tagToCheck)
+            if (destroyAfterUse)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private bool IsTargetTag(string tagToCheck)
 	{
 		// Comprobamos si el tag del objeto esta en nuestra lista
 		return targetTags.Contains(tagToCheck);

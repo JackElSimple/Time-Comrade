@@ -16,6 +16,7 @@ public class LeverPlate: MovingPlatformBase
     private bool doublePressed = false;
     private bool playerOnPlate = false;
     private bool active = false;
+    private bool savedActive = false;
     protected override void Awake()
     {
         base.Awake();
@@ -96,5 +97,40 @@ public class LeverPlate: MovingPlatformBase
             HandlePassenger(collision.transform, false); // unparent player
             active = !active;
         }
+    }
+
+    public override void SaveState() //We will save the state of the pressure plate because it bugged when rewinding
+    {
+        base.SaveState();
+        savedActive = active;
+    }
+    public override void OnRewindFinished()
+    {
+        base.OnRewindFinished();
+        if (active != savedActive)
+        {
+            //if active is not the same of savedActive we toggle it
+            if (!active)
+            {
+                on?.Invoke();
+                if (led != null)
+                {
+                    led.GetComponent<SpriteRenderer>().color = Color.green;
+                }
+            }
+            else
+            {
+                off?.Invoke();
+                if (led != null)
+                {
+                    led.GetComponent<SpriteRenderer>().color = Color.red;
+                }
+            }
+            if (!pressed) //if is not pressed, we simulate that someone left the pressure plate
+            {
+                active = savedActive; 
+            }
+        }
+
     }
 }

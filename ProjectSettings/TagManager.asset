@@ -7,6 +7,7 @@ TagManager:
   - ControladorEscena
   - Clone
   - Wall
+  - ActivaBoton
   layers:
   - Default
   - TransparentFX
