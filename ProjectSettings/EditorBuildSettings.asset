@@ -14,21 +14,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/TutorialLevel.unity
     guid: 746c86ac94e31e74d9312970dd85faa3
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/PruebaKill.unity
     guid: e81a7f5528ce69640b6739936d53fcb3
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/2 corridors.unity
     guid: f3525600aa7cc76148885372a51cae3b
   - enabled: 1
     path: Assets/_Project/Scenes/SecondLevel.unity
     guid: 2b2fc7fb754d8f745a9f4ad4b3030f9d
   - enabled: 1
-    path: Assets/_Project/Scenes/tescior.unity
-    guid: dc6a148c122a5b06dad6437701945af2
-  - enabled: 1
     path: Assets/_Project/Scenes/2 corridors remastered.unity
     guid: 131839204c3211eb2a0b47db59613882
+  - enabled: 1
+    path: Assets/_Project/Scenes/tescior.unity
+    guid: 10f382f3f410b34579a5739476428d23
+  - enabled: 1
+    path: Assets/_Project/Scenes/Bridges.unity
+    guid: b7ef0a69d9fd42f47b4581ae144b23cf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
