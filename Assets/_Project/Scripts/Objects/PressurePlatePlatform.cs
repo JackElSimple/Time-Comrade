@@ -10,7 +10,7 @@ public class PressurePlatePlatform : MovingPlatformBase
     private bool pressed = false;
     private bool doublePressed = false;  
     private bool playerOnPlate = false;
-
+    
     protected override void Awake()
     {
         base.Awake();
@@ -31,7 +31,7 @@ public class PressurePlatePlatform : MovingPlatformBase
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!(collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone"))) return;
+        if (!(collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone") || collision.transform.CompareTag("ActivaBoton"))) return;
 
         if (pressed)
             doublePressed = true;
@@ -49,7 +49,7 @@ public class PressurePlatePlatform : MovingPlatformBase
 
     protected override void OnCollisionExit2D(Collision2D collision)
     {
-        if (!(collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone"))) return;
+        if (!(collision.transform.CompareTag("Player") || collision.transform.CompareTag("Clone") || collision.transform.CompareTag("ActivaBoton"))) return;
 
         if (doublePressed)
             doublePressed = false;

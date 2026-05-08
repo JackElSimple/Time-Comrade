@@ -43,6 +43,7 @@ public abstract class BaseCharacterController : MonoBehaviour
 	protected int framesArrastrar = 0;
 	protected Rigidbody2D cloneReference;
 
+
     public struct PlayerInputFrame //Struct for saving all imputs
 	{
 		public float horizontalInput;
