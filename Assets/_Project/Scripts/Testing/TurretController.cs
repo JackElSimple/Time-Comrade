@@ -21,17 +21,16 @@ public class TurretController : TimeBody
     [SerializeField] private bool automated = false; //if true it shoots all the time
     [SerializeField]  private int distanciaRayo = 15;
     private Vector2 Horizontal = new Vector2(-1,0);
-    private SceneController sc;
     private AudioSource auSo;
     private Animator anim;
     private void Start()
     {
-        sc = FindFirstObjectByType<SceneController>();
         auSo = GetComponent<AudioSource>();
         timeCooldown = shootInterval;
         anim = transform.GetChild(2).GameObject().GetComponent<Animator>();
         if (automated)
         {
+            transform.GetChild(2).GameObject().GetComponent<SpriteRenderer>().enabled = false;
             anim.SetBool("Open",true);
         }
 
