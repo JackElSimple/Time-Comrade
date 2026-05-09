@@ -104,6 +104,29 @@ public class OpitControllerRewind : BaseCharacterController
         canMove = move;
 	}
 
+	public void shootParticles()
+	{
+        for (int i = 0; i < amount; i++)
+        {
+            float angle = i * Mathf.PI * 2f / amount;
+
+            Vector2 dir = new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)
+            );
+
+            GameObject p = Instantiate(
+                particlePrefab,
+                transform.position,
+                Quaternion.identity
+            );
+			p.GetComponent<DeathParticle>().lifetime=particleDuration;
+
+            Rigidbody2D rb = p.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = dir * particleSpeed;
+        }
+    }
+
     public void doingWalkingSound()
 	{
         SceneController sc = FindFirstObjectByType<SceneController>();

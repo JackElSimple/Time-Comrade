@@ -467,6 +467,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   coyoteTime: 0.1
+  amount: 10
+  particleSpeed: 2.5
+  particleDuration: 0.5
+  particlePrefab: {fileID: 5912051426892839782, guid: f4b9a57ea6d71cd489dca7bc53c7a5ad, type: 3}
 --- !u!212 &8918541659605375447
 SpriteRenderer:
   m_ObjectHideFlags: 0

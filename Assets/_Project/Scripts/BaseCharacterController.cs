@@ -30,6 +30,12 @@ public abstract class BaseCharacterController : MonoBehaviour
 	protected float coyoteTimeCounter = 0.05f;
     [SerializeField] protected bool isGrounded => coyoteTimeCounter > 0f;
 
+	[Header("Particles")]
+	[SerializeField] protected int amount = 10;
+	[SerializeField] protected float particleSpeed = 5f;
+    [SerializeField] protected float particleDuration = 0.5f;
+    [SerializeField] protected GameObject particlePrefab;
+
     protected Rigidbody2D rb;
 	//protected bool isGrounded;
 	protected bool wantsToJump;
