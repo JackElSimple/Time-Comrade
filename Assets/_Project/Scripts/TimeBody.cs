@@ -9,6 +9,7 @@ public class TimeBody : MonoBehaviour, SaveListener
 	Rigidbody2D rb;
 	protected SceneController sc;
 	private float rewindAccumulator = 0f;
+	private bool createdDuringRecording = false;
 
 	protected void Update() 
 	{
@@ -23,6 +24,7 @@ public class TimeBody : MonoBehaviour, SaveListener
     {
 		rb = GetComponent<Rigidbody2D>();
 		sc = Object.FindAnyObjectByType<SceneController>();
+		createdDuringRecording = sc.isRecording;
 
 	}
 
@@ -68,6 +70,12 @@ public class TimeBody : MonoBehaviour, SaveListener
 
 	public void StopRewind()
 	{
+		if (pointsInTime.Count == 0 && createdDuringRecording)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		if (pointsInTime.Count > 0)
 		{
 			PointInTime firstPoint = pointsInTime[0]; // Destino final
@@ -93,6 +101,7 @@ public class TimeBody : MonoBehaviour, SaveListener
 	{
 		pointsInTime.Clear();
 		Record(); // T0
+		createdDuringRecording = false;
 	}
 
 	public virtual void LoadState() // Recording time ends or Player stops it manually
