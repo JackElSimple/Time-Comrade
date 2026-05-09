@@ -27,19 +27,20 @@ public class OpitControllerRewind : BaseCharacterController
 			return;
         }
         // Inputs
-        horizontal = Input.GetAxisRaw("Horizontal"); // A,D
-		isJumpHeld = Input.GetButton("Jump"); // Espacio
+		if (!sc.isRewinding) {
+			horizontal = Input.GetAxisRaw("Horizontal"); // A,D
+			isJumpHeld = Input.GetButton("Jump"); // Espacio
+        }
 
-		
 
-		if (Input.GetButtonDown("Jump")) { wantsToJump = true; }
+        if (Input.GetButtonDown("Jump")) { wantsToJump = true; }
 
 
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (sc != null) sc.GestionarHabilidad();
 		}
-
+		
 		HandleVisuals(horizontal); // Voltea el sprite
 		_anim.SetFloat("speed", math.abs(rb.linearVelocity.x));
 
