@@ -190,6 +190,7 @@ public class SceneController : MonoBehaviour
         CancelarGrabacion();
         if (deathSound != null)
             GameManager.Instance.audioManager.PlaySound(deathSound);
+        opitScript.shootParticles();
         StartCoroutine(WaitAndKill(0.5f));    
     }
     IEnumerator WaitAndKill(float segundos)
