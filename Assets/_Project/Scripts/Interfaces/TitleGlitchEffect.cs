@@ -22,6 +22,8 @@ public class TitleGlitchEffect : MonoBehaviour
     private char[] originalChars;
     private char[] workingChars;
     private Coroutine glitchRoutine;
+    private readonly WaitForSecondsRealtime loopWaitInstruction = new WaitForSecondsRealtime(0f);
+    private readonly WaitForSecondsRealtime glitchHoldInstruction = new WaitForSecondsRealtime(0f);
 
     private void Awake()
     {
@@ -66,7 +68,8 @@ public class TitleGlitchEffect : MonoBehaviour
                 Mathf.Max(0.05f, glitchDuration * MinIntervalMultiplier),
                 Mathf.Max(0.1f, glitchDuration * MaxIntervalMultiplier));
 
-            yield return new WaitForSeconds(waitTime);
+            loopWaitInstruction.waitTime = waitTime;
+            yield return loopWaitInstruction;
 
             if (Random.value <= glitchChance)
             {
@@ -86,7 +89,8 @@ public class TitleGlitchEffect : MonoBehaviour
         float holdDuration = glitchDuration * 0.65f;
         if (holdDuration > 0f)
         {
-            yield return new WaitForSeconds(holdDuration);
+            glitchHoldInstruction.waitTime = holdDuration;
+            yield return glitchHoldInstruction;
         }
 
         float returnDuration = Mathf.Max(0.01f, glitchDuration - holdDuration);
