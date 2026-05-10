@@ -79447,7 +79447,7 @@ PrefabInstance:
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: theme
       value: 
-      objectReference: {fileID: 8300000, guid: eb6f5bc7768185e41a45a3ded100e2b8, type: 3}
+      objectReference: {fileID: 8300000, guid: 12ff1bf90feb9504d844555d0cfb4ba8, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: currentSpawnPoint
       value: 

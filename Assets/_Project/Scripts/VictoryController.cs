@@ -22,7 +22,7 @@ public class VictoryController : MonoBehaviour
             {
                 sc.ReproducirTerminarNivel();
             }
-            StartCoroutine(WaitAndComplete(1.5f));
+            StartCoroutine(WaitAndComplete(1.0f));
         }
 	}
     IEnumerator WaitAndComplete(float segundos)
