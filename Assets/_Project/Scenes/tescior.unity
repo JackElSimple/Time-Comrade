@@ -410,7 +410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4759449685961582430, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
       propertyPath: nextSceneName
-      value: MainMenu
+      value: Bridges
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
