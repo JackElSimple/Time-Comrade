@@ -18,7 +18,8 @@ public class CheckpointAnimated : MonoBehaviour
             SceneController sc = FindFirstObjectByType<SceneController>();
             if (sc != null)
             {
-                sc.UpdateSpawnPoint(this.transform);
+
+                sc.UpdateSpawnPoint(this.transform.GetChild(0));//Un empty más elevado ya que la lampara tiene el pivote en el pie
                 anim.SetBool("On", true);
                 auso.Play();
                 Debug.Log("Checkpoint alcanzado: " + gameObject.name);
