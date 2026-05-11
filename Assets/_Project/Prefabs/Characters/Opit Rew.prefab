@@ -457,7 +457,7 @@ MonoBehaviour:
   characterSprite: {fileID: 814075470256104743}
   moveSpeed: 6
   jumpForce: 9
-  jumpCooldown: 0.3
+  jumpCooldown: 0.35
   gravityScale: 4
   fallMultiplier: 1.5
   lowJumpMultiplier: 2

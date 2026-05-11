@@ -36,7 +36,7 @@ public class OpitControllerRewind : BaseCharacterController
         if (Input.GetButtonDown("Jump")) { wantsToJump = true; }
 
 
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetButtonDown("Ability"))
 		{
 			if (sc != null) sc.GestionarHabilidad();
 		}
