@@ -7,6 +7,7 @@ public class VictoryController : MonoBehaviour
 	[SerializeField] private string nextSceneName;
 
 	private ParticleSystem part;
+    private SceneController sc;
     private void Awake()
     {
         part = GetComponent<ParticleSystem>();
@@ -16,7 +17,7 @@ public class VictoryController : MonoBehaviour
 		if (collision.CompareTag("Player"))
 		{
 
-			SceneController sc = FindFirstObjectByType<SceneController>();
+            sc = FindFirstObjectByType<SceneController>();
 			part.Emit(50);
             if (sc != null)
             {
@@ -29,11 +30,11 @@ public class VictoryController : MonoBehaviour
     {
 
         yield return new WaitForSeconds(segundos);
-        SceneController sc = FindFirstObjectByType<SceneController>();
         if (sc != null)
         { 
             // Aquí usamos el string que el desplegable rellenó por nosotros
             sc.CompleteLevel(nextSceneName);
         }
     }
+
 }

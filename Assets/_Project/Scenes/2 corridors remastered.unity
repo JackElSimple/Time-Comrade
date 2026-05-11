@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VictoryPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 4759449685961582430, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
+      propertyPath: nextSceneName
+      value: tescior
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
