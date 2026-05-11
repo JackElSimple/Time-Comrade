@@ -1044,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3325839450805326477, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.12
+      objectReference: {fileID: 0}
     - target: {fileID: 5378157356256215361, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
       propertyPath: m_Name
       value: BluePlatewithPillar (1)
