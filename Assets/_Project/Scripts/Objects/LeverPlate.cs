@@ -81,6 +81,7 @@ public class LeverPlate: MovingPlatformBase
                 //    textOff.SetActive(true);
                 //}
             }
+
         }
     }
 

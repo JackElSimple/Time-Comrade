@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Time Comrade
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 2b40d89cd9a9d9847932d1b66eb64ce1, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -689,8 +689,8 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Time Comrade
-  metroPackageVersion: 
+  metroPackageName: TimeComrade
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -698,7 +698,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Time Comrade
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Time Comrade
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

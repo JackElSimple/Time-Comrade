@@ -36,7 +36,7 @@ public class OpitControllerRewind : BaseCharacterController
         if (Input.GetButtonDown("Jump")) { wantsToJump = true; }
 
 
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetButtonDown("Ability"))
 		{
 			if (sc != null) sc.GestionarHabilidad();
 		}
@@ -106,6 +106,7 @@ public class OpitControllerRewind : BaseCharacterController
 
 	public void shootParticles()
 	{
+        
         for (int i = 0; i < amount; i++)
         {
             float angle = i * Mathf.PI * 2f / amount;
@@ -125,6 +126,13 @@ public class OpitControllerRewind : BaseCharacterController
             Rigidbody2D rb = p.GetComponent<Rigidbody2D>();
             rb.linearVelocity = dir * particleSpeed;
         }
+        GameObject part = Instantiate(
+                particlePrefab,
+                transform.position,
+                Quaternion.identity
+            );
+        part.GetComponent<DeathParticle>().lifetime = particleDuration * 2;
+        part.transform.localScale = Vector3.one * 2;
     }
 
     public void doingWalkingSound()

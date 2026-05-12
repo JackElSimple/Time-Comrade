@@ -64,4 +64,5 @@ public class MainMenuSceneManager : MonoBehaviour
 	{
 		Debug.Log("Volumen de Música: " + volume);
 	}
+
 }
