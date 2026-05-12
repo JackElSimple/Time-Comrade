@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: {x: 0, y: 0}
+  redBullet: 0
 --- !u!58 &1915047127396390036
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ AudioSource:
   m_GameObject: {fileID: 6539145858530715920}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dff93dd5bb0a87f4a9fee6535be8b6ae, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6e35d404149ad0d4d8ef999c096e42b6, type: 3}
   m_Resource: {fileID: 8300000, guid: 6e35d404149ad0d4d8ef999c096e42b6, type: 3}
   m_PlayOnAwake: 1

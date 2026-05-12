@@ -10,11 +10,5 @@ public class NextSceneButton : MonoBehaviour
 		SceneManager.LoadScene(nextIndex);
 	}
 
-	private void OnGUI()
-	{
-		if (GUI.Button(new Rect(10, Screen.height - 50, 150, 30), "Next Scene"))
-		{
-			NextScene();
-		}
-	}
+	
 }
