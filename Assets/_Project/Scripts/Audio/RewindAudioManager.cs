@@ -177,7 +177,8 @@ public sealed class RewindAudioManager : MonoBehaviour
 			return;
 		}
 
-		rewindAudioSource.volume = intensity * maxVolume;
+		float sfxVol = PlayerPrefs.GetFloat("SFXVolume", 0.7f);
+		rewindAudioSource.volume = intensity * maxVolume * sfxVol;
 
 		float basePitch = Mathf.Lerp(minPitch, maxPitch, intensity);
 		rewindAudioSource.pitch = basePitch * Time.timeScale;
