@@ -2199,6 +2199,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 548606579133796832, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.92679024
+      objectReference: {fileID: 0}
+    - target: {fileID: 548606579133796832, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548606579133796832, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2786143419037815393, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.15
@@ -2271,9 +2283,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3371761216914073034, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371761216914073034, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478994364823890640, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731847335775069346, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731847335775069346, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5265900687144389556, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
       propertyPath: m_Layer
@@ -2282,6 +2310,14 @@ PrefabInstance:
     - target: {fileID: 5378157356256215361, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
       propertyPath: m_Name
       value: BluePlatewithPillar (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902568548512581973, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.92941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902568548512581973, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6021915393487857785, guid: 1f329f03ecc8f2c4e85a7c061f3f885f, type: 3}
       propertyPath: m_LocalPosition.y
