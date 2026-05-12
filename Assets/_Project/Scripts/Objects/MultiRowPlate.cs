@@ -1,9 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections;
 
 public class MultiRowPate : MonoBehaviour, SaveListener
 {
+    private sealed class SharedRootState
+    {
+        public SharedRootState(Transform root)
+        {
+            Root = root;
+            TargetPosition = root.position;
+        }
+
+        public Transform Root;
+        public Transform[] TrackedTransforms;
+        public Vector3[] SavedLocalPositions;
+
+        public int Counter;
+        public bool IsMoving;
+        public bool IsRewinding;
+        public Vector3 TargetPosition;
+
+        public int SavedCounter;
+        public Vector3 SavedPosition;
+        public Vector3 SavedTarget;
+        public bool SavedIsMoving;
+        public bool HasSavedState;
+    }
+
+    private static readonly Dictionary<int, SharedRootState> SharedStatesByRoot = new Dictionary<int, SharedRootState>();
+
 	[Header("Movement")]
 	[SerializeField] private Transform platformRoot;
 	[SerializeField] private float yStep = 2f;
@@ -21,36 +48,36 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 	[SerializeField] private string playerTag = "Player";
 	[SerializeField] private string cloneTag = "Clone";
 
-	private int counter = 0;
-	private bool pressed = false;
+    [Header("Debug")]
+    [SerializeField] private bool enableDebugLogs = true;
 
-	private bool isMoving = false;
-	private bool isRewinding = false;
-
-	private Vector3 targetPosition;
-    private Transform[] trackedTransforms;
-    private Vector3[] savedLocalPositions;
+    private readonly HashSet<int> overlappingColliderIds = new HashSet<int>();
+    private SharedRootState sharedState;
+    private bool isAuthority;
+    private bool activationArmed = true;
     private Coroutine delayedRestoreRoutine;
-
-	// --- REWIND STATE ---
-	private int savedCounter;
-	private Vector3 savedPosition;
-	private Vector3 savedTarget;
-	private bool savedIsMoving;
-	private bool savedPressed;
 
 	private void Awake()
 	{
 		if (platformRoot == null)
 			platformRoot = transform;
 
-		targetPosition = platformRoot.position;
-        CacheTrackedTransforms();
+        sharedState = GetOrCreateSharedState(platformRoot);
+        isAuthority = sharedState.Root == platformRoot && sharedState.TrackedTransforms == null;
+        if (isAuthority)
+        {
+            CacheTrackedTransforms();
+        }
+
+        LogState($"Awake. platformRoot='{platformRoot.name}', initialRootPos={platformRoot.position}, yStep={yStep}, yDirection={yDirection}, maxSteps={maxSteps}, authority={isAuthority}");
 	}
 
     private void OnEnable()
     {
-        if (!SceneController.saveListeners.Contains(this))
+        SceneController.RewindStarted += HandleGlobalRewindStarted;
+        SceneController.RewindEnded += HandleGlobalRewindEnded;
+
+        if (isAuthority && !SceneController.saveListeners.Contains(this))
         {
             SceneController.saveListeners.Add(this);
         }
@@ -58,49 +85,71 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 
     private void OnDisable()
     {
+        SceneController.RewindStarted -= HandleGlobalRewindStarted;
+        SceneController.RewindEnded -= HandleGlobalRewindEnded;
+
         if (delayedRestoreRoutine != null)
         {
             StopCoroutine(delayedRestoreRoutine);
             delayedRestoreRoutine = null;
         }
 
-        SceneController.saveListeners.Remove(this);
+        if (isAuthority)
+        {
+            SceneController.saveListeners.Remove(this);
+        }
     }
 
 	private void Update()
 	{
-		if (isRewinding) return;
+        if (overlappingColliderIds.Count == 0 && !sharedState.IsMoving && !sharedState.IsRewinding)
+        {
+            activationArmed = true;
+        }
 
-		if (!isMoving) return;
+        if (!isAuthority || sharedState.IsRewinding || !sharedState.IsMoving)
+        {
+            return;
+        }
 
 		platformRoot.position = Vector3.MoveTowards(
 			platformRoot.position,
-			targetPosition,
+			sharedState.TargetPosition,
 			moveSpeed * Time.deltaTime
 		);
 
-		if (Vector3.Distance(platformRoot.position, targetPosition) < 0.01f)
+		if (Vector3.Distance(platformRoot.position, sharedState.TargetPosition) < 0.01f)
 		{
-			isMoving = false;
+			platformRoot.position = sharedState.TargetPosition;
+			sharedState.IsMoving = false;
+            LogState($"Movement completed at {platformRoot.position}. sharedCounter={sharedState.Counter}");
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (isRewinding) return;
+		if (sharedState.IsRewinding) return;
 		if (!IsValid(collision)) return;
-		if (pressed || isMoving) return;
+        if (!overlappingColliderIds.Add(collision.collider.GetInstanceID())) return;
+        if (overlappingColliderIds.Count > 1) return;
+        if (!activationArmed)
+        {
+            LogState($"OnCollisionEnter2D by '{collision.transform.name}' ignored because activation is not armed yet.");
+            return;
+        }
 
-		pressed = true;
+        activationArmed = false;
+        LogState($"OnCollisionEnter2D by '{collision.transform.name}' (tag='{collision.transform.tag}'). sharedCounter={sharedState.Counter}, rootPos={platformRoot.position}, targetPos={sharedState.TargetPosition}");
 		Activate();
 	}
 
 	private void OnCollisionExit2D(Collision2D collision)
 	{
-		if (isRewinding) return;
 		if (!IsValid(collision)) return;
+        if (!overlappingColliderIds.Remove(collision.collider.GetInstanceID())) return;
+		if (sharedState.IsRewinding) return;
 
-		pressed = false;
+        LogState($"OnCollisionExit2D by '{collision.transform.name}' (tag='{collision.transform.tag}'). sharedCounter={sharedState.Counter}, rootPos={platformRoot.position}, targetPos={sharedState.TargetPosition}, remainingContacts={overlappingColliderIds.Count}");
 	}
 
 	private bool IsValid(Collision2D collision)
@@ -111,16 +160,20 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 
 	private void Activate()
 	{
-		if (counter >= maxSteps)
+        LogState($"Activate requested. sharedCounter={sharedState.Counter}/{maxSteps}, rootPos={platformRoot.position}, targetBefore={sharedState.TargetPosition}");
+
+		if (sharedState.Counter >= maxSteps)
 		{
+            LogState("Max steps reached. Activation ignored.");
 			onMaxReached?.Invoke();
 			return;
 		}
 
-		counter++;
+        sharedState.Counter++;
+        sharedState.TargetPosition = platformRoot.position + new Vector3(0f, yStep * yDirection, 0f);
+		sharedState.IsMoving = true;
 
-		targetPosition += new Vector3(0f, yStep * yDirection, 0f);
-		isMoving = true;
+        LogState($"Activation accepted. sharedCounter={sharedState.Counter}/{maxSteps}, targetAfter={sharedState.TargetPosition}, deltaY={yStep * yDirection}");
 
 		onActivated?.Invoke();
 	}
@@ -131,12 +184,16 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 
 	public void StartRewind()
 	{
-		isRewinding = true;
+		sharedState.IsRewinding = true;
+        ClearLocalInteractionState();
+        LogState($"StartRewind. sharedCounter={sharedState.Counter}, rootPos={platformRoot.position}, targetPos={sharedState.TargetPosition}, isMoving={sharedState.IsMoving}");
 	}
 
 	public void StopRewind()
 	{
-		isRewinding = false;
+		sharedState.IsRewinding = false;
+        ClearLocalInteractionState();
+        LogState("StopRewind requested. Scheduling delayed RestoreState().");
 
         if (delayedRestoreRoutine != null)
         {
@@ -148,79 +205,134 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 
 	public void SaveState()
 	{
-		savedCounter = counter;
-		savedPosition = platformRoot.position;
-		savedTarget = targetPosition;
-		savedIsMoving = isMoving;
-		savedPressed = pressed;
+		sharedState.SavedCounter = sharedState.Counter;
+		sharedState.SavedPosition = platformRoot.position;
+		sharedState.SavedTarget = sharedState.TargetPosition;
+		sharedState.SavedIsMoving = sharedState.IsMoving;
+        sharedState.HasSavedState = true;
         SaveTrackedLocalPositions();
+        LogState($"SaveState. savedCounter={sharedState.SavedCounter}, savedRootPos={sharedState.SavedPosition}, savedTarget={sharedState.SavedTarget}, savedIsMoving={sharedState.SavedIsMoving}");
 	}
 
 	public void LoadState()
 	{
+        LogState("LoadState called. Entering rewind mode.");
 		StartRewind();
 	}
 
 	public void CancelState()
 	{
-		isRewinding = false;
+		sharedState.IsRewinding = false;
+        ClearLocalInteractionState();
+        LogState("CancelState called. Rewind flag cleared.");
 	}
 
 	public void OnRewindFinished()
 	{
+        LogState("OnRewindFinished called.");
 		StopRewind();
 	}
 
 	public void RestoreState()
 	{
-		counter = savedCounter;
+        if (!sharedState.HasSavedState)
+        {
+            LogState("RestoreState skipped because there is no saved snapshot.");
+            return;
+        }
 
-		platformRoot.position = savedPosition;
-		targetPosition = savedTarget;
+        Vector3 previousRootPosition = platformRoot.position;
+        Vector3 previousTargetPosition = sharedState.TargetPosition;
 
-		isMoving = savedIsMoving;
-		pressed = savedPressed;
+		sharedState.Counter = sharedState.SavedCounter;
+
+		platformRoot.position = sharedState.SavedPosition;
+		sharedState.TargetPosition = sharedState.SavedTarget;
+
+		sharedState.IsMoving = sharedState.SavedIsMoving;
+        ClearLocalInteractionState();
 
         RestoreTrackedLocalPositions();
+        LogState($"RestoreState applied. rootPos {previousRootPosition} -> {platformRoot.position}, targetPos {previousTargetPosition} -> {sharedState.TargetPosition}, sharedCounter={sharedState.Counter}, isMoving={sharedState.IsMoving}");
 	}
+
+    private SharedRootState GetOrCreateSharedState(Transform root)
+    {
+        int rootId = root.GetInstanceID();
+        if (!SharedStatesByRoot.TryGetValue(rootId, out SharedRootState state))
+        {
+            state = new SharedRootState(root);
+            SharedStatesByRoot[rootId] = state;
+        }
+
+        return state;
+    }
 
     private void CacheTrackedTransforms()
     {
-        trackedTransforms = platformRoot.GetComponentsInChildren<Transform>(true);
-        savedLocalPositions = new Vector3[trackedTransforms.Length];
+        sharedState.TrackedTransforms = platformRoot.GetComponentsInChildren<Transform>(true);
+        sharedState.SavedLocalPositions = new Vector3[sharedState.TrackedTransforms.Length];
     }
 
     private void SaveTrackedLocalPositions()
     {
-        if (trackedTransforms == null || trackedTransforms.Length == 0)
+        if (sharedState.TrackedTransforms == null || sharedState.TrackedTransforms.Length == 0)
         {
             CacheTrackedTransforms();
         }
 
-        for (int i = 0; i < trackedTransforms.Length; i++)
+        for (int i = 0; i < sharedState.TrackedTransforms.Length; i++)
         {
-            savedLocalPositions[i] = trackedTransforms[i].localPosition;
+            sharedState.SavedLocalPositions[i] = sharedState.TrackedTransforms[i].localPosition;
         }
     }
 
     private void RestoreTrackedLocalPositions()
     {
-        if (trackedTransforms == null || savedLocalPositions == null)
+        if (sharedState.TrackedTransforms == null || sharedState.SavedLocalPositions == null)
         {
             return;
         }
 
-        int count = Mathf.Min(trackedTransforms.Length, savedLocalPositions.Length);
+        int count = Mathf.Min(sharedState.TrackedTransforms.Length, sharedState.SavedLocalPositions.Length);
         for (int i = 0; i < count; i++)
         {
-            trackedTransforms[i].localPosition = savedLocalPositions[i];
+            sharedState.TrackedTransforms[i].localPosition = sharedState.SavedLocalPositions[i];
         }
     }
 
     private IEnumerator RestoreStateAfterListeners()
     {
         yield return null;
+        LogState("Delayed RestoreState() executing after one frame.");
         RestoreState();
         delayedRestoreRoutine = null;
+    }
+
+    private void HandleGlobalRewindStarted()
+    {
+        ClearLocalInteractionState();
+    }
+
+    private void HandleGlobalRewindEnded()
+    {
+        ClearLocalInteractionState();
+    }
+
+    private void ClearLocalInteractionState()
+    {
+        overlappingColliderIds.Clear();
+        activationArmed = true;
+    }
+
+    private void LogState(string message)
+    {
+        if (!enableDebugLogs)
+        {
+            return;
+        }
+
+        string rootName = platformRoot != null ? platformRoot.name : "<null>";
+        Debug.Log($"[MultiRowPlate:{name}] [root:{rootName}] {message}", this);
     }
 }

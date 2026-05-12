@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class MovingPlatformBase : TimeBody
 {
+    protected virtual bool RequiresTargetPoint => true;
+
     [Header("Target Setup")]
     public Transform targetPoint;
 
@@ -20,7 +22,10 @@ public abstract class MovingPlatformBase : TimeBody
 
         if (targetPoint == null)
         {
-            Debug.LogError($"{name}: targetPoint is not assigned!");
+            if (RequiresTargetPoint)
+            {
+                Debug.LogError($"{name}: targetPoint is not assigned!");
+            }
             return;
         }
 
