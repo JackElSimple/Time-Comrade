@@ -4243,7 +4243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19200fe53ca4b445b2bf6e6600471b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionsPanel: {fileID: 2102435364}
+  optionsPanel: {fileID: 467944453}
   brightnessOverlay: {fileID: 977386613}
   brightnessSlider: {fileID: 568545560}
   audioMixer: {fileID: 24100000, guid: 8fe5b81a4aac4424f87a32c16080b7ef, type: 2}
