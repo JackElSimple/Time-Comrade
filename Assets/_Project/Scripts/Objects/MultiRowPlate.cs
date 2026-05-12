@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class MultiRowPate : MonoBehaviour, SaveListener
 {
@@ -27,6 +28,9 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 	private bool isRewinding = false;
 
 	private Vector3 targetPosition;
+    private Transform[] trackedTransforms;
+    private Vector3[] savedLocalPositions;
+    private Coroutine delayedRestoreRoutine;
 
 	// --- REWIND STATE ---
 	private int savedCounter;
@@ -41,6 +45,7 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 			platformRoot = transform;
 
 		targetPosition = platformRoot.position;
+        CacheTrackedTransforms();
 	}
 
     private void OnEnable()
@@ -53,6 +58,12 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 
     private void OnDisable()
     {
+        if (delayedRestoreRoutine != null)
+        {
+            StopCoroutine(delayedRestoreRoutine);
+            delayedRestoreRoutine = null;
+        }
+
         SceneController.saveListeners.Remove(this);
     }
 
@@ -126,7 +137,13 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 	public void StopRewind()
 	{
 		isRewinding = false;
-		RestoreState();
+
+        if (delayedRestoreRoutine != null)
+        {
+            StopCoroutine(delayedRestoreRoutine);
+        }
+
+        delayedRestoreRoutine = StartCoroutine(RestoreStateAfterListeners());
 	}
 
 	public void SaveState()
@@ -136,6 +153,7 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 		savedTarget = targetPosition;
 		savedIsMoving = isMoving;
 		savedPressed = pressed;
+        SaveTrackedLocalPositions();
 	}
 
 	public void LoadState()
@@ -162,5 +180,47 @@ public class MultiRowPate : MonoBehaviour, SaveListener
 
 		isMoving = savedIsMoving;
 		pressed = savedPressed;
+
+        RestoreTrackedLocalPositions();
 	}
+
+    private void CacheTrackedTransforms()
+    {
+        trackedTransforms = platformRoot.GetComponentsInChildren<Transform>(true);
+        savedLocalPositions = new Vector3[trackedTransforms.Length];
+    }
+
+    private void SaveTrackedLocalPositions()
+    {
+        if (trackedTransforms == null || trackedTransforms.Length == 0)
+        {
+            CacheTrackedTransforms();
+        }
+
+        for (int i = 0; i < trackedTransforms.Length; i++)
+        {
+            savedLocalPositions[i] = trackedTransforms[i].localPosition;
+        }
+    }
+
+    private void RestoreTrackedLocalPositions()
+    {
+        if (trackedTransforms == null || savedLocalPositions == null)
+        {
+            return;
+        }
+
+        int count = Mathf.Min(trackedTransforms.Length, savedLocalPositions.Length);
+        for (int i = 0; i < count; i++)
+        {
+            trackedTransforms[i].localPosition = savedLocalPositions[i];
+        }
+    }
+
+    private IEnumerator RestoreStateAfterListeners()
+    {
+        yield return null;
+        RestoreState();
+        delayedRestoreRoutine = null;
+    }
 }
