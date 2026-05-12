@@ -8,7 +8,9 @@ public class OptionsManager : MonoBehaviour
     public CanvasGroup brightnessOverlay;
     public Slider brightnessSlider;
     public AudioMixer audioMixer;
+    public AudioMixer sfxMixer;
     public Slider musicSlider;
+    public Slider sfxSlider;
     public GameObject soundOn;
     public GameObject soundOff;
 
@@ -17,9 +19,11 @@ public class OptionsManager : MonoBehaviour
         // Cargar valores guardados (o usar los de por defecto)
         float savedBright = PlayerPrefs.GetFloat("Brightness", 1f);
         float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 0.7f);
+        float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.7f);
 
         brightnessSlider.value = savedBright;
         musicSlider.value = savedMusic;
+        sfxSlider.value = savedSFX;
 
         SetBrightness(savedBright);
         SetMusicVolume(savedMusic);
@@ -27,6 +31,7 @@ public class OptionsManager : MonoBehaviour
         // Escuchar cambios en los sliders
         brightnessSlider.onValueChanged.AddListener(SetBrightness);
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     public void OpenOptions()
@@ -55,6 +60,15 @@ public class OptionsManager : MonoBehaviour
             : -80f;
         audioMixer.SetFloat("MusicVolume", db);
         PlayerPrefs.SetFloat("MusicVolume", value);
+    }
+    void SetSFXVolume(float value)
+    {
+        // Convierte lineal → logarítmico (así suena natural)
+        float db = value > 0.001f
+            ? Mathf.Log10(value) * 20f
+            : -80f;
+        sfxMixer.SetFloat("SFXVolume", db);
+        PlayerPrefs.SetFloat("SFXVolume", value);
         if (value < 0.01)
         {
             soundOn.SetActive(false);
