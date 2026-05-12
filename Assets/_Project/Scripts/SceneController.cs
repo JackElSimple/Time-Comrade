@@ -15,6 +15,8 @@ public class SceneController : MonoBehaviour
 
     [Header("Cosas Rewind")]
     [SerializeField] private float recordingDuration = 10.0f; // Duracion maxima de la grabacion, se podria hacer publica para que segun el nivel dure mas o menos
+    [SerializeField] private bool allowRewindTimeScaleBoost = true;
+    [SerializeField, Min(1f)] private float rewindBoostTimeScale = 2f;
 
     [Header("Objetos en escena")]
 	[SerializeField] private Transform currentSpawnPoint;
@@ -34,6 +36,7 @@ public class SceneController : MonoBehaviour
     private GameObject clone;
 	private OpitControllerRewind opitScript;
 	private CloneController cloneScript;
+    private const float NormalTimeScale = 1f;
 
 	void Start()
     {
@@ -45,7 +48,7 @@ public class SceneController : MonoBehaviour
         
     }
 
-    void FixedUpdate()
+	void FixedUpdate()
     {
 
         if (Time.timeScale == 0f) return;
@@ -73,8 +76,14 @@ public class SceneController : MonoBehaviour
 		}
 
 	}
+
+    private void Update()
+    {
+        UpdateRewindTimeScale();
+    }
 	private void EndGlobalRewind()
 	{
+        ResetRewindTimeScale();
         if (theme != null)
         {
             GameManager.Instance.audioManager.ResumeMusic();
@@ -174,6 +183,7 @@ public class SceneController : MonoBehaviour
 		{
 			isRecording = false;
 			isRewinding = true;
+            ResetRewindTimeScale();
 			opitScript.FinishRecording(); 
             RewindStarted?.Invoke();
 		}
@@ -220,7 +230,7 @@ public class SceneController : MonoBehaviour
 		Debug.Log("<color=green>[SCENE] Nivel Completado. Cargando: " + sceneName + "</color>");
 		SceneManager.LoadScene(sceneName);
 	}
-	public void CancelarGrabacion()
+    public void CancelarGrabacion()
 	{
 		if (isRecording)
 		{
@@ -239,6 +249,27 @@ public class SceneController : MonoBehaviour
             
             Debug.Log("Habilidad cancelada: El personaje se queda donde esta.");
 		}
+	}
+
+    private void UpdateRewindTimeScale()
+    {
+        if (!isRewinding)
+        {
+            return;
+        }
+
+		bool boosting =
+	allowRewindTimeScaleBoost &&
+	(Input.GetMouseButton(0) ||
+	 Input.GetKey(KeyCode.Return) ||
+	 Input.GetKey(KeyCode.KeypadEnter));
+
+		if (boosting) { Time.timeScale = rewindBoostTimeScale; }
+    }
+
+    private void ResetRewindTimeScale()
+    {
+		Time.timeScale = NormalTimeScale;
 	}
 
     public void ReproducirTerminarNivel()
@@ -292,6 +323,7 @@ public class SceneController : MonoBehaviour
     }
     private void OnDestroy()
     {
+        ResetRewindTimeScale();
         recordingListeners.Clear();
         saveListeners.Clear();
     }

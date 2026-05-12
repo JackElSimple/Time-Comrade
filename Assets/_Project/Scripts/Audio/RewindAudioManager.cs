@@ -170,19 +170,22 @@ public sealed class RewindAudioManager : MonoBehaviour
         }
     }
 
-    private void ApplyIntensity(float intensity)
-    {
-        if (rewindAudioSource == null)
-        {
-            return;
-        }
+	private void ApplyIntensity(float intensity)
+	{
+		if (rewindAudioSource == null)
+		{
+			return;
+		}
 
-        rewindAudioSource.volume = intensity * maxVolume;
-        rewindAudioSource.pitch = Mathf.Lerp(minPitch, maxPitch, intensity);
+		rewindAudioSource.volume = intensity * maxVolume;
 
-        if (rewindLowPassFilter != null && rewindLowPassFilter.enabled)
-        {
-            rewindLowPassFilter.cutoffFrequency = Mathf.Lerp(highCutoffFrequency, lowCutoffFrequency, intensity);
-        }
-    }
+		float basePitch = Mathf.Lerp(minPitch, maxPitch, intensity);
+		rewindAudioSource.pitch = basePitch * Time.timeScale;
+
+		if (rewindLowPassFilter != null && rewindLowPassFilter.enabled)
+		{
+			rewindLowPassFilter.cutoffFrequency =
+				Mathf.Lerp(highCutoffFrequency, lowCutoffFrequency, intensity);
+		}
+	}
 }
