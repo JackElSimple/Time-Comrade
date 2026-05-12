@@ -4164,7 +4164,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1631211382}
         m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
         m_MethodName: CloseOptions
         m_Mode: 1
