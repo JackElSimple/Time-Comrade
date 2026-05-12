@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MultiRowPate : MonoBehaviour
+public class MultiRowPate : MonoBehaviour, SaveListener
 {
 	[Header("Movement")]
 	[SerializeField] private Transform platformRoot;
@@ -33,6 +33,7 @@ public class MultiRowPate : MonoBehaviour
 	private Vector3 savedPosition;
 	private Vector3 savedTarget;
 	private bool savedIsMoving;
+	private bool savedPressed;
 
 	private void Awake()
 	{
@@ -41,6 +42,19 @@ public class MultiRowPate : MonoBehaviour
 
 		targetPosition = platformRoot.position;
 	}
+
+    private void OnEnable()
+    {
+        if (!SceneController.saveListeners.Contains(this))
+        {
+            SceneController.saveListeners.Add(this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneController.saveListeners.Remove(this);
+    }
 
 	private void Update()
 	{
@@ -72,6 +86,7 @@ public class MultiRowPate : MonoBehaviour
 
 	private void OnCollisionExit2D(Collision2D collision)
 	{
+		if (isRewinding) return;
 		if (!IsValid(collision)) return;
 
 		pressed = false;
@@ -120,6 +135,22 @@ public class MultiRowPate : MonoBehaviour
 		savedPosition = platformRoot.position;
 		savedTarget = targetPosition;
 		savedIsMoving = isMoving;
+		savedPressed = pressed;
+	}
+
+	public void LoadState()
+	{
+		StartRewind();
+	}
+
+	public void CancelState()
+	{
+		isRewinding = false;
+	}
+
+	public void OnRewindFinished()
+	{
+		StopRewind();
 	}
 
 	public void RestoreState()
@@ -130,7 +161,6 @@ public class MultiRowPate : MonoBehaviour
 		targetPosition = savedTarget;
 
 		isMoving = savedIsMoving;
-
-		pressed = false;
+		pressed = savedPressed;
 	}
 }
