@@ -1140,6 +1140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 1224797996}
   speed: 2
+  currentTarget: {x: 0, y: 0, z: 0}
+  movingForward: 1
+  savedMovingForward: 0
 --- !u!50 &1296398677
 Rigidbody2D:
   serializedVersion: 5
@@ -1179,9 +1182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecording: 0
-  isRewinding: 0
-  recordTime: 10
 --- !u!1001 &1310392927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1552,9 +1552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f8cf459c8679749be858f83e34ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRecording: 0
-  isRewinding: 0
-  recordTime: 10
 --- !u!1001 &1554111465
 PrefabInstance:
   m_ObjectHideFlags: 0
