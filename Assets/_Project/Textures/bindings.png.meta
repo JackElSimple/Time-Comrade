@@ -1,0 +1,1339 @@
+fileFormatVersion: 2
+guid: bf47e4eba584119f399a0e0fa0ff3af8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8103168476156821925
+    second: bindingsFixed_0
+  - first:
+      213: 82749856328974920
+    second: bindingsFixed_1
+  - first:
+      213: -8682931361198082581
+    second: bindingsFixed_2
+  - first:
+      213: 4109290025131164972
+    second: bindingsFixed_3
+  - first:
+      213: 859464053832213912
+    second: bindingsFixed_4
+  - first:
+      213: -8499794040836812813
+    second: bindingsFixed_5
+  - first:
+      213: 8833223384676409926
+    second: bindingsFixed_6
+  - first:
+      213: 1590185199125769727
+    second: bindingsFixed_7
+  - first:
+      213: -4979720924729859344
+    second: bindingsFixed_8
+  - first:
+      213: -8418611156551548665
+    second: bindingsFixed_9
+  - first:
+      213: 4475528295846464262
+    second: bindingsFixed_10
+  - first:
+      213: -9200813415442277450
+    second: bindingsFixed_11
+  - first:
+      213: 2275605781941662606
+    second: bindingsFixed_12
+  - first:
+      213: -7118261864142721204
+    second: bindingsFixed_13
+  - first:
+      213: 2977426224426362308
+    second: bindingsFixed_14
+  - first:
+      213: 8505923580418138146
+    second: bindingsFixed_15
+  - first:
+      213: 4674192505503087672
+    second: bindingsFixed_16
+  - first:
+      213: -776438948204639127
+    second: bindingsFixed_17
+  - first:
+      213: 7809695644824728388
+    second: bindingsFixed_18
+  - first:
+      213: -7134432473148649556
+    second: bindingsFixed_19
+  - first:
+      213: -3297820245414404489
+    second: bindingsFixed_20
+  - first:
+      213: 4155604725246471159
+    second: bindingsFixed_21
+  - first:
+      213: -7430123857787434652
+    second: bindingsFixed_22
+  - first:
+      213: 9032448235102486290
+    second: bindingsFixed_23
+  - first:
+      213: -7193622501095134544
+    second: bindingsFixed_24
+  - first:
+      213: -8812588853636575339
+    second: bindingsFixed_25
+  - first:
+      213: -4178398593727823571
+    second: bindingsFixed_26
+  - first:
+      213: 7903144577056076769
+    second: bindingsFixed_27
+  - first:
+      213: -6111830942708499202
+    second: bindingsFixed_28
+  - first:
+      213: -1835423749831946856
+    second: bindingsFixed_29
+  - first:
+      213: -4742202693995463550
+    second: bindingsFixed_30
+  - first:
+      213: -6803547160056102815
+    second: bindingsFixed_31
+  - first:
+      213: -182482481460205181
+    second: bindingsFixed_32
+  - first:
+      213: -5324616018340595853
+    second: bindingsFixed_33
+  - first:
+      213: 3566601754883225652
+    second: bindingsFixed_34
+  - first:
+      213: -6594163973743033414
+    second: bindingsFixed_35
+  - first:
+      213: 5382923018484520843
+    second: bindingsFixed_36
+  - first:
+      213: -6563179016752285915
+    second: bindingsFixed_37
+  - first:
+      213: 2108475591709071524
+    second: bindingsFixed_38
+  - first:
+      213: 4150604432072880578
+    second: bindingsFixed_39
+  - first:
+      213: -4019807278746547858
+    second: bindingsFixed_40
+  - first:
+      213: -1520519077880007067
+    second: bindingsFixed_41
+  - first:
+      213: -6557097609987620164
+    second: bindingsFixed_42
+  - first:
+      213: 7707676473050558737
+    second: bindingsFixed_43
+  - first:
+      213: 7225578234622571234
+    second: bindingsFixed_44
+  - first:
+      213: 5192538901776658388
+    second: bindingsFixed_45
+  - first:
+      213: 3707117464656559887
+    second: bindingsFixed_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bindingsFixed_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 589
+        width: 654
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5e778f0433cb8f80800000000000000
+      internalID: -8103168476156821925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_1
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 587
+        width: 510
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84204bf4e8cf52100800000000000000
+      internalID: 82749856328974920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_2
+      rect:
+        serializedVersion: 2
+        x: 1281
+        y: 625
+        width: 38
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be570be5ee7008780800000000000000
+      internalID: -8682931361198082581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_3
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 575
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c25cff28181270930800000000000000
+      internalID: 4109290025131164972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_4
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 501
+        width: 30
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 895e2e9d00e6deb00800000000000000
+      internalID: 859464053832213912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_5
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 501
+        width: 36
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ff80fb8a5aaa0a80800000000000000
+      internalID: -8499794040836812813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_6
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 501
+        width: 28
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 642af413ed9e59a70800000000000000
+      internalID: 8833223384676409926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_7
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 501
+        width: 30
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffda9f07309711610800000000000000
+      internalID: 1590185199125769727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_8
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 501
+        width: 34
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f2a5e0e33a74eab0800000000000000
+      internalID: -4979720924729859344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_9
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 501
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 701ca9fb1c51b2b80800000000000000
+      internalID: -8418611156551548665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_10
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 489
+        width: 30
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60b4320d5454c1e30800000000000000
+      internalID: 4475528295846464262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_11
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 489
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bb1ae752f4205080800000000000000
+      internalID: -9200813415442277450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_12
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 489
+        width: 34
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e833579e663949f10800000000000000
+      internalID: 2275605781941662606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_13
+      rect:
+        serializedVersion: 2
+        x: 1307
+        y: 489
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f20997c8ad63d90800000000000000
+      internalID: -7118261864142721204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_14
+      rect:
+        serializedVersion: 2
+        x: 1339
+        y: 489
+        width: 34
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5add34061f15920800000000000000
+      internalID: 2977426224426362308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_15
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 489
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22021791e6c1b0670800000000000000
+      internalID: 8505923580418138146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_16
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 283
+        width: 166
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83cfd4e91511ed040800000000000000
+      internalID: 4674192505503087672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_17
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 223
+        width: 132
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96c0c7ee3e88935f0800000000000000
+      internalID: -776438948204639127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_18
+      rect:
+        serializedVersion: 2
+        x: 1105
+        y: 217
+        width: 166
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44371b9bfcc916c60800000000000000
+      internalID: 7809695644824728388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_19
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 125
+        width: 166
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf86fb27776dfc90800000000000000
+      internalID: -7134432473148649556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_20
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 125
+        width: 168
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e9bfa95f9cb32d0800000000000000
+      internalID: -3297820245414404489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_21
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 125
+        width: 168
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fb2043fa7caba930800000000000000
+      internalID: 4155604725246471159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_22
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 155
+        width: 26
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 469cc63c7b5e2e890800000000000000
+      internalID: -7430123857787434652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_23
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 155
+        width: 20
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21f336950d3b95d70800000000000000
+      internalID: 9032448235102486290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_24
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 155
+        width: 10
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0baa7fdd27e1b2c90800000000000000
+      internalID: -7193622501095134544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_25
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 155
+        width: 26
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59fcc63f02563b580800000000000000
+      internalID: -8812588853636575339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_26
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 155
+        width: 12
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d218cdafd985306c0800000000000000
+      internalID: -4178398593727823571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_27
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 153
+        width: 26
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e37bf3ce1c9dad60800000000000000
+      internalID: 7903144577056076769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_28
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 155
+        width: 12
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc7e94b32a6e2ba0800000000000000
+      internalID: -6111830942708499202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_29
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 155
+        width: 28
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89d83f2f2d34786e0800000000000000
+      internalID: -1835423749831946856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_30
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 155
+        width: 28
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cff7b66cf403eb0800000000000000
+      internalID: -4742202693995463550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_31
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 131
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1600d3897e1f491a0800000000000000
+      internalID: -6803547160056102815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_32
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 131
+        width: 36
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38925d26621b77df0800000000000000
+      internalID: -182482481460205181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_33
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 131
+        width: 30
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 377347d31f92b16b0800000000000000
+      internalID: -5324616018340595853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_34
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 131
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 438791f366d1f7130800000000000000
+      internalID: 3566601754883225652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_35
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 131
+        width: 34
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab34e52adc2dc74a0800000000000000
+      internalID: -6594163973743033414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_36
+      rect:
+        serializedVersion: 2
+        x: 1259
+        y: 131
+        width: 32
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b871b0227fbf3ba40800000000000000
+      internalID: 5382923018484520843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_37
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 23
+        width: 44
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 527be2d1577eae4a0800000000000000
+      internalID: -6563179016752285915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_38
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 21
+        width: 30
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a89665216fc24d10800000000000000
+      internalID: 2108475591709071524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_39
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 23
+        width: 32
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c1bdd87db8e99930800000000000000
+      internalID: 4150604432072880578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_40
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 23
+        width: 12
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6948cce396c638c0800000000000000
+      internalID: -4019807278746547858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_41
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 23
+        width: 46
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 566f1c864f706eae0800000000000000
+      internalID: -1520519077880007067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_42
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 23
+        width: 12
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb20027f6728005a0800000000000000
+      internalID: -6557097609987620164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_43
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 23
+        width: 26
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11170db4aea27fa60800000000000000
+      internalID: 7707676473050558737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_44
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 23
+        width: 32
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e2f8732f19664460800000000000000
+      internalID: 7225578234622571234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_45
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 23
+        width: 30
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4df6bc2be9a9f0840800000000000000
+      internalID: 5192538901776658388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bindingsFixed_46
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 21
+        width: 30
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0f308561b3527330800000000000000
+      internalID: 3707117464656559887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bindingsFixed_0: -8103168476156821925
+      bindingsFixed_1: 82749856328974920
+      bindingsFixed_10: 4475528295846464262
+      bindingsFixed_11: -9200813415442277450
+      bindingsFixed_12: 2275605781941662606
+      bindingsFixed_13: -7118261864142721204
+      bindingsFixed_14: 2977426224426362308
+      bindingsFixed_15: 8505923580418138146
+      bindingsFixed_16: 4674192505503087672
+      bindingsFixed_17: -776438948204639127
+      bindingsFixed_18: 7809695644824728388
+      bindingsFixed_19: -7134432473148649556
+      bindingsFixed_2: -8682931361198082581
+      bindingsFixed_20: -3297820245414404489
+      bindingsFixed_21: 4155604725246471159
+      bindingsFixed_22: -7430123857787434652
+      bindingsFixed_23: 9032448235102486290
+      bindingsFixed_24: -7193622501095134544
+      bindingsFixed_25: -8812588853636575339
+      bindingsFixed_26: -4178398593727823571
+      bindingsFixed_27: 7903144577056076769
+      bindingsFixed_28: -6111830942708499202
+      bindingsFixed_29: -1835423749831946856
+      bindingsFixed_3: 4109290025131164972
+      bindingsFixed_30: -4742202693995463550
+      bindingsFixed_31: -6803547160056102815
+      bindingsFixed_32: -182482481460205181
+      bindingsFixed_33: -5324616018340595853
+      bindingsFixed_34: 3566601754883225652
+      bindingsFixed_35: -6594163973743033414
+      bindingsFixed_36: 5382923018484520843
+      bindingsFixed_37: -6563179016752285915
+      bindingsFixed_38: 2108475591709071524
+      bindingsFixed_39: 4150604432072880578
+      bindingsFixed_4: 859464053832213912
+      bindingsFixed_40: -4019807278746547858
+      bindingsFixed_41: -1520519077880007067
+      bindingsFixed_42: -6557097609987620164
+      bindingsFixed_43: 7707676473050558737
+      bindingsFixed_44: 7225578234622571234
+      bindingsFixed_45: 5192538901776658388
+      bindingsFixed_46: 3707117464656559887
+      bindingsFixed_5: -8499794040836812813
+      bindingsFixed_6: 8833223384676409926
+      bindingsFixed_7: 1590185199125769727
+      bindingsFixed_8: -4979720924729859344
+      bindingsFixed_9: -8418611156551548665
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
