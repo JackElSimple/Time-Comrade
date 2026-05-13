@@ -255,6 +255,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 967786041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &118574560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 118574561}
+  m_Layer: 0
+  m_Name: spawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &118574561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118574560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.2860866, y: 5.03, z: 1.0245612}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &149592196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 803017143083261091, guid: 4a16c8d2f08d02f40a0372e64b762f77, type: 3}
@@ -342,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 4729075737650607715, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
       propertyPath: m_Name
       value: VictoryPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759449685961582430, guid: 6db97e1b248a17d448328de5cd96403b, type: 3}
+      propertyPath: nextSceneName
+      value: tescior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7890,11 +7925,11 @@ PrefabInstance:
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: theme
       value: 
-      objectReference: {fileID: 8300000, guid: d64ec73298a7e7640bb5ade0d86dfef2, type: 3}
+      objectReference: {fileID: 8300000, guid: 645751a012830494b804cb27dc15968d, type: 3}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: currentSpawnPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 118574561}
     - target: {fileID: 17279379533095951, guid: cbf9476ca5e8b514b9773299c7e6f27a, type: 3}
       propertyPath: recordingDuration
       value: 40
@@ -12642,3 +12677,4 @@ SceneRoots:
   - {fileID: 569790917}
   - {fileID: 1155059824}
   - {fileID: 207560734}
+  - {fileID: 118574561}
