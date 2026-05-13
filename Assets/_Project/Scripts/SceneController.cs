@@ -37,8 +37,9 @@ public class SceneController : MonoBehaviour
 	private OpitControllerRewind opitScript;
 	private CloneController cloneScript;
     private const float NormalTimeScale = 1f;
+    private bool canBoost = false;
 
-	void Start()
+    void Start()
     {
         if (theme != null)
         {
@@ -187,14 +188,20 @@ public class SceneController : MonoBehaviour
 			opitScript.FinishRecording(); 
             RewindStarted?.Invoke();
 		}
-
-		foreach (var obj in saveListeners) obj.LoadState();
+        StartCoroutine(EnableBoostAfterDelay());
+        foreach (var obj in saveListeners) obj.LoadState();
         if (theme != null)
         {
             GameManager.Instance.audioManager.PauseMusic();
         }
     }
-
+    IEnumerator EnableBoostAfterDelay()
+    {
+        canBoost = false;
+        // Esperamos 0.2 segundos para que al jugador le dé tiempo a soltar el botón
+        yield return new WaitForSecondsRealtime(0.2f);
+        canBoost = true;
+    }
     public void KillPlayer()//and respawn it
     {
         CancelarGrabacion();
@@ -253,8 +260,9 @@ public class SceneController : MonoBehaviour
 
     private void UpdateRewindTimeScale()
     {
-        if (!isRewinding)
+        if (!isRewinding || !canBoost)
         {
+            ResetRewindTimeScale();
             return;
         }
 
