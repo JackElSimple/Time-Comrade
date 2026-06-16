@@ -3,7 +3,7 @@
 > **Language / Idioma / Język:**   [English](#english) | [Español](#español) | [Polski](#polish)
 
 ---
-
+GDD: https://docs.google.com/document/d/e/2PACX-1vSABtcI8yBAe4Q7Tf4oTIkklQxa889tAOfzTlMR7XTGisB4rHEFhSiM41J1MlruBg/pub
 <a id="español"></a>
 # 🇪🇸 Organización del Proyecto
 
